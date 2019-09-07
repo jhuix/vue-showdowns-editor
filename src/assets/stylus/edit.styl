@@ -1,0 +1,26 @@
+
+$mainBackgroundColor = #002b36;
+
+.vue-codemirror {
+  width: auto;
+  overflow-y: auto;
+  height: 100%;
+
+  .CodeMirror, .CodeMirror-merge {
+    height: 100%;
+  }
+
+  .CodeMirror {
+    .CodeMirror-gutters {
+      border-right: 0px;
+      background-color: $mainBackgroundColor;
+      color: rgb(187, 187, 187);
+    }
+
+    .CodeMirror-cursors {
+      .CodeMirror-cursor {
+        border-left: 2px solid $mainBackgroundColor;
+      }
+    }
+  }
+}
