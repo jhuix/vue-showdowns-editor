@@ -62,14 +62,16 @@ module.exports = {
   // 如果这个值是一个对象，则会通过 webpack-merge 合并到最终的配置中
   // 如果你需要基于环境有条件地配置行为，或者想要直接修改配置，那就换成一个函数 (该函数会在环境变量被设置之后懒执行)。
   // 该方法的第一个参数会收到已经解析好的配置。在函数内，你可以直接修改配置，或者返回一个将会被合并的对象。
-  //configureWebpack: {},
+  configureWebpack: {
+    devtool: 'source-map'
+  },
   // 对内部的 webpack 配置（比如修改、增加Loader选项）(链式操作)
   //chainWebpack: () => {},
 
   css: {
     // 是否将组件中的 CSS 提取至一个独立的 CSS 文件中,当作为一个库构建时，你也可以将其设置为 false 免得用户自己导入 CSS
     // 默认生产环境下是 true，开发环境下是 false
-    extract: true,
+    extract: false,
     // 当为true时，css文件名可省略 module 默认为 false
     modules: true,
     // 是否为 CSS 开启 source map。设置为 true 之后可能会影响构建的性能
@@ -82,18 +84,30 @@ module.exports = {
       },
       postcss: {
         // 这里的选项会传递给 postcss-loader
+      },
+      sass: {
+        // 这里的选项会传递给 sass-loader
+      },
+      scss: {
+        // 这里的选项会传递给 sass-loader
+      },
+      less: {
+        // 这里的选项会传递给 less-loader
+      },
+      stylus: {
+        // 这里的选项会传递给 stylus-loader
       }
     }
   },
   // 支持webPack-dev-server的所有选项
   devServer: {
-    host: '0.0.0.0',
-    // 端口号
-    port: 8080,
-    // https:{type:Boolean}
-    https: false,
     //配置自动启动浏览器
-    open: true
+    open: process.platform === 'darwin',
+    //host: '0.0.0.0',
+    // 端口号
+    port: 8088,
+    // https:{type:Boolean}
+    https: false
     //proxy: 'http://localhost:4000' // 配置跨域处理,只有一个代理
     // 配置多个代理
     //proxy: {
@@ -109,9 +123,9 @@ module.exports = {
     //   target: "<other_url>"
     //  }
     //}
-  }
+  },
   // 是否为 Babel 或 TypeScript 使用 thread-loader
-  //parallel: require('os').cpus().length > 1,
+  parallel: require('os').cpus().length > 1
   // 向 PWA 插件传递选项
   //pwa: {},
   // 可以用来传递任何第三方插件选项

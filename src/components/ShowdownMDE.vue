@@ -10,7 +10,13 @@
   <div class="mde-workspace-container">
     <div class="mde-toolbar" v-if="hasToolbar">
       <div class="mde-toolbar-actions nav">
-        <mde-buttons v-bind:items="toolSet.rootItems" v-on:click="handleClick"></mde-buttons>
+        <!--<mde-buttons v-bind:items="toolSet.rootItems" v-on:click="handleClick"></mde-buttons>-->
+        <mde-menu
+          ref="roomenu"
+          v-bind:item="rootSet.item"
+          v-bind:items="rootSet.menuItems"
+          v-on:menuclick="handleClick"
+        ></mde-menu>
         <mde-buttons v-bind:items="toolSet.editItems" v-on:click="handleClick"></mde-buttons>
       </div>
       <div class="mde-toolbar-actions edit" ref="edittool">
@@ -125,7 +131,7 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom left',
-          info: ''
+          info: '设置'
         }
       }
     ],
@@ -678,6 +684,24 @@ const getMenuSet = function() {
   };
 };
 
+let rootMenuSet = {
+  item: {
+    type: 'shezhi',
+    text: '',
+    shortkey: 'Ctrl+Shift+S',
+    caret: true,
+    disabled: false,
+    tooltip: {
+      show: true,
+      inverted: true,
+      small: true,
+      position: 'bottom left',
+      info: '设置'
+    }
+  },
+  menuItems: []
+};
+
 export default {
   name: 'showdown-mde',
   props: {
@@ -714,8 +738,10 @@ export default {
       mdpOptions: this.previewOptions,
       editor: null,
       previewer: null,
+      rootmenu: null,
       edittool: null,
       othertool: null,
+      rootSet: rootMenuSet,
       toolSet: getToolSet(),
       menuSet: getMenuSet(),
       screenWidth: document.documentElement.clientWidth,
@@ -830,10 +856,8 @@ export default {
   methods: {
     insertMarkdownContent(type) {
       if (type) {
-        if (type !== 'settings') {
-          this.editor.insertMarkdownContent(type);
-        } else {
-          //TODO
+        if (!this.editor.insertMarkdownContent(type)) {
+          this.$emit('toolclick', type);
         }
       }
     },
@@ -842,6 +866,37 @@ export default {
         this.lastToolOffset =
           this.othertool.$el.offsetLeft + this.othertool.$el.offsetWidth;
       return this.lastToolOffset;
+    },
+    getEditor() {
+      return this.editor;
+    },
+    getPreviewor() {
+      return this.previewer;
+    },
+    getPreviewHtml() {
+      return this.previewer ? this.previewer.outputHtml : '';
+      //   const parser = new DOMParser();
+      //   const wrapper = parser.parseFromString(
+      //     this.previewer.outputHtml,
+      //     'text/html'
+      //   );
+
+      //   let katexStyle = ''; //require('../../node_modules/katex/dist/katex.min.css');
+      //   let previewStyle = ''; //require('../../src/assets/stylus/preview.styl');
+      //   wrapper.head.outerHTML = `<head>\
+      //     <meta charset="utf-8">\
+      //     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">\
+      //     <meta name="viewport" content="width=device-width,initial-scale=1.0">\
+      //     <title>Markdown预览页面</title>\
+      //     <link rel="stylesheet" href="${katexStyle}" type="text/css" />\
+      //     <link rel="stylesheet" href="${previewStyle}" type="text/css" />\
+      //     </head>`;
+      //   return '<!DOCTYPE html>' + wrapper.documentElement.outerHTML;
+      // }
+      // return '<html><head></head><body></body></html>';
+    },
+    addRootMenu(item) {
+      if (this.rootSet) this.rootSet.menuItems.push(item);
     },
     handleClick(e, item) {
       this.insertMarkdownContent(item.type);
@@ -854,9 +909,9 @@ export default {
         try {
           // scrolling with the same percentage
           const scrollInfo = cm.getScrollInfo();
-          let preview = this.previewer.$el;
-          preview.scrollTop =
-            (preview.scrollHeight * scrollInfo.top) / scrollInfo.height;
+          let previewElement = this.previewer.$el;
+          previewElement.scrollTop =
+            (previewElement.scrollHeight * scrollInfo.top) / scrollInfo.height;
         } catch (e) {
           console.log('scroll current object to failed:', cm);
         }
@@ -866,6 +921,7 @@ export default {
   mounted() {
     this.editor = this.$refs.mdeditor;
     this.previewer = this.$refs.mdpreviewer;
+    this.rootmenu = this.$refs.rootmenu;
     if (this.hasToolbar) {
       this.edittool = this.$refs.edittool;
       this.titletool = this.$refs.titletool;
@@ -894,7 +950,6 @@ export default {
   position: relative;
   flex: 1;
   outline: none;
-  overflow: hidden;
   min-width: 885px;
   width: 100%;
   height: 100%;
@@ -936,9 +991,13 @@ export default {
     }
 
     .mde-scroll-container {
+      overflow: hidden;
       width: 100%;
       height: 100%;
-      overflow: hidden;
+
+      .mde-previewer {
+        overflow-y: auto
+      }
     }
 
     ::-webkit-scrollbar {

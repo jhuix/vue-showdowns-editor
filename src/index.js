@@ -7,9 +7,11 @@
  */
 
 import ShowdownMDE from './components/ShowdownMDE.vue';
+import Previewer from './components/Previewer.vue';
+import Editor from './components/Editor.vue';
 
 // 以数组的结构保存组件，便于遍历
-const components = [ShowdownMDE];
+const components = [ShowdownMDE, Previewer, Editor];
 
 // 定义 install 方法
 const install = function(Vue, config) {
@@ -33,9 +35,10 @@ const install = function(Vue, config) {
   });
 };
 
+const VueShowdownMDE = { install, ...components };
+
 if (typeof window !== 'undefined' && window.Vue) {
-  install(window.Vue);
+  window.Vue.use(VueShowdownMDE);
 }
 
-const VueShowdownMDE = { install, ...components };
-export { VueShowdownMDE as default, ShowdownMDE };
+export { VueShowdownMDE as default, ShowdownMDE, Previewer, Editor };

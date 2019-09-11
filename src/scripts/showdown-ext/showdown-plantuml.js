@@ -5,9 +5,10 @@
  * @LastEditors: Jhuix (Hui Jin) <jhuix0117@gmail.com>
  * @LastEditTime: 2019-09-07 19:51:07
  */
+
 'use strict';
 
-import plantumlcodec from './plantuml-codec.js';
+import plantumlcodec from '../utils/plantuml-codec.js';
 
 const defaultUmlWebsite = 'http://www.plantuml.com/plantuml';
 const defaultImageFormat = 'img';
@@ -23,7 +24,7 @@ function renderPlantumlElements(elements, config) {
     const imageFormat = config.imageFormat;
     let imageExtension = '';
     if (imageFormat !== defaultImageFormat) imageExtension = `.${imageFormat}`;
-    let src = `${config.umlWebSite}/${imageFormat}/${plantumlcodec.encode(
+    let src = `${config.umlWebSite}/${imageFormat}/${plantumlcodec.encodeuml(
       code
     )}${imageExtension}`;
     element.parentNode.outerHTML = `<div class="${name}"><img src='${src}' alt=''></img></div>`;

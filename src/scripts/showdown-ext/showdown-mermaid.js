@@ -5,6 +5,7 @@
  * @LastEditors: Jhuix (Hui Jin) <jhuix0117@gmail.com>
  * @LastEditTime: 2019-09-07 19:51:02
  */
+
 'use strict';
 
 import mermaid from 'mermaid';
@@ -50,19 +51,24 @@ var showdownMermaid = function(userConfig) {
   let selectors = config.selectors;
 
   if (selectors && typeof selectors === 'string') {
-    window.addEventListener('load', function() {
-      const elements = this.document.querySelectorAll(selectors);
-      if (elements && elements.length > 0) {
-        elements.forEach(element => {
-          element.addEventListener('DOMNodeInserted', function() {
-            if (hasMermaidContentChange) {
-              hasMermaidContentChange = false;
-              mermaid.init();
-            }
+    window.document.addEventListener(
+      'DOMContentLoaded',
+      function domLoaded() {
+        this.removeEventListener('DOMContentLoaded', domLoaded, false);
+        const elements = this.querySelectorAll(selectors);
+        if (elements && elements.length > 0) {
+          elements.forEach(element => {
+            element.addEventListener('DOMNodeInserted', function() {
+              if (hasMermaidContentChange) {
+                hasMermaidContentChange = false;
+                mermaid.init();
+              }
+            });
           });
-        });
-      }
-    });
+        }
+      },
+      false
+    );
   }
 
   return [

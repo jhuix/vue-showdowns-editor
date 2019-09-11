@@ -6,6 +6,8 @@
  * @LastEditTime: 2019-09-07 19:50:55
  */
 
+'use strict';
+
 var showdownFootnotes = function() {
   return [
     {

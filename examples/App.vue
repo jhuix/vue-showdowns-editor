@@ -7,55 +7,13 @@
  -->
 <template>
   <div id="app">
-    <showdown-mde
-      :markdown="mdDoc"
-      :hasToolbar="hasToolbar"
-      :previewExtensions="previewExtensions"
-    />
+    <router-view />
   </div>
 </template>
 
 <script>
-import { ShowdownMDE } from '../src';
-import axios from 'axios';
-import showdownFootnotes from '../src/scripts/showdown-ext/showdown-footnotes.js';
-
 export default {
-  name: 'app',
-  components: {
-    [ShowdownMDE.name]: ShowdownMDE
-  },
-  data() {
-    return {
-      mdDoc: '',
-      hasToolbar: false,
-      previewExtensions: null //[showdownFootnotes]
-    };
-  },
-  created() {
-    console.log('the app is created!', this);
-
-    this.$nextTick(function() {
-      let that = this;
-      var defHtml = axios.get('//demo.showdownjs.com/md/text.md');
-      defHtml
-        .then(function(res) {
-          that.mdDoc = res.data;
-          return axios.get(
-            "//raw.githubusercontent.com/wiki/showdownjs/showdown/Showdown's-Markdown-syntax.md"
-          );
-        })
-        .then(function(res) {
-          that.mdDoc = that.mdDoc + '\n\n' + res.data;
-        })
-        .catch(function(error) {
-          that.mdDoc = '';
-          console.log(error);
-        });
-
-      this.previewExtensions = [showdownFootnotes];
-    });
-  }
+  name: 'app'
 };
 </script>
 <style lang="stylus">
@@ -78,7 +36,6 @@ html {
 }
 
 body {
-  overflow: hidden;
   background: #fff;
   font-size: 14px;
   line-height: 1.4285em;
@@ -91,7 +48,6 @@ body {
 
 #app {
   color: rgba(0, 0, 0, 0.87);
-  overflow: hidden;
   height: 100%;
   font-size: 14px;
 }

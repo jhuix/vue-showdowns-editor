@@ -1,5 +1,5 @@
 /*
- * @Description: plantuml codec for PlantUML website
+ * @Description: zlib codec for PlantUML website
  * @Author: Jhuix (Hui Jin) <jhuix0117@gmail.com>
  * @Date: 2019-08-30 10:02:40
  * @LastEditors: Jhuix (Hui Jin) <jhuix0117@gmail.com>
@@ -99,13 +99,9 @@ function decode64(data) {
 }
 
 function encode(data) {
-  const startuml = '@startuml';
-  const enduml = '@enduml';
-  const s = `${startuml}${String(data.split(startuml)[1]).split(enduml)[0] ||
-    ''}${enduml}`;
   return encode64(
     zlib
-      .deflateRawSync(unescape(encodeURIComponent(s)), {
+      .deflateRawSync(unescape(encodeURIComponent(data)), {
         level: 9
       })
       .toString('binary')
@@ -123,8 +119,9 @@ if (typeof module !== 'undefined' && typeof module.exports === 'object') {
   };
 }
 
-const plantumlcodec = {
+const zlibcodec = {
   encode: encode,
   decode: decode
 };
-export default plantumlcodec;
+
+export default zlibcodec;

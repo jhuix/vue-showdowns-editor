@@ -113,6 +113,7 @@ export default {
     },
     insertMarkdownContent(type) {
       console.log('the click object type is ', type);
+      let result = true;
       const selectText = this.codemirror.getSelection();
       let defaultText = selectText;
       if (!defaultText) defaultText = '请输入文本';
@@ -228,11 +229,18 @@ export default {
         case 'zhangjiemulu':
           this.codemirror.replaceSelection(`${selectText}\n\n[TOC]\n\n`);
           break;
+        default:
+          result = false;
+          break;
       }
-      this.codemirror.focus();
+      if (result) this.codemirror.focus();
+      return result;
     },
     getEditor() {
       return this.codemirror;
+    },
+    getMarkdown() {
+      return this.mdDoc;
     },
     onMdReady(cm) {
       this.$emit('ready', cm);

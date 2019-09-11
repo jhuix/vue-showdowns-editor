@@ -181,7 +181,6 @@ export default {
   flex: 1;
   position: absolute;
   outline: none;
-  overflow: hidden;
   user-select: text;
 
   &.horizontal {
