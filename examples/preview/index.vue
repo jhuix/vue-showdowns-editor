@@ -17,7 +17,9 @@ export default {
     };
   },
   created() {
-    const html = this.$route.query.html ? this.$route.query.html : localStorage.previewHtml;
+    const html = this.$route.query.html
+      ? this.$route.query.html
+      : localStorage.previewHtml;
     if (html) {
       this.outputHtml = zlibcodec.decode(html);
     }
@@ -46,7 +48,7 @@ export default {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgb(241, 241, 241);
   border-radius: 0;
 }
 

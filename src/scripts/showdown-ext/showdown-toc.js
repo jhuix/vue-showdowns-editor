@@ -4,6 +4,7 @@
  * @Date: 2019-08-27 16:57:06
  * @LastEditors: Jhuix (Hui Jin) <jhuix0117@gmail.com>
  * @LastEditTime: 2019-09-07 19:51:14
+ * Reference website: https://github.com/ravisorg/showdown-toc
  */
 
 'use strict';

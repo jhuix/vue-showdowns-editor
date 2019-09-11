@@ -1007,7 +1007,7 @@ export default {
     }
 
     ::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.1);
+      background: rgb(241, 241, 241);
       border-radius: 0;
     }
 

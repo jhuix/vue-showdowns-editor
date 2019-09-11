@@ -24,12 +24,14 @@ import 'codemirror/mode/xml/xml.js';
 import 'codemirror/addon/edit/closetag.js';
 import 'codemirror/addon/edit/continuelist.js';
 import 'codemirror/addon/edit/closebrackets.js';
+import 'codemirror/addon/edit/matchbrackets.js';
 import 'codemirror/addon/lint/lint.js';
 import 'codemirror/addon/mode/overlay.js';
 import 'codemirror/addon/fold/foldcode.js';
 import 'codemirror/addon/fold/foldgutter.js';
 import 'codemirror/addon/fold/brace-fold.js';
 import 'codemirror/addon/fold/xml-fold.js';
+import 'codemirror/addon/fold/indent-fold.js';
 import 'codemirror/addon/fold/markdown-fold.js';
 import 'codemirror/addon/fold/comment-fold.js';
 import 'codemirror/addon/selection/active-line.js';
@@ -40,23 +42,26 @@ import debounce from 'lodash/debounce';
 const getOptions = function(options) {
   return {
     mode: 'text/x-markdown',
-    theme: 'default',
+    theme: 'idea',
     autofocus: true,
     showCursorWhenSelecting: true,
     line: true,
-    //inputStyle: 'textarea',
     lineNumbers: true, // 显示行数
     lineWrapping: true, // 自动换行
     foldGutter: true, // 展开收起
     tabSize: 4,
-    //electricChars: true,
     matchBrackets: true, // 括号匹配
     dragDrop: false,
     autoCloseBrackets: false, // 关闭括号匹配
-    //autoRefresh: true,
-    //extraKeys: {},
+    autoCloseTags: true,
+    extraKeys: {
+      Enter: 'newlineAndIndentContinueMarkdownList',
+      Tab: function(cm) {
+        var spaces = Array(cm.getOption('tabSize')).join(' ');
+        cm.replaceSelection(spaces);
+      }
+    },
     gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
-    styleSelectedText: true,
     styleActiveLine: true, // 当前行背景高亮
     ...options
   };
@@ -265,6 +270,13 @@ export default {
 // theme css
 @import ('../../node_modules/codemirror/theme/lesser-dark.css');
 @import ('../../node_modules/codemirror/theme/mdn-like.css');
+@import ('../../node_modules/codemirror/theme/neat.css');
+@import ('../../node_modules/codemirror/theme/rubyblue.css');
+@import ('../../node_modules/codemirror/theme/seti.css');
+@import ('../../node_modules/codemirror/theme/darcula.css');
+@import ('../../node_modules/codemirror/theme/idea.css');
+@import ('../../node_modules/codemirror/theme/the-matrix.css');
+@import '../../node_modules/codemirror/addon/fold/foldgutter.css';
 @import '../../node_modules/codemirror/lib/codemirror.css';
 @import '../../src/assets/stylus/edit.styl';
 </style>

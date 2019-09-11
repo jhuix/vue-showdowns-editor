@@ -4,6 +4,7 @@
  * @Date: 2019-08-30 10:02:40
  * @LastEditors: Jhuix (Hui Jin) <jhuix0117@gmail.com>
  * @LastEditTime: 2019-09-07 19:50:55
+ * Reference website: https://github.com/Kriegslustig/showdown-footnotes
  */
 
 'use strict';
