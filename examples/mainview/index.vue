@@ -56,7 +56,7 @@ export default {
       if (this.$refs.smde && type === 'preview') {
         const html = zlibcodec.encode(this.$refs.smde.getPreviewHtml());
         //this.$store.dispatch('setPreviewHtml', html);
-        localStorage.previewHtml = html;
+        sessionStorage.previewHtml = html;
         window.open(`/#/preview`);
       }
     }

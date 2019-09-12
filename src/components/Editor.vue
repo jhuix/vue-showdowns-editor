@@ -17,6 +17,7 @@
 </template>
 
 <script type="text/javascript">
+import debounce from 'lodash/debounce';
 import { codemirror } from 'vue-codemirror';
 import 'codemirror/mode/gfm/gfm.js';
 import 'codemirror/mode/markdown/markdown.js';
@@ -36,9 +37,6 @@ import 'codemirror/addon/fold/markdown-fold.js';
 import 'codemirror/addon/fold/comment-fold.js';
 import 'codemirror/addon/selection/active-line.js';
 
-// const controlKey = process.platform === 'win32' ? 'Ctrl' : 'Cmd'
-import debounce from 'lodash/debounce';
-
 const getOptions = function(options) {
   return {
     mode: 'text/x-markdown',
@@ -52,8 +50,10 @@ const getOptions = function(options) {
     tabSize: 4,
     matchBrackets: true, // 括号匹配
     dragDrop: false,
-    autoCloseBrackets: false, // 关闭括号匹配
-    autoCloseTags: true,
+    autoCloseBrackets: true, // 自动闭合括号匹配
+    autoCloseTags: true, //自动闭合tagname匹配
+    gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
+    styleActiveLine: true, // 当前行背景高亮
     extraKeys: {
       Enter: 'newlineAndIndentContinueMarkdownList',
       Tab: function(cm) {
@@ -61,8 +61,6 @@ const getOptions = function(options) {
         cm.replaceSelection(spaces);
       }
     },
-    gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
-    styleActiveLine: true, // 当前行背景高亮
     ...options
   };
 };

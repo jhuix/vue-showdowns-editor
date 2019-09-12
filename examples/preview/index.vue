@@ -19,7 +19,7 @@ export default {
   created() {
     const html = this.$route.query.html
       ? this.$route.query.html
-      : localStorage.previewHtml;
+      : sessionStorage.previewHtml;
     if (html) {
       this.outputHtml = zlibcodec.decode(html);
     }
