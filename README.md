@@ -2,6 +2,8 @@
 
 A markdown editor using codemirror and previewer using showdown for Vue.js
 
+![intro](https://github.com/jhuix/showdown-markdown-editor/blob/master/docs/3147F455-5FB5-45f2-AE51-8EAD671B35FE.png)
+
 ## Supporting some markdown extension features
 
 - [LaTeX](https://www.latex-project.org/) math and [AsciiMath](http://asciimath.org/)

@@ -3,9 +3,9 @@
  * @Author: Jhuix (Hui Jin) <jhuix0117@gmail.com>
  * @Date: 2019-08-18 14:05:41
  * @LastEditors: Jhuix (Hui Jin) <jhuix0117@gmail.com>
- * @LastEditTime: 2019-09-07 20:03:43
+ * @LastEditTime: 2019-09-14 23:08:24
  */
-
+import showdown from 'showdown';
 import ShowdownMDE from './components/ShowdownMDE.vue';
 import Previewer from './components/Previewer.vue';
 import Editor from './components/Editor.vue';
@@ -41,4 +41,4 @@ if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(VueShowdownMDE);
 }
 
-export { VueShowdownMDE as default, ShowdownMDE, Previewer, Editor };
+export { VueShowdownMDE as default, ShowdownMDE, Previewer, Editor, showdown };

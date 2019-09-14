@@ -5,7 +5,13 @@
   "private": false,
   "description": "A markdown editor using codemirror and previewer using showdown for Vue.js",
   "main": "lib/index.min.js",
-  "keyword": "markdown-editor vue showdown markdown showdown-editor",
+  "keywords": [
+    "markdown-editor",
+    "vue",
+    "showdown",
+    "markdown",
+    "showdown-editor"
+  ],
   "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
