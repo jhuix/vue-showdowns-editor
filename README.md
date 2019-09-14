@@ -14,12 +14,12 @@ A markdown editor using codemirror and previewer using showdown for Vue.js
 
 - [mermaid](https://github.com/knsv/mermaid)
 
-  It's implemented in showdown-mermaid.js, it's surpport diagrams of Flowchart and Sequence and
+  It's implemented in showdown-mermaid.js, surpport diagrams of Flowchart and Sequence and
   Gantt, check [mermaid doc](https://mermaidjs.github.io) for more information.
 
 - [plantuml](http://plantuml.com)
 
-  It's implemented in showdown-plantuml.js, To know more about PlantUML, please visit http://plantuml.com/.
+  It's implemented in showdown-plantuml.js. To know more about PlantUML, please visit http://plantuml.com/.
 
 - footnotes
 
