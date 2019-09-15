@@ -3,7 +3,7 @@
  * @Author: Jhuix (Hui Jin) <jhuix0117@gmail.com>
  * @Date: 2019-08-27 16:57:06
  * @LastEditors: Jhuix (Hui Jin) <jhuix0117@gmail.com>
- * @LastEditTime: 2019-09-07 19:51:14
+ * @LastEditTime: 2019-09-15 21:27:51
  * Reference website: https://github.com/ravisorg/showdown-toc
  */
 
@@ -52,17 +52,13 @@ function renderTocElements(wrapper) {
         // Create two of the same element.
         if (element['tagName']) {
           if (results[1].trim().length > 0) {
-            before = wrapper.ownerDocument.createElement(
-              '<' + element['tagName'] + '>'
-            );
+            before = wrapper.ownerDocument.createElement(element['tagName']);
             before.appendChild(
               wrapper.ownerDocument.createTextNode(results[1])
             );
           }
           if (results[3].trim().length > 0) {
-            after = wrapper.ownerDocument.createElement(
-              '<' + element['tagName'] + '>'
-            );
+            after = wrapper.ownerDocument.createElement(element['tagName']);
             after.appendChild(wrapper.ownerDocument.createTextNode(results[3]));
           }
         }
@@ -82,12 +78,12 @@ function renderTocElements(wrapper) {
         // If there was text before our [toc], add that in
         if (before) {
           element.parentNode.replaceChild(before, element);
-          before.parentNode.insertAfter(toc, before);
+          before.parentNode.insertBefore(toc, before.nextSibling);
         } else {
           element.parentNode.replaceChild(toc, element);
         }
         if (after) {
-          toc.parentNode.insertAfter(after, toc);
+          toc.parentNode.insertBefore(after, toc.nextSibling);
         }
         // Reset the heading level - we're going to start looking for new
         // headings again
