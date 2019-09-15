@@ -3,7 +3,7 @@
  * @Author: Jhuix (Hui Jin) <jhuix0117@gmail.com>
  * @Date: 2019-08-26 10:53:06
  * @LastEditors: Jhuix (Hui Jin) <jhuix0117@gmail.com>
- * @LastEditTime: 2019-09-07 20:34:34
+ * @LastEditTime: 2019-09-15 21:36:01
  -->
 <template>
   <codemirror
@@ -40,7 +40,7 @@ import 'codemirror/addon/selection/active-line.js';
 const getOptions = function(options) {
   return {
     mode: 'text/x-markdown',
-    theme: 'idea',
+    theme: 'default',
     autofocus: true,
     showCursorWhenSelecting: true,
     line: true,
@@ -183,11 +183,11 @@ export default {
           break;
         //居中对齐
         case 'juzhongduiqi':
-          this.codemirror.replaceSelection(`:-:${selectText}`);
+          doc.replaceRange(`:-: ${defaultLineText}`, firstPos, currentPos);
           break;
         //右对齐
         case 'juyouduiqi':
-          this.codemirror.replaceSelection(`--:${selectText}`);
+          doc.replaceRange(`--: ${defaultLineText}`, firstPos, currentPos);
           break;
         //无序列表
         case 'wuxuliebiao':
@@ -207,6 +207,7 @@ export default {
           break;
         //图片
         case 'tupian':
+          this.codemirror.replaceSelection(`![](图片链接)${selectText}`);
           break;
         //代码块
         case 'daimakuai':
