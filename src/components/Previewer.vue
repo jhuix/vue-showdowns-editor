@@ -36,6 +36,11 @@ const getExtensions = function(extensions) {
   ].concat(extensions ? extensions : []);
 };
 
+//The above behavior is how many browsers actually implement NodeList.prototype.forEach
+if (window.NodeList && !NodeList.prototype.forEach) {
+  NodeList.prototype.forEach = Array.prototype.forEach;
+}
+
 export default {
   name: 'mdpreviewer',
   props: {

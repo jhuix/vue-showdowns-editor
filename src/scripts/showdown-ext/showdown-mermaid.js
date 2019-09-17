@@ -10,7 +10,7 @@
 
 import mermaid from 'mermaid';
 
-let hasMermaidContentChange = false;
+let hasMermaidContentChange = 0;
 
 // <div class="mermaid"></div>
 function renderMermaidElements(elements) {
@@ -21,7 +21,7 @@ function renderMermaidElements(elements) {
     const code = element.textContent;
     const name = element.className;
     element.parentNode.outerHTML = `<div class="${name}">${code}</div>`;
-    hasMermaidContentChange = true;
+    ++hasMermaidContentChange;
   });
 }
 
@@ -51,24 +51,26 @@ var showdownMermaid = function(userConfig) {
   let selectors = config.selectors;
 
   if (selectors && typeof selectors === 'string') {
-    window.document.addEventListener(
-      'DOMContentLoaded',
-      function domLoaded() {
-        this.removeEventListener('DOMContentLoaded', domLoaded, false);
-        const elements = this.querySelectorAll(selectors);
-        if (elements && elements.length > 0) {
-          elements.forEach(element => {
-            element.addEventListener('DOMNodeInserted', function() {
-              if (hasMermaidContentChange) {
-                hasMermaidContentChange = false;
+    window.document.addEventListener('DOMContentLoaded', function domLoaded() {
+      this.removeEventListener('DOMContentLoaded', domLoaded, false);
+      const elements = this.querySelectorAll(selectors);
+      if (elements && elements.length > 0) {
+        elements.forEach(element => {
+          element.addEventListener('DOMNodeInserted', function(e) {
+            if (hasMermaidContentChange > 0) {
+              let classname = e.target.className;
+              if (
+                classname &&
+                classname.split(' ').indexOf('mermaid') !== -1 &&
+                !--hasMermaidContentChange
+              ) {
                 mermaid.init();
               }
-            });
+            }
           });
-        }
-      },
-      false
-    );
+        });
+      }
+    });
   }
 
   return [
