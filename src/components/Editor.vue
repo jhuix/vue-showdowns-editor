@@ -117,15 +117,18 @@ export default {
     insertMarkdownContent(type) {
       console.log('the click object type is ', type);
       let result = true;
+      let replaceText = null;
+      let textMatch = null;
       const selectText = this.codemirror.getSelection();
-      let defaultText = selectText;
-      if (!defaultText) defaultText = '请输入文本';
+      let defaultSelectText = selectText;
       const doc = this.codemirror.getDoc();
       let currentPos = doc.getCursor();
+      let lineText = doc.getLine(currentPos.line);
       let firstPos = { line: currentPos.line, ch: 0 };
-      const lineText = doc.getRange(firstPos, currentPos);
-      let defaultLineText = lineText;
-      if (!defaultLineText) defaultLineText = '请输入文本';
+      const lineRangeText = doc.getRange(firstPos, currentPos);
+      let defaultLineText = lineRangeText;
+      if (!defaultSelectText && !lineText) defaultSelectText = '请输入文本';
+      if (!defaultLineText && !lineText) defaultLineText = '请输入文本';
       switch (type) {
         //撤销
         case 'chexiao':
@@ -180,14 +183,51 @@ export default {
           break;
         //左对齐
         case 'juzuoduiqi':
+          //Match defaultLineText consist of ':-:' or '--:'
+          textMatch = defaultLineText.match(
+            /^([\s\S]*?)([:-]-:)(?:[\s]?)([\s\S]*)$/
+          );
+          if (textMatch) {
+            //Delete align mark string ':-:' or '--:'
+            replaceText = textMatch[3];
+            doc.replaceRange(replaceText, firstPos, currentPos);
+          }
           break;
         //居中对齐
         case 'juzhongduiqi':
-          doc.replaceRange(`:-: ${defaultLineText}`, firstPos, currentPos);
+          //Match defaultLineText consist of ':-:' or '--:'.
+          replaceText = `:-: ${defaultLineText}`;
+          textMatch = defaultLineText.match(
+            /^([\s\S]*?)([:-]-:)(?:[\s]?)([\s\S]*)$/
+          );
+          if (textMatch) {
+            //If has align center mark string ':-:', then delete it;
+            //Otherware add it.
+            if (textMatch[2] === ':-:') {
+              replaceText = textMatch[3];
+            } else {
+              replaceText = `:-: ${textMatch[3]}`;
+            }
+          }
+          doc.replaceRange(replaceText, firstPos, currentPos);
           break;
         //右对齐
         case 'juyouduiqi':
-          doc.replaceRange(`--: ${defaultLineText}`, firstPos, currentPos);
+          // Match defaultLineText consist of ':-:' or '--:'.
+          replaceText = `--: ${defaultLineText}`;
+          textMatch = defaultLineText.match(
+            /^([\s\S]*?)([:-]-:)(?:[\s]?)([\s\S]*)$/
+          );
+          if (textMatch) {
+            //If has align right mark string '--:', then delete it;
+            //Otherware add it.
+            if (textMatch[2] === '--:') {
+              replaceText = textMatch[3];
+            } else {
+              replaceText = `--: ${textMatch[3]}`;
+            }
+          }
+          doc.replaceRange(replaceText, firstPos, currentPos);
           break;
         //无序列表
         case 'wuxuliebiao':
@@ -203,11 +243,11 @@ export default {
           break;
         //链接
         case 'chaolianjie':
-          this.codemirror.replaceSelection(`${selectText}[链接]()`);
+          this.codemirror.replaceSelection(`${selectText}[文本](文本链接地址)`);
           break;
         //图片
         case 'tupian':
-          this.codemirror.replaceSelection(`![](图片链接)${selectText}`);
+          this.codemirror.replaceSelection(`![](图片链接地址)${selectText}`);
           break;
         //代码块
         case 'daimakuai':
