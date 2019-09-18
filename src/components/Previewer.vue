@@ -10,6 +10,7 @@
 import showdown from 'showdown';
 import showdownKatex from 'showdown-katex';
 import showdowToc from '@/scripts/showdown-ext/showdown-toc.js';
+import showdownAlign from '@/scripts/showdown-ext/showdown-align.js';
 import showdownMermaid from '@/scripts/showdown-ext/showdown-mermaid.js';
 import showdownPlantuml from '@/scripts/showdown-ext/showdown-plantuml.js';
 import showdownFootnotes from '@/scripts/showdown-ext/showdown-footnotes.js';
@@ -29,6 +30,7 @@ const getOptions = function(options) {
 const getExtensions = function(extensions) {
   return [
     showdowToc,
+    showdownAlign,
     showdownFootnotes,
     showdownKatex(),
     showdownMermaid({ selectors: 'div.markdown-preview' }),
