@@ -16,7 +16,6 @@ function renderTocElements(wrapper) {
   let preLevel = null;
   const elements = wrapper.querySelectorAll('p,h1,h2,h3,h4,h5,h6');
   for (let i = 0; i < elements.length; i++) {
-    let results = null;
     element = elements[i];
 
     // Does the element consist only of [toc]?
@@ -27,68 +26,6 @@ function renderTocElements(wrapper) {
       toc.className = 'showdown-toc';
       element.parentNode.replaceChild(toc, element);
       headingLevel = null;
-    }
-    // Does this item contain a [toc] with other stuff?
-    // If so, we'll split the element into two
-    else if (
-      (results = element.textContent
-        .trim()
-        .match(/^([\s\S]*?)((?:\\)?\[toc\])([\s\S]*)$/))
-    ) {
-      // If there was a \ before the [toc] they're trying to escape it,
-      // so return the [toc] string without the \ and carry on. For
-      // some reason (I'm guessing a bug in showdown) you actually
-      // appear to need two \ (\\) in order to get this to show up for
-      // the filter. Leaving this code here anyway for now because it's
-      // "the right thing to do"(tm).
-      if (results[2][0] == '\\') {
-        element.textContent = results[1] + results[2].substr(1) + results[3];
-      }
-      // Otherwise start building a new table of contents.
-      else {
-        let before = null;
-        let after = null;
-
-        // Create two of the same element.
-        if (element['tagName']) {
-          if (results[1].trim().length > 0) {
-            before = wrapper.ownerDocument.createElement(element['tagName']);
-            before.appendChild(
-              wrapper.ownerDocument.createTextNode(results[1])
-            );
-          }
-          if (results[3].trim().length > 0) {
-            after = wrapper.ownerDocument.createElement(element['tagName']);
-            after.appendChild(wrapper.ownerDocument.createTextNode(results[3]));
-          }
-        }
-        // Otherwise if there's no tagName assume it's a text node
-        // and create two of those.
-        else {
-          if (results[1].trim().length > 0) {
-            before = wrapper.ownerDocument.createTextNode(results[1]);
-          }
-          if (results[3].trim().length > 0) {
-            after = wrapper.ownerDocument.createTextNode(results[3]);
-          }
-        }
-        // Our new table of contents container.
-        toc = wrapper.ownerDocument.createElement('ul');
-        toc.className = 'showdown-toc';
-        // If there was text before our [toc], add that in
-        if (before) {
-          element.parentNode.replaceChild(before, element);
-          before.parentNode.insertBefore(toc, before.nextSibling);
-        } else {
-          element.parentNode.replaceChild(toc, element);
-        }
-        if (after) {
-          toc.parentNode.insertBefore(after, toc.nextSibling);
-        }
-        // Reset the heading level - we're going to start looking for new
-        // headings again
-        headingLevel = null;
-      }
     }
     // If we've started a table of contents, but have nothing in it yet,
     // look for the first header tag we encounter (after the [toc]).
