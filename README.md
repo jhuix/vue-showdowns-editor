@@ -8,25 +8,33 @@ A markdown editor using codemirror and previewer using showdown for Vue.js
 
 [CodeMirror](https://github.com/codemirror/CodeMirror) is a versatile text editor implemented in JavaScript for the browser. It is specialized for editing code, and comes with over 100 language modes and various addons that implement more advanced editing functionality. Every language comes with fully-featured code and syntax highlighting to help with reading and editing complex code.
 
-
-Markdown editor of [showdown-markdown-editor](https://github.com/jhuix/showdown-markdown-editor), edit markdown text using [vue-codemirror](https://github.com/surmon-china/vue-codemirror) to access codemirror. You can find more information (and the [manual](https://codemirror.net/doc/manual.html)) on the [codemirror project page](https://codemirror.net/). 
+Markdown editor of [showdown-markdown-editor](https://github.com/jhuix/showdown-markdown-editor), edit markdown text using [vue-codemirror](https://github.com/surmon-china/vue-codemirror) to access codemirror. You can find more information (and the [manual](https://codemirror.net/doc/manual.html)) on the [codemirror project page](https://codemirror.net/).
 
 ## Showdown
 
 [Showdown](https://github.com/showdownjs/showdown) is a Javascript Markdown to HTML converter, based on the original works by John Gruber. Showdown can be used client side (in the browser) or server side (with NodeJs).
-  
-Markdown previewer of [showdown-markdown-editor](https://github.com/jhuix/showdown-markdown-editor), preview markdown content with HTML using the showdown to converte it. For more information, refer to the following document:
-  - [Showdown's Markdown syntax](https://github.com/showdownjs/showdown/wiki/Showdown's-Markdown-syntax)
-  - [Showdown Options](https://github.com/showdownjs/showdown/wiki/Showdown-options)
 
+Markdown previewer of [showdown-markdown-editor](https://github.com/jhuix/showdown-markdown-editor), preview markdown content with HTML using the showdown to converte it. For more information, refer to the following document:
+
+- [Showdown's Markdown syntax](https://github.com/showdownjs/showdown/wiki/Showdown's-Markdown-syntax)
+- [Showdown Options](https://github.com/showdownjs/showdown/wiki/Showdown-options)
 
 ## Supporting some markdown extension features
 
-  [TOC]
+- [LaTeX math and AsciiMath](#LaTeX-math-and-AsciiMath)
+
+- [Table of Contents](#Table-of-Contents)
+
+- [Mermaid](#Mermaid)
+
+- [Plantuml](#Plantuml)
+
+- [Footnotes](#Footnotes)
 
 ### LaTeX math and AsciiMath
 
 It's supported by [showdown-katex](https://github.com/obedm503/showdown-katex.git), that render [LaTeX](https://www.latex-project.org/) math and [AsciiMath](http://asciimath.org/) using [KaTeX](https://github.com/Khan/KaTeX), You can check [KaTeX supported functions/symbols](https://khan.github.io/KaTeX/function-support.html).
+
 - Math examples
 
       ```asciimath
@@ -49,19 +57,19 @@ It's supported by [showdown-katex](https://github.com/obedm503/showdown-katex.gi
 
   ![math](https://raw.githubusercontent.com/jhuix/showdown-markdown-editor/master/docs/preview-math.png)
 
-
-### TOC(Table of Contents)
+### Table of Contents
 
 It's implemented child TOC in showdown-toc.js, use for reference the [showdown-toc](https://github.com/ravisorg/showdown-toc).
 
 - TOC examples
- 
-   \ [TOC]
+
+```
+  [TOC]
+```
 
 - Show pictures
 
   ![toc](https://raw.githubusercontent.com/jhuix/showdown-markdown-editor/master/docs/preview-intro.png)
-
 
 ### Mermaid
 
@@ -152,12 +160,11 @@ It's implemented in showdown-plantuml.js. render diagrams of uml using [plantuml
 
 ### Footnotes
 
-> It's implemented in showdown-footnotes.js, use for reference the [showdown-footnotes](https://github.com/Kriegslustig/showdown-footnotes).
+It's implemented in showdown-footnotes.js, use for reference the [showdown-footnotes](https://github.com/Kriegslustig/showdown-footnotes).
 
-> - Footnotes examples
+- Footnotes examples
 
   [^1]: The explanation.
-
 
 ## Project setup
 
