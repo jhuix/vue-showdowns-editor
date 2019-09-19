@@ -4,33 +4,118 @@
  * @Date: 2019-08-27 16:57:06
  * @LastEditors: Jhuix (Hui Jin) <jhuix0117@gmail.com>
  * @LastEditTime: 2019-09-15 21:27:51
- * Reference website: https://github.com/ravisorg/showdown-toc
  */
 
 'use strict';
 
+function createHeadingElement(wrapper, element, toc, nexthead) {
+  if (nexthead) {
+    toc = toc.appendChild(wrapper.ownerDocument.createElement('ul'));
+  }
+
+  const child = toc
+    .appendChild(wrapper.ownerDocument.createElement('li'))
+    .appendChild(wrapper.ownerDocument.createElement('a'));
+  child.appendChild(wrapper.ownerDocument.createTextNode(element.textContent));
+  child.href = '#' + element.id;
+  return toc;
+}
+
+function appendTocElement(wrapper, element, currTocNode, headingLevel) {
+  // If the current heading level is not greater than the heading level of current toc node,
+  // return the toc node whose heading level is less than the current heading level in the toc node list.
+  // At the same time, clearing the invalid toc node.
+  if (headingLevel <= currTocNode.headingLevel) {
+    let tempTocNode = null;
+    while (currTocNode) {
+      if (headingLevel > currTocNode.headingLevel) break;
+      tempTocNode = currTocNode;
+      currTocNode = tempTocNode.parentNode;
+      // Remove toc node from node list and clean it.
+      tempTocNode.parentNode = null;
+      tempTocNode.toc = null;
+      tempTocNode.headingLevel = null;
+      tempTocNode.preLevel = null;
+    }
+    if (currTocNode)
+      appendTocElement(wrapper, element, currTocNode, headingLevel);
+    return currTocNode;
+  }
+
+  // If the current heading level is greater than the heading level of
+  // the latest heading of the current toc node,
+  // you need to create a new level heading with out list.
+  // Otherwise add a heading of the same heading level.
+  if (headingLevel > currTocNode.preLevel) {
+    currTocNode.toc = createHeadingElement(
+      wrapper,
+      element,
+      currTocNode.toc,
+      true
+    );
+    currTocNode.preLevel = headingLevel;
+  } else {
+    while (headingLevel < currTocNode.preLevel) {
+      currTocNode.toc = currTocNode.toc.parentNode;
+      currTocNode.preLevel--;
+    }
+    createHeadingElement(wrapper, element, currTocNode.toc, false);
+  }
+
+  if (currTocNode.parentNode)
+    appendTocElement(wrapper, element, currTocNode.parentNode, headingLevel);
+  return currTocNode;
+}
+
 function renderTocElements(wrapper) {
   let element = null;
-  let toc = null;
-  let headingLevel = null;
-  let preLevel = null;
+  let headingLevel = 0;
+  let currTocNode = null;
   const elements = wrapper.querySelectorAll('p,h1,h2,h3,h4,h5,h6');
   for (let i = 0; i < elements.length; i++) {
     element = elements[i];
 
-    // Does the element consist only of [toc]?
-    // If so, we can replace this element with out list.
+    // Match the element text is [toc].
+    // And replace this element with out list that classname is 'showdown-toc'.
     if (element.textContent.trim().toLowerCase() == '[toc]') {
-      // Our new table of contents container.
-      toc = wrapper.ownerDocument.createElement('ul');
+      // New table of contents container.
+      let toc = wrapper.ownerDocument.createElement('ul');
       toc.className = 'showdown-toc';
       element.parentNode.replaceChild(toc, element);
-      headingLevel = null;
+      let tocNode = {
+        parentNode: null,
+        toc: toc,
+        headingLevel: headingLevel,
+        preLevel: 0
+      };
+      if (currTocNode) {
+        // If the heading level of the TOC node is higher than
+        // that of the previous TOC node,
+        // the TOC node is a child of the previous TOC node.
+        // Otherwise, look up the TOC node in the node list
+        // whose heading level is not greater than the TOC node.
+        if (headingLevel > currTocNode.headingLevel) {
+          tocNode.parentNode = currTocNode;
+        } else {
+          // The code will never be executed, just to prevent logic loss.
+          // Because invalid nodes have been cleared in appendTocElement method.
+          let prev = currTocNode;
+          while (headingLevel < prev.headingLevel) {
+            prev = prev.parentNode;
+          }
+          if (prev) {
+            if (headingLevel === prev.headingLevel) {
+              tocNode.parentNode = prev.parentNode;
+            } else {
+              tocNode.parentNode = prev;
+            }
+          }
+        }
+      }
+      currTocNode = tocNode;
     }
-    // If we've started a table of contents, but have nothing in it yet,
-    // look for the first header tag we encounter (after the [toc]).
-    // That's going to be what we use as contents entries for this table
-    // of contents.
+    // That's going to be what we use as contents entries
+    // for this table of contents.
     else if (element['tagName']) {
       switch (element['tagName']) {
         case 'H1':
@@ -39,53 +124,33 @@ function renderTocElements(wrapper) {
         case 'H4':
         case 'H5':
         case 'H6':
-          {
-            const thisLevel = parseInt(element['tagName'].substr(1));
-            if (!toc) {
-              headingLevel = thisLevel;
-              preLevel = thisLevel;
-            } else {
-              // If we know what header level we're looking for (either we just
-              // found it above, or we're continuing to look for more) then check to
-              // see if this heading should be added to the contents.
-              if (!headingLevel) headingLevel = thisLevel;
-              if (!preLevel) preLevel = thisLevel;
-
-              // If we move up in what would be the document tree
-              // (eg: if we're looking for H2 and we suddenly find an
-              // H1) then we can probably safely assume that we want
-              // the table of contents to end for this section.
-              if (thisLevel < headingLevel) {
-                toc = null;
-                headingLevel = null;
-                preLevel = null;
-                break;
-              }
-
-              if (thisLevel > preLevel) {
-                toc = toc.appendChild(
-                  wrapper.ownerDocument.createElement('ul')
-                );
-                preLevel = thisLevel;
-              } else {
-                while (thisLevel < preLevel) {
-                  toc = toc.parentNode;
-                  preLevel--;
-                }
-              }
-
-              const child = toc
-                .appendChild(wrapper.ownerDocument.createElement('li'))
-                .appendChild(wrapper.ownerDocument.createElement('a'));
-              child.appendChild(
-                wrapper.ownerDocument.createTextNode(element.textContent)
-              );
-              child.href = '#' + element.id;
+          headingLevel = parseInt(element['tagName'].substr(1));
+          if (currTocNode) {
+            if (!currTocNode.preLevel) {
+              currTocNode.preLevel = headingLevel;
             }
+
+            currTocNode = appendTocElement(
+              wrapper,
+              element,
+              currTocNode,
+              headingLevel
+            );
           }
           break;
       }
     }
+  }
+
+  // Final, clear all toc node in node list.
+  while (currTocNode) {
+    let tempTocNode = currTocNode;
+    currTocNode = tempTocNode.parentNode;
+    // Clean toc node.
+    tempTocNode.parentNode = null;
+    tempTocNode.toc = null;
+    tempTocNode.headingLevel = null;
+    tempTocNode.preLevel = null;
   }
 }
 

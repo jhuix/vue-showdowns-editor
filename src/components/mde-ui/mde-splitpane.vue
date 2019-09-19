@@ -199,7 +199,7 @@ export default {
 }
 
 .mde-ui.pane {
-  overflow: auto;
+  overflow: hidden;
   position: relative;
   outline: none;
 

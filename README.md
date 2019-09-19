@@ -1,6 +1,6 @@
 # showdown-markdown-editor
 
-A markdown editor using codemirror and previewer using showdown for Vue.js
+A markdown editor using codemirror and previewer using showdown for Vue.js.
 
 ![intro](https://raw.githubusercontent.com/jhuix/showdown-markdown-editor/master/docs/preview-intro.png)
 
@@ -59,7 +59,7 @@ It's supported by [showdown-katex](https://github.com/obedm503/showdown-katex.gi
 
 ### Table of Contents
 
-It's implemented child TOC in showdown-toc.js, use for reference the [showdown-toc](https://github.com/ravisorg/showdown-toc).
+It's implemented sub-TOC in showdown-toc.js.
 
 - TOC examples
 
@@ -69,7 +69,7 @@ It's implemented child TOC in showdown-toc.js, use for reference the [showdown-t
 
 - Show pictures
 
-  ![toc](https://raw.githubusercontent.com/jhuix/showdown-markdown-editor/master/docs/preview-intro.png)
+  ![toc](https://raw.githubusercontent.com/jhuix/showdown-markdown-editor/master/docs/preview-toc.png)
 
 ### Mermaid
 
