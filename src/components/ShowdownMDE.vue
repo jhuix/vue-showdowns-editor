@@ -10,7 +10,6 @@
   <div class="mde-workspace-container">
     <div class="mde-toolbar" v-if="hasToolbar">
       <div class="mde-toolbar-actions nav">
-        <!--<mde-buttons v-bind:items="toolSet.rootItems" v-on:click="handleClick"></mde-buttons>-->
         <mde-menu
           ref="roomenu"
           v-bind:item="rootSet.item"
@@ -120,24 +119,9 @@ import debounce from 'lodash/debounce';
 
 const getToolSet = function() {
   return {
-    rootItems: [
-      {
-        type: 'shezhi',
-        text: '',
-        shortkey: 'Ctrl+Shift+S',
-        disabled: false,
-        tooltip: {
-          show: true,
-          inverted: true,
-          small: true,
-          position: 'bottom left',
-          info: '设置'
-        }
-      }
-    ],
     editItems: [
       {
-        type: 'chexiao',
+        type: 'undo',
         text: '',
         shortkey: 'Ctrl+Z',
         disabled: true,
@@ -150,7 +134,7 @@ const getToolSet = function() {
         }
       },
       {
-        type: 'zhongzuo',
+        type: 'redo',
         text: '',
         shortkey: 'Ctrl+Y',
         disabled: true,
@@ -165,7 +149,7 @@ const getToolSet = function() {
     ],
     titleItems: [
       {
-        type: 'biaoti1',
+        type: 'h1',
         text: '',
         shortkey: 'Ctrl+1',
         disabled: false,
@@ -178,7 +162,7 @@ const getToolSet = function() {
         }
       },
       {
-        type: 'biaoti2',
+        type: 'h2',
         text: '',
         shortkey: 'Ctrl+2',
         disabled: false,
@@ -191,7 +175,7 @@ const getToolSet = function() {
         }
       },
       {
-        type: 'biaoti3',
+        type: 'h3',
         text: '',
         shortkey: 'Ctrl+3',
         disabled: false,
@@ -204,7 +188,7 @@ const getToolSet = function() {
         }
       },
       {
-        type: 'biaoti4',
+        type: 'h4',
         text: '',
         shortkey: 'Ctrl+4',
         disabled: false,
@@ -217,7 +201,7 @@ const getToolSet = function() {
         }
       },
       {
-        type: 'biaoti5',
+        type: 'h5',
         text: '',
         shortkey: 'Ctrl+5',
         disabled: false,
@@ -230,7 +214,7 @@ const getToolSet = function() {
         }
       },
       {
-        type: 'biaoti6',
+        type: 'h6',
         text: '',
         shortkey: 'Ctrl+6',
         disabled: false,
@@ -245,7 +229,7 @@ const getToolSet = function() {
     ],
     fontItems: [
       {
-        type: 'jiacu',
+        type: 'bold',
         text: '',
         shortkey: 'Ctrl+B',
         disabled: false,
@@ -258,7 +242,7 @@ const getToolSet = function() {
         }
       },
       {
-        type: 'xieti',
+        type: 'italic',
         text: '',
         shortkey: 'Ctrl+I',
         disabled: false,
@@ -271,7 +255,7 @@ const getToolSet = function() {
         }
       },
       {
-        type: 'shanchuxian',
+        type: 'strikethrough',
         text: '',
         shortkey: 'Ctrl+Shift+X',
         disabled: false,
@@ -284,7 +268,7 @@ const getToolSet = function() {
         }
       },
       {
-        type: 'xiahuaxian',
+        type: 'underline',
         text: '',
         shortkey: 'Ctrl+Shift+U',
         disabled: false,
@@ -297,7 +281,7 @@ const getToolSet = function() {
         }
       },
       {
-        type: 'charudaima',
+        type: 'code',
         text: '',
         shortkey: 'Ctrl+E',
         disabled: false,
@@ -312,7 +296,7 @@ const getToolSet = function() {
     ],
     alignItems: [
       {
-        type: 'juzuoduiqi',
+        type: 'align-left',
         text: '',
         shortkey: 'Ctrl+Alt+L',
         disabled: false,
@@ -325,7 +309,7 @@ const getToolSet = function() {
         }
       },
       {
-        type: 'juzhongduiqi',
+        type: 'align-center',
         text: '',
         shortkey: 'Ctrl+Alt+M',
         disabled: false,
@@ -338,7 +322,7 @@ const getToolSet = function() {
         }
       },
       {
-        type: 'juyouduiqi',
+        type: 'align-right',
         text: '',
         shortkey: 'Ctrl+Alt+R',
         disabled: false,
@@ -353,7 +337,7 @@ const getToolSet = function() {
     ],
     listItems: [
       {
-        type: 'wuxuliebiao',
+        type: 'bullet',
         text: '',
         shortkey: 'Ctrl+Alt+B',
         disabled: false,
@@ -366,7 +350,7 @@ const getToolSet = function() {
         }
       },
       {
-        type: 'youxuliebiao',
+        type: 'ordered',
         text: '',
         shortkey: 'Ctrl+Alt+O',
         disabled: false,
@@ -379,7 +363,7 @@ const getToolSet = function() {
         }
       },
       {
-        type: 'renwuliebiao',
+        type: 'tasks',
         text: '',
         shortkey: 'Ctrl+Alt+T',
         disabled: false,
@@ -394,7 +378,7 @@ const getToolSet = function() {
     ],
     otherItems: [
       {
-        type: 'chaolianjie',
+        type: 'link',
         text: '',
         shortkey: 'Ctrl+L',
         disabled: false,
@@ -407,7 +391,7 @@ const getToolSet = function() {
         }
       },
       {
-        type: 'tupian',
+        type: 'image',
         text: '',
         shortkey: 'Ctrl+Alt+I',
         disabled: false,
@@ -420,7 +404,7 @@ const getToolSet = function() {
         }
       },
       {
-        type: 'daimakuai',
+        type: 'codeblock',
         text: '',
         shortkey: 'Ctrl+Shift+E',
         disabled: false,
@@ -433,7 +417,7 @@ const getToolSet = function() {
         }
       },
       {
-        type: 'fengexian',
+        type: 'splitline',
         text: '',
         shortkey: 'Ctrl+H',
         disabled: false,
@@ -446,7 +430,7 @@ const getToolSet = function() {
         }
       },
       {
-        type: 'yinyong',
+        type: 'quote',
         text: '',
         shortkey: 'Ctrl+Q',
         disabled: false,
@@ -459,7 +443,7 @@ const getToolSet = function() {
         }
       },
       {
-        type: 'biaoge',
+        type: 'table',
         text: '',
         shortkey: 'Ctrl+T',
         disabled: false,
@@ -472,7 +456,7 @@ const getToolSet = function() {
         }
       },
       {
-        type: 'zhangjiemulu',
+        type: 'toc',
         text: '',
         shortkey: 'Ctrl+M',
         disabled: false,
@@ -492,7 +476,7 @@ const getMenuSet = function() {
   return {
     title: {
       item: {
-        type: 'biaoti',
+        type: 'heading',
         text: '',
         shortkey: 'Atl+H',
         caret: true,
@@ -507,42 +491,42 @@ const getMenuSet = function() {
       },
       menuItems: [
         {
-          type: 'biaoti1',
+          type: 'h1',
           text: '标题一',
           shortkey: 'Ctrl+1',
           menu: true,
           disabled: false
         },
         {
-          type: 'biaoti2',
+          type: 'h2',
           text: '标题二',
           shortkey: 'Ctrl+2',
           menu: true,
           disabled: false
         },
         {
-          type: 'biaoti3',
+          type: 'h3',
           text: '标题三',
           shortkey: 'Ctrl+3',
           menu: true,
           disabled: false
         },
         {
-          type: 'biaoti4',
+          type: 'h4',
           text: '标题四',
           shortkey: 'Ctrl+4',
           menu: true,
           disabled: false
         },
         {
-          type: 'biaoti5',
+          type: 'h5',
           text: '标题五',
           shortkey: 'Ctrl+5',
           menu: true,
           disabled: false
         },
         {
-          type: 'biaoti6',
+          type: 'h6',
           text: '标题六',
           shortkey: 'Ctrl+6',
           menu: true,
@@ -552,7 +536,7 @@ const getMenuSet = function() {
     },
     font: {
       item: {
-        type: 'ziti',
+        type: 'font',
         text: '',
         shortkey: 'Atl+F',
         caret: true,
@@ -567,35 +551,35 @@ const getMenuSet = function() {
       },
       menuItems: [
         {
-          type: 'jiacu',
+          type: 'bold',
           text: '加粗',
           shortkey: 'Ctrl+B',
           menu: true,
           disabled: false
         },
         {
-          type: 'xieti',
+          type: 'italic',
           text: '斜体',
           shortkey: 'Ctrl+I',
           menu: true,
           disabled: false
         },
         {
-          type: 'shanchuxian',
+          type: 'strikethrough',
           text: '删除线',
           shortkey: 'Ctrl+Shift+X',
           menu: true,
           disabled: false
         },
         {
-          type: 'xiahuaxian',
+          type: 'underline',
           text: '下划线',
           shortkey: 'Ctrl+Shift+U',
           menu: true,
           disabled: false
         },
         {
-          type: 'charudaima',
+          type: 'code',
           text: '插入代码',
           shortkey: 'Ctrl+E',
           menu: true,
@@ -605,7 +589,7 @@ const getMenuSet = function() {
     },
     align: {
       item: {
-        type: 'duiqifangshi',
+        type: 'align-justify',
         text: '',
         shortkey: 'Atl+A',
         caret: true,
@@ -620,21 +604,21 @@ const getMenuSet = function() {
       },
       menuItems: [
         {
-          type: 'juzuoduiqi',
+          type: 'align-left',
           text: '居左对齐',
           shortkey: 'Ctrl+Alt+L',
           menu: true,
           disabled: false
         },
         {
-          type: 'juzhongduiqi',
+          type: 'align-center',
           text: '居中对齐',
           shortkey: 'Ctrl+Alt+M',
           menu: true,
           disabled: false
         },
         {
-          type: 'juyouduiqi',
+          type: 'align-right',
           text: '居右对齐',
           shortkey: 'Ctrl+Alt+R',
           menu: true,
@@ -644,7 +628,7 @@ const getMenuSet = function() {
     },
     list: {
       item: {
-        type: 'wuxuliebiao',
+        type: 'list',
         text: '',
         shortkey: 'Atl+L',
         caret: true,
@@ -659,21 +643,21 @@ const getMenuSet = function() {
       },
       menuItems: [
         {
-          type: 'wuxuliebiao',
+          type: 'bullet',
           text: '无序列表',
           shortkey: 'Ctrl+Alt+B',
           menu: true,
           disabled: false
         },
         {
-          type: 'youxuliebiao',
+          type: 'ordered',
           text: '有序列表',
           shortkey: 'Ctrl+Alt+O',
           menu: true,
           disabled: false
         },
         {
-          type: 'renwuliebiao',
+          type: 'tasks',
           text: '任务列表',
           shortkey: 'Ctrl+Alt+T',
           menu: true,
@@ -686,7 +670,7 @@ const getMenuSet = function() {
 
 let rootMenuSet = {
   item: {
-    type: 'shezhi',
+    type: 'tools',
     text: '',
     shortkey: 'Ctrl+Shift+S',
     caret: true,
@@ -996,7 +980,7 @@ export default {
       height: 100%;
 
       .mde-previewer {
-        overflow-y: auto
+        overflow-y: auto;
       }
     }
 

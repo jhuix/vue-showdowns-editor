@@ -119,158 +119,175 @@ export default {
       let result = true;
       let replaceText = null;
       let textMatch = null;
+      let prefix = null;
       const selectText = this.codemirror.getSelection();
       let defaultSelectText = selectText;
       const doc = this.codemirror.getDoc();
       let currentPos = doc.getCursor();
       let lineText = doc.getLine(currentPos.line);
       let firstPos = { line: currentPos.line, ch: 0 };
+      let lastPos = { line: currentPos.line, ch: lineText.length };
       const lineRangeText = doc.getRange(firstPos, currentPos);
       let defaultLineText = lineRangeText;
       if (!defaultSelectText && !lineText) defaultSelectText = '请输入文本';
       if (!defaultLineText && !lineText) defaultLineText = '请输入文本';
+
       switch (type) {
-        //撤销
-        case 'chexiao':
-          doc.undo();
-          break;
-        //重做
-        case 'zhongzuo':
-          doc.redo();
-          break;
         //标题一
-        case 'biaoti1':
-          doc.replaceRange(`# ${defaultLineText}`, firstPos, currentPos);
+        case 'h1':
+          prefix = '#';
           break;
         //标题二
-        case 'biaoti2':
-          doc.replaceRange(`## ${defaultLineText}`, firstPos, currentPos);
+        case 'h2':
+          prefix = '##';
           break;
         //标题三
-        case 'biaoti3':
-          doc.replaceRange(`### ${defaultLineText}`, firstPos, currentPos);
+        case 'h3':
+          prefix = '###';
           break;
         //标题四
-        case 'biaoti4':
-          doc.replaceRange(`#### ${defaultLineText}`, firstPos, currentPos);
+        case 'h4':
+          prefix = '####';
           break;
         //标题五
-        case 'biaoti5':
-          doc.replaceRange(`##### ${defaultLineText}`, firstPos, currentPos);
+        case 'h5':
+          prefix = '#####';
           break;
         //标题六
-        case 'biaoti6':
-          doc.replaceRange(`###### ${defaultLineText}`, firstPos, currentPos);
+        case 'h6':
+          prefix = '######';
           break;
-        //黑体
-        case 'jiacu':
-          this.codemirror.replaceSelection(`**${selectText}**`);
-          break;
-        //斜体
-        case 'xieti':
-          this.codemirror.replaceSelection(`*${selectText}*`);
-          break;
-        case 'xiahuaxian':
-          this.codemirror.replaceSelection(`__${selectText}__`);
-          break;
-        //删除线
-        case 'shanchuxian':
-          this.codemirror.replaceSelection(`~~${selectText}~~`);
-          break;
-        //代码
-        case 'charudaima':
-          this.codemirror.replaceSelection(`\`${selectText}\``);
-          break;
+      }
+
+      if (prefix) {
+        textMatch = lineText.match(/^(#{1,6})(?:\s+)([\S\s]*)$/);
+        if (textMatch) {
+          if (textMatch[1] !== prefix) {
+            replaceText = `${prefix} ${textMatch[2]}`;
+          } else {
+            replaceText = textMatch[2];
+          }
+        } else {
+          replaceText = `${prefix} ${lineText}`;
+        }
+        doc.replaceRange(replaceText, firstPos, lastPos);
+        prefix = null;
+      }
+
+      switch (type) {
         //左对齐
-        case 'juzuoduiqi':
-          //Match defaultLineText consist of ':-:' or '--:'
-          textMatch = defaultLineText.match(
-            /^([\s\S]*?)([:-]-:)(?:[\s]?)([\s\S]*)$/
-          );
+        case 'align-left':
+          prefix = '';
+          break;
+        //居中对齐
+        case 'align-center':
+          prefix = ':-:';
+          break;
+        //右对齐
+        case 'align-right':
+          prefix = '--:';
+          break;
+      }
+
+      if (prefix != null) {
+        //Match defaultLineText consist of ':-:' or '--:'
+        textMatch = defaultLineText.match(
+          /^([\s\S]*?)([:-]-:)(?:[\s]?)([\s\S]*)$/
+        );
+
+        if (prefix === '') {
+          // It's align left
           if (textMatch) {
             //Delete align mark string ':-:' or '--:'
             replaceText = textMatch[3];
-            doc.replaceRange(replaceText, firstPos, currentPos);
           }
-          break;
-        //居中对齐
-        case 'juzhongduiqi':
-          //Match defaultLineText consist of ':-:' or '--:'.
-          replaceText = `:-: ${defaultLineText}`;
-          textMatch = defaultLineText.match(
-            /^([\s\S]*?)([:-]-:)(?:[\s]?)([\s\S]*)$/
-          );
+        } else {
+          replaceText = `${prefix} ${defaultLineText}`;
           if (textMatch) {
-            //If has align center mark string ':-:', then delete it;
+            //If has align right mark string '${prefix}', then delete it;
             //Otherware add it.
-            if (textMatch[2] === ':-:') {
+            if (textMatch[2] === prefix) {
               replaceText = textMatch[3];
             } else {
-              replaceText = `:-: ${textMatch[3]}`;
+              replaceText = `${prefix} ${textMatch[3]}`;
             }
           }
-          doc.replaceRange(replaceText, firstPos, currentPos);
+        }
+        doc.replaceRange(replaceText, firstPos, currentPos);
+        prefix = null;
+      }
+
+      switch (type) {
+        //撤销
+        case 'undo':
+          doc.undo();
           break;
-        //右对齐
-        case 'juyouduiqi':
-          // Match defaultLineText consist of ':-:' or '--:'.
-          replaceText = `--: ${defaultLineText}`;
-          textMatch = defaultLineText.match(
-            /^([\s\S]*?)([:-]-:)(?:[\s]?)([\s\S]*)$/
-          );
-          if (textMatch) {
-            //If has align right mark string '--:', then delete it;
-            //Otherware add it.
-            if (textMatch[2] === '--:') {
-              replaceText = textMatch[3];
-            } else {
-              replaceText = `--: ${textMatch[3]}`;
-            }
-          }
-          doc.replaceRange(replaceText, firstPos, currentPos);
+        //重做
+        case 'redo':
+          doc.redo();
+          break;
+        //黑体
+        case 'bold':
+          this.codemirror.replaceSelection(`**${selectText}**`, 'around');
+          break;
+        //斜体
+        case 'italic':
+          this.codemirror.replaceSelection(`*${selectText}*`, 'around');
+          break;
+        //下划线
+        case 'underline':
+          this.codemirror.replaceSelection(`__${selectText}__`, 'around');
+          break;
+        //删除线
+        case 'strikethrough':
+          this.codemirror.replaceSelection(`~~${selectText}~~`, 'around');
+          break;
+        //代码
+        case 'code':
+          this.codemirror.replaceSelection(`\`${selectText}\``, 'around');
           break;
         //无序列表
-        case 'wuxuliebiao':
+        case 'bullet':
           doc.replaceRange(`- ${defaultLineText}`, firstPos, currentPos);
           break;
         //有序列表
-        case 'youxuliebiao':
+        case 'ordered':
           doc.replaceRange(`1. ${defaultLineText}`, firstPos, currentPos);
           break;
         //任务列表
-        case 'renwuliebiao':
+        case 'tasks':
           doc.replaceRange(`- [x] ${defaultLineText}`, firstPos, currentPos);
           break;
         //链接
-        case 'chaolianjie':
+        case 'link':
           this.codemirror.replaceSelection(`${selectText}[文本](文本链接地址)`);
           break;
         //图片
-        case 'tupian':
+        case 'image':
           this.codemirror.replaceSelection(`![](图片链接地址)${selectText}`);
           break;
         //代码块
-        case 'daimakuai':
+        case 'codeblock':
           this.codemirror.replaceSelection(
             `\n\n\`\`\`\n${selectText}\n\`\`\`\n\n`
           );
           break;
         //分割线
-        case 'fengexian':
+        case 'splitline':
           this.codemirror.replaceSelection(`\n----\n${selectText}`);
           break;
         //引用
-        case 'yinyong':
+        case 'quote':
           doc.replaceRange(`> ${defaultLineText}`, firstPos, currentPos);
           break;
         //表格
-        case 'biaoge':
+        case 'table':
           this.codemirror.replaceSelection(
             `\n\n|     |     |\n| --- | --- |\n|     |     |\n\n${selectText}`
           );
           break;
         //章节导航
-        case 'zhangjiemulu':
+        case 'toc':
           this.codemirror.replaceSelection(`${selectText}\n\n[TOC]\n\n`);
           break;
         default:
