@@ -68,12 +68,12 @@ export default {
       this.$refs.smde.addRootMenu(previewMenuItem);
 
       let that = this;
-      var defHtml = axios.get('//demo.showdownjs.com/md/text.md');
+      var defHtml = axios.get('http://demo.showdownjs.com/md/text.md');
       defHtml
         .then(function(res) {
           that.mdDoc = res.data;
           return axios.get(
-            "//raw.githubusercontent.com/wiki/showdownjs/showdown/Showdown's-Markdown-syntax.md"
+            "https://raw.githubusercontent.com/wiki/showdownjs/showdown/Showdown's-Markdown-syntax.md"
           );
         })
         .then(function(res) {
@@ -83,7 +83,7 @@ export default {
           that.mdDoc = '';
           console.log(error);
         });
-      //      this.previewExtensions = [showdownFootnotes];
+      // this.previewExtensions = [showdownFootnotes];
     });
   }
 };

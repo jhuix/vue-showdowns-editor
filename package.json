@@ -4,20 +4,31 @@
   "author": "Jhuix <jhuix0117@gmail.com>",
   "private": false,
   "description": "A markdown editor using codemirror and previewer using showdown for Vue.js",
-  "main": "lib/index.min.js",
+  "main": "dist/lib/showdownmde.common.js",
+  "unpkg": "dist/lib/showdownmde.umd.min.js",
+  "css": "dist/lib/showdownmde.css",
+  "files": [
+    "src",
+    "lib"
+  ],
   "keywords": [
-    "markdown-editor",
     "vue",
     "showdown",
     "markdown",
+    "markdown-editor",
     "showdown-editor"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jhuix/showdown-markdown-editor"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --dest dist/demo",
     "lint": "vue-cli-service lint",
-    "lib": "vue-cli-service build --target lib --name showdown-markdown-editor --dest lib src/index.js"
+    "build:lib": "vue-cli-service build --target lib --name showdownmde --dest dist/lib src/index.js",
+    "build:wc": "vue-cli-service build --target wc --name showdown-mde --dest dist/wc src/index.js"
   },
   "dependencies": {
     "codemirror": "^5.48.2",
