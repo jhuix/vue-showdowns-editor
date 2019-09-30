@@ -4,13 +4,17 @@ A markdown editor using codemirror and previewer using showdown for Vue.js.
 
 ![intro](https://raw.githubusercontent.com/jhuix/showdown-markdown-editor/master/docs/screenshot/preview-intro.png)
 
-## Codemirror
+## Demo
+
+[showdownmde demo](https://jhuix.github.io/showdown-markdown-editor/demo/index.html)
+
+## Markdown editor
 
 [CodeMirror](https://github.com/codemirror/CodeMirror) is a versatile text editor implemented in JavaScript for the browser. It is specialized for editing code, and comes with over 100 language modes and various addons that implement more advanced editing functionality. Every language comes with fully-featured code and syntax highlighting to help with reading and editing complex code.
 
 Markdown editor of [showdown-markdown-editor](https://github.com/jhuix/showdown-markdown-editor), edit markdown text using [vue-codemirror](https://github.com/surmon-china/vue-codemirror) to access codemirror. You can find more information (and the [manual](https://codemirror.net/doc/manual.html)) on the [codemirror project page](https://codemirror.net/).
 
-## Showdown
+## Markdown previewer
 
 [Showdown](https://github.com/showdownjs/showdown) is a Javascript Markdown to HTML converter, based on the original works by John Gruber. Showdown can be used client side (in the browser) or server side (with NodeJs).
 
