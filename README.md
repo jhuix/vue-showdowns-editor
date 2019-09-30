@@ -2,7 +2,7 @@
 
 A markdown editor using codemirror and previewer using showdown for Vue.js.
 
-![intro](https://raw.githubusercontent.com/jhuix/showdown-markdown-editor/master/docs/preview-intro.png)
+![intro](https://raw.githubusercontent.com/jhuix/showdown-markdown-editor/master/docs/screenshot/preview-intro.png)
 
 ## Codemirror
 
@@ -55,7 +55,7 @@ It's supported by [showdown-katex](https://github.com/obedm503/showdown-katex.gi
 
 - Show pictures
 
-  ![math](https://raw.githubusercontent.com/jhuix/showdown-markdown-editor/master/docs/preview-math.png)
+  ![math](https://raw.githubusercontent.com/jhuix/showdown-markdown-editor/master/docs/screenshot/preview-math.png)
 
 ### Table of Contents
 
@@ -69,7 +69,7 @@ It's implemented sub-TOC in showdown-toc.js.
 
 - Show pictures
 
-  ![toc](https://raw.githubusercontent.com/jhuix/showdown-markdown-editor/master/docs/preview-toc.png)
+  ![toc](https://raw.githubusercontent.com/jhuix/showdown-markdown-editor/master/docs/screenshot/preview-toc.png)
 
 ### Mermaid
 
@@ -87,7 +87,7 @@ Mermaid examples:
            C-->D;
         ```
 
-  ![flowchart](https://raw.githubusercontent.com/jhuix/showdown-markdown-editor/master/docs/preview-flowchart.png)
+  ![flowchart](https://raw.githubusercontent.com/jhuix/showdown-markdown-editor/master/docs/screenshot/preview-flowchart.png)
 
 - Sequence diagram
 
@@ -105,7 +105,7 @@ Mermaid examples:
            Bob-->>John: Jolly good!
        ```
 
-  ![sequence](https://raw.githubusercontent.com/jhuix/showdown-markdown-editor/master/docs/preview-sequence.png)
+  ![sequence](https://raw.githubusercontent.com/jhuix/showdown-markdown-editor/master/docs/screenshot/preview-sequence.png)
 
 - Gantt diagram
 
@@ -122,7 +122,7 @@ Mermaid examples:
        Future task2               :         des4, after des3, 5d
        ```
 
-  ![gantt](https://raw.githubusercontent.com/jhuix/showdown-markdown-editor/master/docs/preview-gantt.png)
+  ![gantt](https://raw.githubusercontent.com/jhuix/showdown-markdown-editor/master/docs/screenshot/preview-gantt.png)
 
 ### Plantuml
 
@@ -156,7 +156,7 @@ It's implemented in showdown-plantuml.js. render diagrams of uml using [plantuml
 
 - Show pictures
 
-  ![plantuml](https://raw.githubusercontent.com/jhuix/showdown-markdown-editor/master/docs/preview-plantuml.png)
+  ![plantuml](https://raw.githubusercontent.com/jhuix/showdown-markdown-editor/master/docs/screenshot/preview-plantuml.png)
 
 ### Footnotes
 
