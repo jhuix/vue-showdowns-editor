@@ -1,3 +1,7 @@
+const isDebug = process.env.NODE_ENV === 'development';
+const isProduction = process.env.NODE_ENV === 'production';
+const isDemo = process.env.BUILD_ENV === 'demo';
+
 // vue.config.js 配置说明
 // 官方vue.config.js 参考文档 https://cli.vuejs.org/zh/config
 module.exports = {
@@ -6,7 +10,7 @@ module.exports = {
   // 例如 https://www.my-app.com/。如果应用被部署在一个子路径上，你就需要用这个选项指定这个子路径。
   // 例如，如果你的应用被部署在 https://www.my-app.com/my-app/，则设置 publicPath 为 /my-app/。
   // baseUrl 从 Vue CLI 3.3 起已弃用，请使用publicPath
-  publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
+  publicPath: isProduction ? './' : '/',
   // outputDir: 在npm run build 或 yarn build 时 ，生成文件的目录名称（要和publicPath的生产环境路径一致）；
   // 构建时传入 --no-clean 可关闭该行为。
   outputDir: 'dist',
@@ -42,7 +46,7 @@ module.exports = {
 
   // 是否通过 eslint-loader 在每次保存时 lint 代码;
   // 在生产构建时禁用 eslint-loader。
-  lintOnSave: process.env.NODE_ENV !== 'production',
+  lintOnSave: !isProduction,
   // 是否使用包含运行时编译器的 Vue 构建版本。
   // 设置为 true 后你就可以在 Vue 组件中使用 template 选项了，但是这会让你的应用额外增加 10kb 左右。(默认false)
   runtimeCompiler: false,
@@ -50,7 +54,7 @@ module.exports = {
   // 打包之后发现map文件过大，项目文件体积很大，设置为false就可以不输出map文件
   // map文件的作用在于：项目打包后，代码都是经过压缩加密的，如果运行时报错，输出的错误信息无法准确得知是哪里的代码报错。
   // 有了map就可以像未加密的代码一样，准确的输出是哪一行哪一列有错。
-  productionSourceMap: false,
+  productionSourceMap: !isProduction || isDemo,
 
   // Babel 显式转译列表
   //transpileDependencies: [],
@@ -63,15 +67,35 @@ module.exports = {
   // 如果你需要基于环境有条件地配置行为，或者想要直接修改配置，那就换成一个函数 (该函数会在环境变量被设置之后懒执行)。
   // 该方法的第一个参数会收到已经解析好的配置。在函数内，你可以直接修改配置，或者返回一个将会被合并的对象。
   configureWebpack: {
-    devtool: 'source-map'
+    devtool: 'source-map',
+    // 排除外部库以及不需要打包的 node_modules 第三方包（如使用CDN或引用本地JS库）
+    // 作为一个合格成熟的 lib，应该学会让用你的人去安装第三方包
+    externals:
+      isDebug || isDemo
+        ? {}
+        : {
+            vue: 'Vue',
+            'core-js': 'core-js',
+            mermaid: 'mermaid',
+            showdown: 'showdown',
+            'showdown-katex': 'showdown-katex',
+            'vue-codemirror': 'vue-codemirror',
+            zlib: 'zlib'
+          }
   },
   // 对内部的 webpack 配置（比如修改、增加Loader选项）(链式操作)
-  //chainWebpack: () => {},
-
+  chainWebpack: config => {
+    // 构建若皆为 js 库，则不需要生成 html
+    if (!(isDebug || isDemo)) {
+      config.plugins.delete('html');
+      config.plugins.delete('preload');
+      config.plugins.delete('prefetch');
+    }
+  },
   css: {
     // 是否将组件中的 CSS 提取至一个独立的 CSS 文件中,当作为一个库构建时，你也可以将其设置为 false 免得用户自己导入 CSS
     // 默认生产环境下是 true，开发环境下是 false
-    //extract: false,
+    extract: true,
     // 当为true时，css文件名可省略 module 默认为 false
     modules: true,
     // 是否为 CSS 开启 source map。设置为 true 之后可能会影响构建的性能

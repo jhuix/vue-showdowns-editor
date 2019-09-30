@@ -68,7 +68,7 @@ const getOptions = function(options) {
 export default {
   name: 'mdeditor',
   components: {
-    codemirror
+    [codemirror.name]: codemirror
   },
   props: {
     markdown: String,

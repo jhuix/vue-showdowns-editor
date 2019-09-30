@@ -37,8 +37,4 @@ const install = function(Vue, config) {
 
 const VueShowdownMDE = { install, ...components };
 
-if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(VueShowdownMDE);
-}
-
 export { VueShowdownMDE as default, ShowdownMDE, Previewer, Editor, showdown };
