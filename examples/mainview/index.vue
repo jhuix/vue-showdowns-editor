@@ -68,7 +68,7 @@ export default {
       this.$refs.smde.addRootMenu(previewMenuItem);
 
       let that = this;
-      var defHtml = axios.get('http://demo.showdownjs.com/md/text.md');
+      var defHtml = axios.get('https://demo.showdownjs.com/md/text.md');
       defHtml
         .then(function(res) {
           that.mdDoc = res.data;
