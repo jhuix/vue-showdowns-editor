@@ -3,7 +3,7 @@
  * @Author: Jhuix (Hui Jin) <jhuix0117@gmail.com>
  * @Date: 2019-09-06 09:59:50
  * @LastEditors: Jhuix (Hui Jin) <jhuix0117@gmail.com>
- * @LastEditTime: 2019-10-04 10:22:48
+ * @LastEditTime: 2019-10-04 11:10:05
  -->
 
 <template>
@@ -70,7 +70,9 @@ export default {
       this.$refs.smde.addRootMenu(previewMenuItem);
 
       let that = this;
-      var defHtml = axios.get('https://demo.showdownjs.com/md/text.md');
+      var defHtml = axios.get(
+        'https://raw.githubusercontent.com/jhuix/showdown-markdown-editor/master/docs/demo.md'
+      );
       defHtml
         .then(function(res) {
           that.mdDoc = res.data;
@@ -82,10 +84,8 @@ export default {
           that.mdDoc = that.mdDoc + '\n\n' + res.data;
         })
         .catch(function(error) {
-          that.mdDoc = '';
           console.log(error);
         });
-      // this.previewExtensions = [showdownFootnotes];
     });
   }
 };

@@ -81,7 +81,7 @@ sequenceDiagram
 
 ### Plantuml
 
-It's implemented in showdown-plantuml.js. render diagrams of uml using [plantuml](http://plantuml.com). To know more about PlantUML, please visit http://plantuml.com/.
+It's implemented in showdown-plantuml.js. render diagrams of uml using [plantuml](http://plantuml.com). To know more about PlantUML, please visit [plantuml website](http://plantuml.com/).
 
 #### Plantuml examples
 

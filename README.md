@@ -6,7 +6,7 @@ A markdown editor using codemirror and previewer using showdown for Vue.js.
 
 ## Demo
 
-[showdownmde demo](https://jhuix.github.io/showdown-markdown-editor/demo/index.html)
+[showdownmde demo](https://jhuix.github.io/showdown-markdown-editor/demo)
 
 ## Markdown editor
 
@@ -130,7 +130,7 @@ Mermaid examples:
 
 ### Plantuml
 
-It's implemented in showdown-plantuml.js. render diagrams of uml using [plantuml](http://plantuml.com). To know more about PlantUML, please visit http://plantuml.com/.
+It's implemented in showdown-plantuml.js. render diagrams of uml using [plantuml](http://plantuml.com). To know more about PlantUML, please visit [plantuml website](http://plantuml.com/).
 
 - Plantuml examples
 
