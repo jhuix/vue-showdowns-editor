@@ -3,7 +3,7 @@
  * @Author: Jhuix (Hui Jin) <jhuix0117@gmail.com>
  * @Date: 2019-09-06 09:59:50
  * @LastEditors: Jhuix (Hui Jin) <jhuix0117@gmail.com>
- * @LastEditTime: 2019-09-07 19:52:04
+ * @LastEditTime: 2019-10-04 10:22:48
  -->
 
 <template>
@@ -57,7 +57,9 @@ export default {
         const html = zlibcodec.encode(this.$refs.smde.getPreviewHtml());
         //this.$store.dispatch('setPreviewHtml', html);
         sessionStorage.previewHtml = html;
-        window.open(`/#/preview`);
+        let url = window.location.protocol === 'file:' ? './index.html' : './';
+        url += '#/preview';
+        window.open(url);
       }
     }
   },

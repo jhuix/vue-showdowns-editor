@@ -3,7 +3,7 @@
  * @Author: Jhuix (Hui Jin) <jhuix0117@gmail.com>
  * @Date: 2019-08-30 10:02:40
  * @LastEditors: Jhuix (Hui Jin) <jhuix0117@gmail.com>
- * @LastEditTime: 2019-09-07 19:50:50
+ * @LastEditTime: 2019-10-04 10:44:03
  * Encode/Decode code taken from the PlantUML website:
  * http://plantuml.sourceforge.net/codejavascript2.html
  */
@@ -109,7 +109,11 @@ function encode(data) {
 }
 
 function decode(data) {
-  return zlib.inflateRawSync(Buffer.from(decode64(data), 'binary')).toString();
+  return decodeURIComponent(
+    escape(
+      zlib.inflateRawSync(Buffer.from(decode64(data), 'binary')).toString()
+    )
+  );
 }
 
 if (typeof module !== 'undefined' && typeof module.exports === 'object') {
