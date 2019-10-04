@@ -3,14 +3,16 @@
  * @Author: Jhuix (Hui Jin) <jhuix0117@gmail.com>
  * @Date: 2019-08-30 09:32:41
  * @LastEditors: Jhuix (Hui Jin) <jhuix0117@gmail.com>
- * @LastEditTime: 2019-09-07 19:51:07
+ * @LastEditTime: 2019-10-04 11:24:58
  */
 
 'use strict';
 
 import plantumlcodec from '../utils/plantuml-codec.js';
 
-const defaultUmlWebsite = 'http://www.plantuml.com/plantuml';
+const defaultUmlWebsite =
+  (window.location.protocol === 'file:' ? 'http:' : '') +
+  '//www.plantuml.com/plantuml';
 const defaultImageFormat = 'img';
 
 // <div class="mermaid"></div>
