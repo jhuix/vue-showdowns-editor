@@ -3,7 +3,7 @@
  * @Author: Jhuix (Hui Jin) <jhuix0117@gmail.com>
  * @Date: 2019-09-06 09:59:50
  * @LastEditors: Jhuix (Hui Jin) <jhuix0117@gmail.com>
- * @LastEditTime: 2019-10-04 11:10:05
+ * @LastEditTime: 2019-10-04 11:46:33
  -->
 
 <template>
@@ -77,7 +77,7 @@ export default {
         .then(function(res) {
           that.mdDoc = res.data;
           return axios.get(
-            "https://raw.githubusercontent.com/wiki/showdownjs/showdown/Showdown's-Markdown-syntax.md"
+            "https://raw.githubusercontent.com/jhuix/showdown-markdown-editor/master/docs/Showdown's-Markdown-syntax.md"
           );
         })
         .then(function(res) {
