@@ -6,7 +6,7 @@ A markdown editor using codemirror and previewer using showdown for Vue.js.
 
 ## Demo
 
-[showdownmde demo](https://jhuix.github.io/showdown-markdown-editor/demo)
+[showdownmde demo](https://jhuix.github.io/showdown-markdown-editor/demo/)
 
 ## Markdown editor
 
