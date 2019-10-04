@@ -121,7 +121,9 @@ This is an H2
 **Note:**    
 In live preview editors, when a paragraph is followed by a list it can cause an awkward effect.
 
+```md
 ![awkward effect][]
+```
 
 You can prevent this by enabling the option **`smoothPreview`**.
 
