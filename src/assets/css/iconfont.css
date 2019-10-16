@@ -1,15 +1,11 @@
 @font-face {
   font-family: iconfont;
   src: url("../../assets/fonts/iconfont.eot?t=1568951438266"); /* IE9 */
-  src: url("../../assets/fonts/iconfont.eot?t=1568951438266#iefix")
-      format("embedded.opentype"),
-    /* IE6.IE8 */ url("../../assets/fonts/iconfont.woff2?t=1568951438266")
-      format("woff2"),
-    url("../../assets/fonts/iconfont.woff?t=1568951438266") format("woff"),
-    url("../../assets/fonts/iconfont.ttf?t=1568951438266") format("truetype"),
-    /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
-      url("../../assets/fonts/iconfont.svg?t=1568951438266#iconfont")
-      format("svg"); /* iOS 4.1. */
+  src: url("../../assets/fonts/iconfont.eot?t=1568951438266#iefix") format("embedded.opentype"), /* IE6.IE8 */
+       url("../../assets/fonts/iconfont.woff2?t=1568951438266") format("woff2"),
+       url("../../assets/fonts/iconfont.woff?t=1568951438266") format("woff"),
+       url("../../assets/fonts/iconfont.ttf?t=1568951438266") format("truetype"),  /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+       url("../../assets/fonts/iconfont.svg?t=1568951438266#iconfont") format("svg"); /* iOS 4.1. */
 }
 
 .icon {
