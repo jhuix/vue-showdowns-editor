@@ -101,7 +101,7 @@ function decode64(data) {
 function encode(data) {
   return encode64(
     zlib
-      .deflateRawSync(unescape(encodeURIComponent(data)), {
+      .deflateRawSync(data, {
         level: 9
       })
       .toString('binary')
@@ -109,11 +109,7 @@ function encode(data) {
 }
 
 function decode(data) {
-  return decodeURIComponent(
-    escape(
-      zlib.inflateRawSync(Buffer.from(decode64(data), 'binary')).toString()
-    )
-  );
+  return zlib.inflateRawSync(Buffer.from(decode64(data), 'binary')).toString();
 }
 
 if (typeof module !== 'undefined' && typeof module.exports === 'object') {
