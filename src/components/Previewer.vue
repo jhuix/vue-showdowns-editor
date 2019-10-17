@@ -23,6 +23,8 @@ const getOptions = function(options) {
     tasklists: true,
     underline: true,
     emoji: true,
+    ghCompatibleHeaderId: false,
+    rawHeaderId: true,
     ...options
   };
 };
@@ -98,7 +100,11 @@ export default {
 
       // set options of this instance (include flavor)
       for (const key in this.showdownOptions) {
-        converter.setOption(key, this.showdownOptions[key]);
+        if (key == 'flavor') {
+          converter.setFlavor(this.showdownOptions[key]);
+        } else {
+          converter.setOption(key, this.showdownOptions[key]);
+        }
       }
       return converter;
     },
