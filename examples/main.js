@@ -10,8 +10,8 @@ import App from './App.vue';
 import store from './store';
 import router from './router';
 
-//import VueShowdownMDE from '../src';
-//Vue.use(VueShowdownMDE);
+//import VueMDSE from '../src';
+//Vue.use(VueMDSE);
 Vue.config.productionTip = false;
 
 new Vue({

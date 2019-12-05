@@ -2,6 +2,22 @@ const isDebug = process.env.NODE_ENV === 'development';
 const isProduction = process.env.NODE_ENV === 'production';
 const isDemo = process.env.BUILD_ENV === 'demo';
 
+console.log(`Build env: demo=${isDemo} debug=${isDebug} product=${isProduction}`);
+
+function getExternals() {
+  let externals = {};
+
+  // if (!isDebug && !isDemo) {
+  //   externals = {
+  //     vue: 'Vue',
+  //     'core-js': 'core-js',
+  //     zlib: 'zlib',
+  //     ...externals
+  //   };
+  // }
+  return externals;
+}
+
 // vue.config.js 配置说明
 // 官方vue.config.js 参考文档 https://cli.vuejs.org/zh/config
 module.exports = {
@@ -34,7 +50,7 @@ module.exports = {
       // 在 dist/index.html 的输出
       filename: 'index.html',
       // 当使用 title 选项时，template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
-      title: 'showdown-markdown-editor',
+      title: 'markdown-showdowns-editor',
       // 在这个页面中包含的块，默认情况下会包含
       // 提取出来的通用 chunk 和 vendor chunk。
       chunks: ['chunk-vendors', 'chunk-common', 'index']
@@ -70,28 +86,17 @@ module.exports = {
     devtool: 'source-map',
     // 排除外部库以及不需要打包的 node_modules 第三方包（如使用CDN或引用本地JS库）
     // 作为一个合格成熟的 lib，应该学会让用你的人去安装第三方包
-    externals:
-      isDebug || isDemo
-        ? {}
-        : {
-            vue: 'Vue',
-            'core-js': 'core-js',
-            mermaid: 'mermaid',
-            showdown: 'showdown',
-            'showdown-katex': 'showdown-katex',
-            'vue-codemirror': 'vue-codemirror',
-            zlib: 'zlib'
-          }
+    externals: getExternals()
   },
   // 对内部的 webpack 配置（比如修改、增加Loader选项）(链式操作)
-  chainWebpack: config => {
+  // chainWebpack: config => {
     // 构建若皆为 js 库，则不需要生成 html
-    if (!(isDebug || isDemo)) {
-      config.plugins.delete('html');
-      config.plugins.delete('preload');
-      config.plugins.delete('prefetch');
-    }
-  },
+    // if (!(isDebug || isDemo)) {
+    //  config.plugins.delete('html');
+    //  config.plugins.delete('preload');
+    //  config.plugins.delete('prefetch');
+    // }
+  // },
   css: {
     // 是否将组件中的 CSS 提取至一个独立的 CSS 文件中,当作为一个库构建时，你也可以将其设置为 false 免得用户自己导入 CSS
     // 默认生产环境下是 true，开发环境下是 false

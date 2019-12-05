@@ -6,10 +6,10 @@
  * @LastEditTime: 2019-09-14 23:08:24
  */
 
-import VueShowdownMDE from './index';
+import VueMDSE from './index';
 
-export default VueShowdownMDE;
+export default VueMDSE;
 
 if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(VueShowdownMDE);
+  window.Vue.use(VueMDSE);
 }

@@ -271,27 +271,27 @@
   content: "\e636";
 }
 
-.icon.h1:before {
+.icon.ch1:before {
   content: "\e637";
 }
 
-.icon.h2:before {
+.icon.ch2:before {
   content: "\e638";
 }
 
-.icon.h3:before {
+.icon.ch3:before {
   content: "\e639";
 }
 
-.icon.h4:before {
+.icon.ch4:before {
   content: "\e63a";
 }
 
-.icon.h5:before {
+.icon.ch5:before {
   content: "\e63b";
 }
 
-.icon.h6:before {
+.icon.ch6:before {
   content: "\e63c";
 }
 

@@ -6,12 +6,7 @@
  * @LastEditTime: 2019-09-07 19:50:37
  -->
 <template>
-  <div
-    :class="splitPaneClassName"
-    @mousemove="onMouseMove"
-    @mouseup="onMouseUp"
-    class="mde-ui splitpane"
-  >
+  <div :class="splitPaneClassName" @mousemove="onMouseMove" @mouseup="onMouseUp" class="mde-ui splitpane">
     <div :class="paneClassName1" :style="{ [paneType]: splitSize }">
       <slot name="pane1"></slot>
     </div>
@@ -26,8 +21,7 @@
 function getRealSize(defaultSize, minSize, maxSize, draggedSize) {
   if (typeof draggedSize === 'number') {
     const min = typeof minSize === 'number' ? minSize : 0;
-    const max =
-      typeof maxSize === 'number' && maxSize >= 0 ? maxSize : Infinity;
+    const max = typeof maxSize === 'number' && maxSize >= 0 ? maxSize : Infinity;
     return Math.max(min, Math.min(max, draggedSize));
   }
   if (defaultSize !== undefined) {
@@ -79,8 +73,7 @@ export default {
       hasMoved: false,
       currentSize: 0,
       paneType: this.split === 'vertical' ? 'width' : 'height',
-      splitSize:
-        this.defaultSize !== undefined ? this.defaultSize : this.minSize + 'px'
+      splitSize: this.defaultSize !== undefined ? this.defaultSize : this.minSize + 'px'
     };
   },
   watch: {
@@ -141,12 +134,7 @@ export default {
           }
 
           const currentPage = this.split === 'vertical' ? e.pageX : e.pageY;
-          const draggedSize = getRealSize(
-            this.defaultSize,
-            this.minSize,
-            this.maxSize,
-            currentPage - offset
-          );
+          const draggedSize = getRealSize(this.defaultSize, this.minSize, this.maxSize, currentPage - offset);
           if (typeof draggedSize !== 'number') {
             if (this.splitSize != draggedSize) {
               this.splitSize = draggedSize;
@@ -155,11 +143,8 @@ export default {
           } else if (this.currentSize != draggedSize) {
             if (this.isPercent) {
               const targetOffset =
-                this.split === 'vertical'
-                  ? e.currentTarget.offsetWidth
-                  : e.currentTarget.offsetHeight;
-              const percent =
-                Math.floor((draggedSize / targetOffset) * 10000) / 100;
+                this.split === 'vertical' ? e.currentTarget.offsetWidth : e.currentTarget.offsetHeight;
+              const percent = Math.floor((draggedSize / targetOffset) * 10000) / 100;
               this.splitSize = percent + '%';
             } else {
               this.splitSize = draggedSize + 'px';

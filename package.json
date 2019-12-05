@@ -1,12 +1,12 @@
 {
-  "name": "showdown-markdown-editor",
+  "name": "vue-mdse",
   "version": "0.2.1",
   "author": "Jhuix <jhuix0117@gmail.com>",
   "private": false,
   "description": "A markdown editor using codemirror and previewer using showdown for Vue.js",
-  "main": "dist/lib/showdownmde.umd.js",
-  "unpkg": "dist/lib/showdownmde.umd.min.js",
-  "css": "dist/lib/showdownmde.css",
+  "main": "dist/lib/vue-mdse.umd.js",
+  "unpkg": "dist/lib/vue-mdse.umd.min.js",
+  "css": "dist/lib/vue-mdse.css",
   "files": [
     "src",
     "dist",
@@ -16,9 +16,12 @@
   "keywords": [
     "vue",
     "showdown",
+    "showdowns",
     "markdown",
+    "preview",
+    "html",
     "markdown-editor",
-    "showdown-editor"
+    "showdowns-editor"
   ],
   "license": "MIT",
   "repository": {
@@ -30,17 +33,14 @@
     "build": "npm run build:lib && npm run demo",
     "lint": "vue-cli-service lint",
     "demo": "cross-env BUILD_ENV=demo vue-cli-service build --dest docs/demo",
-    "build:lib": "vue-cli-service build --target lib --name showdownmde --dest dist/lib src/index.js",
-    "build:wc": "vue-cli-service build --target wc --name showdown-mde --dest dist/wc src/index.js"
+    "build:lib": "vue-cli-service build --target lib --name VueMDSE --filename vue-mdse --dest dist/lib src/index.js",
+    "build:wc": "vue-cli-service build --target wc  --name VueMDSE --filename vue-mdse --dest dist/wc src/index.js"
   },
   "dependencies": {
+    "@jhuix/showdowns": "^0.3.3",
     "core-js": "^2.6.5",
-    "mermaid": "^8.2.5",
-    "showdown": "^1.9.0",
-    "showdown-katex": "^0.6.0",
     "vue": "^2.6.10",
-    "vue-codemirror": "^4.0.6",
-    "zlib": "^1.0.5"
+    "vue-codemirror": "^4.0.6"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.11.0",

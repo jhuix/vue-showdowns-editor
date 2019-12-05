@@ -7,17 +7,17 @@
  -->
 
 <template>
-  <showdown-mde
+  <mdse
     :hasToolbar="hasToolbar"
     :markdown="mdDoc"
     :previewExtensions="previewExtensions"
     @toolclick="handlerToolClick"
-    ref="smde"
-  ></showdown-mde>
+    ref="mdse"
+  ></mdse>
 </template>
 
 <script>
-import { ShowdownMDE } from '../../src';
+import { mdse } from '../../src';
 import axios from 'axios';
 import zlibcodec from '../../src/scripts/utils/zlib-codec.js';
 //例如：若需加入showdown-footnotes的showdown扩展时,
@@ -27,7 +27,7 @@ import zlibcodec from '../../src/scripts/utils/zlib-codec.js';
 //import showdownFootnotes from '../src/scripts/showdown-ext/showdown-footnotes.js';
 //export default
 // data() {
-//   previewExtensions: [showdownFootnotes]
+//   previewExtensions: {'showdown-footnotes': showdownFootnotes}
 // }
 //}
 
@@ -42,7 +42,7 @@ const previewMenuItem = {
 export default {
   name: 'mainview',
   components: {
-    [ShowdownMDE.name]: ShowdownMDE
+    [mdse.name]: mdse
   },
   data() {
     return {
@@ -53,8 +53,8 @@ export default {
   },
   methods: {
     handlerToolClick(type) {
-      if (this.$refs.smde && type === 'preview') {
-        const html = zlibcodec.encode(this.$refs.smde.getPreviewHtml());
+      if (this.$refs.mdse && type === 'preview') {
+        const html = zlibcodec.zEncode(this.$refs.mdse.getPreviewHtml());
         //this.$store.dispatch('setPreviewHtml', html);
         sessionStorage.previewHtml = html;
         let url = window.location.protocol === 'file:' ? './index.html' : './';
@@ -67,18 +67,14 @@ export default {
     console.log('the app is created!', this);
 
     this.$nextTick(function() {
-      this.$refs.smde.addRootMenu(previewMenuItem);
+      this.$refs.mdse.addRootMenu(previewMenuItem);
 
       let that = this;
-      var defHtml = axios.get(
-        'https://raw.githubusercontent.com/jhuix/showdown-markdown-editor/master/docs/demo.md'
-      );
+      var defHtml = axios.get('https://jhuix.github.io/showdowns/showdowns-features.md');
       defHtml
         .then(function(res) {
           that.mdDoc = res.data;
-          return axios.get(
-            "https://raw.githubusercontent.com/jhuix/showdown-markdown-editor/master/docs/Showdown's-Markdown-syntax.md"
-          );
+          return axios.get("https://jhuix.github.io/showdowns/Showdown's-Markdown-syntax.md");
         })
         .then(function(res) {
           that.mdDoc = that.mdDoc + '\n\n' + res.data;

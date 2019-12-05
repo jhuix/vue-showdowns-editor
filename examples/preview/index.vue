@@ -17,17 +17,15 @@ export default {
     };
   },
   created() {
-    const html = this.$route.query.html
-      ? this.$route.query.html
-      : sessionStorage.previewHtml;
+    const html = this.$route.query.html ? this.$route.query.html : sessionStorage.previewHtml;
     if (html) {
-      this.outputHtml = zlibcodec.decode(html);
+      this.outputHtml = zlibcodec.zDecode(html);
     }
   },
   render(h) {
     return h('div', {
       class: {
-        'markdown-preview': true
+        "showdowns-container": true
       },
       domProps: {
         innerHTML: this.outputHtml
@@ -38,9 +36,6 @@ export default {
 </script>
 
 <style lang="stylus">
-@import '../../node_modules/katex/dist/katex.min.css';
-@import '../../src/assets/stylus/preview.styl';
-
 ::-webkit-scrollbar {
   -webkit-appearance: none;
   width: 10px;

@@ -20,11 +20,7 @@ function encode64(data) {
     } else if (i + 1 == data.length) {
       r += append3bytes(data.charCodeAt(i), 0, 0);
     } else {
-      r += append3bytes(
-        data.charCodeAt(i),
-        data.charCodeAt(i + 1),
-        data.charCodeAt(i + 2)
-      );
+      r += append3bytes(data.charCodeAt(i), data.charCodeAt(i + 1), data.charCodeAt(i + 2));
     }
   }
   return r;
@@ -112,6 +108,18 @@ function decode(data) {
   return zlib.inflateRawSync(Buffer.from(decode64(data), 'binary')).toString();
 }
 
+function zEncode(data) {
+  return zlib
+    .deflateRawSync(data, {
+      level: 9
+    })
+    .toString('base64');
+}
+
+function zDecode(data) {
+  return zlib.inflateRawSync(Buffer.from(data, 'base64')).toString();
+}
+
 if (typeof module !== 'undefined' && typeof module.exports === 'object') {
   module.exports = {
     encode,
@@ -121,7 +129,9 @@ if (typeof module !== 'undefined' && typeof module.exports === 'object') {
 
 const zlibcodec = {
   encode: encode,
-  decode: decode
+  decode: decode,
+  zEncode: zEncode,
+  zDecode: zDecode
 };
 
 export default zlibcodec;

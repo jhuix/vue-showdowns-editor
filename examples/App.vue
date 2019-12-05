@@ -26,8 +26,8 @@ export default {
 html {
   box-sizing: border-box;
   text-size-adjust: 100%;
-  font-size: 14px;
-  line-height: 1.15;
+  font-size: 16px;
+  line-height: 1.6;
   height: 100%;
 }
 
@@ -37,8 +37,8 @@ html {
 
 body {
   background: #fff;
-  font-size: 14px;
-  line-height: 1.4285em;
+  font-size: 16px;
+  line-height: 1.6;
   min-height: 100%;
   position: relative;
   font-family: Helvetica Neue, NotoSansHans-Regular, AvenirNext-Regular, arial, Hiragino Sans GB, Microsoft Yahei, WenQuanYi Micro Hei, Arial, Helvetica, sans-serif;
@@ -49,6 +49,6 @@ body {
 #app {
   color: rgba(0, 0, 0, 0.87);
   height: 100%;
-  font-size: 14px;
+  font-size: 16px;
 }
 </style>

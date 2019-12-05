@@ -191,9 +191,7 @@ export default {
 
       if (prefix != null) {
         //Match defaultLineText consist of ':-:' or '--:'
-        textMatch = defaultLineText.match(
-          /^([\s\S]*?)([:-]-:)(?:[\s]?)([\s\S]*)$/
-        );
+        textMatch = defaultLineText.match(/^([\s\S]*?)([:-]-:)(?:[\s]?)([\s\S]*)$/);
 
         if (prefix === '') {
           // It's align left
@@ -268,9 +266,7 @@ export default {
           break;
         //代码块
         case 'codeblock':
-          this.codemirror.replaceSelection(
-            `\n\n\`\`\`\n${selectText}\n\`\`\`\n\n`
-          );
+          this.codemirror.replaceSelection(`\n\n\`\`\`\n${selectText}\n\`\`\`\n\n`);
           break;
         //分割线
         case 'splitline':
@@ -282,9 +278,7 @@ export default {
           break;
         //表格
         case 'table':
-          this.codemirror.replaceSelection(
-            `\n\n|     |     |\n| --- | --- |\n|     |     |\n\n${selectText}`
-          );
+          this.codemirror.replaceSelection(`\n\n|     |     |\n| --- | --- |\n|     |     |\n\n${selectText}`);
           break;
         //章节导航
         case 'toc':

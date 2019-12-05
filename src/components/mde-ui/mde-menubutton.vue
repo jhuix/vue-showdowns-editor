@@ -17,12 +17,7 @@
       v-bind:type="item.type"
       v-on:click.native="handleClick($event, item)"
     ></mde-button>
-    <mde-buttons
-      class="dropdown menu"
-      v-bind:items="items"
-      v-on:click="handleMenuClick"
-      v-show="isShowMenu"
-    ></mde-buttons>
+    <mde-buttons class="dropdown menubutton" v-bind:items="items" v-on:click="handleMenuClick" v-show="isShowMenu"></mde-buttons>
   </div>
 </template>
 
@@ -31,7 +26,7 @@ import Button from '@/components/mde-ui/mde-button.vue';
 import Buttons from '@/components/mde-ui/mde-buttons.vue';
 
 export default {
-  name: 'mde-menu',
+  name: 'mde-menubutton',
   props: {
     disabled: {
       type: Boolean,
@@ -58,6 +53,8 @@ export default {
   },
   methods: {
     handleClick(event, item) {
+      event;
+      item;
       this.isShowMenu = !this.isShowMenu;
     },
     handleMenuClick(event, item) {
@@ -71,7 +68,7 @@ export default {
 };
 </script>
 
-<style lang="stylus" >
+<style lang="stylus">
 .mde-ui.dropdown {
   display: inline-flex;
   flex-direction: column;

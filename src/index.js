@@ -5,36 +5,37 @@
  * @LastEditors: Jhuix (Hui Jin) <jhuix0117@gmail.com>
  * @LastEditTime: 2019-09-14 23:08:24
  */
-import showdown from 'showdown';
-import ShowdownMDE from './components/ShowdownMDE.vue';
-import Previewer from './components/Previewer.vue';
+
+import showdowns from '@jhuix/showdowns';
+import mdse from './components/mdse.vue';
+import Showdowns from './components/Showdowns.vue';
 import Editor from './components/Editor.vue';
 
 // 以数组的结构保存组件，便于遍历
-const components = [ShowdownMDE, Previewer, Editor];
+const components = { mdse, Showdowns, Editor };
 
 // 定义 install 方法
 const install = function(Vue, config) {
   if (config) {
     if (config.editOptions) {
-      ShowdownMDE.props.editOptions.default = () => config.editOptions;
+      mdse.props.editOptions.default = () => config.editOptions;
     }
     if (config.previewOptions) {
-      ShowdownMDE.props.previewOptions.default = () => config.previewOptions;
+      mdse.props.previewOptions.default = () => config.previewOptions;
     }
 
     if (config.previewExtensions) {
-      ShowdownMDE.props.previewExtensions.default = () =>
-        config.previewExtensions;
+      mdse.props.previewExtensions.default = () => config.previewExtensions;
     }
   }
 
   // 遍历并注册全局组件
-  components.map(component => {
-    Vue.component(component.name, component);
-  });
+  for (let key in components) {
+    Vue.component(components[key].name, components[key]);
+  }
 };
 
-const VueShowdownMDE = { install, ...components };
+const VueMDSE = { mdse, Showdowns, Editor, showdowns, install };
 
-export { VueShowdownMDE as default, ShowdownMDE, Previewer, Editor, showdown };
+export default VueMDSE;
+export { mdse, Showdowns, Editor, showdowns, install };
