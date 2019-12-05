@@ -1,6 +1,6 @@
 {
   "name": "vue-mdse",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "author": "Jhuix <jhuix0117@gmail.com>",
   "private": false,
   "description": "A markdown editor using codemirror and previewer using showdown for Vue.js",
