@@ -1,5 +1,5 @@
 {
-  "name": "vue-mdse",
+  "name": "vue-mardown-showdowns-editor",
   "version": "1.0.0",
   "author": "Jhuix <jhuix0117@gmail.com>",
   "private": false,
@@ -37,7 +37,7 @@
     "build:wc": "vue-cli-service build --target wc  --name VueMDSE --filename vue-mdse --dest dist/wc src/index.js"
   },
   "dependencies": {
-    "@jhuix/showdowns": "^0.3.3",
+    "@jhuix/showdowns": "^0.3.6",
     "core-js": "^2.6.5",
     "vue": "^2.6.10",
     "vue-codemirror": "^4.0.6"

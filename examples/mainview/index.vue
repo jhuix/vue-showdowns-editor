@@ -1,10 +1,8 @@
 <!--
- * @Description: example of showdown-mardown-editor
- * @Author: Jhuix (Hui Jin) <jhuix0117@gmail.com>
- * @Date: 2019-09-06 09:59:50
- * @LastEditors: Jhuix (Hui Jin) <jhuix0117@gmail.com>
- * @LastEditTime: 2019-10-04 11:46:33
- -->
+ * Copyright (c) 2019-present, Jhuix (Hui Jin) <jhuix0117@gmail.com>. All rights reserved.
+ * Use of this source code is governed by a MIT license that can be found in the LICENSE file.
+ * Description: example of mardown-showdowns-editor
+-->
 
 <template>
   <mdse
@@ -19,7 +17,7 @@
 <script>
 import { mdse } from '../../src';
 import axios from 'axios';
-import zlibcodec from '../../src/scripts/utils/zlib-codec.js';
+import zlibcodec from '../utils/zlib-codec.js';
 //例如：若需加入showdown-footnotes的showdown扩展时,
 //现在<script/>区域import该showdown-footnotes扩展，
 //然后再在下面的export default对象的data返回对象中的数组属性previewExtensions加入该showdown-footnotes扩展。

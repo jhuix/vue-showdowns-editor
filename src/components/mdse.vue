@@ -1,10 +1,8 @@
 <!--
- * @Description: markdown showdowns editor (MDSE)
- * @Author: Jhuix (Hui Jin) <jhuix0117@gmail.com>
- * @Date: 2019-08-18 14:05:41
- * @LastEditors: Jhuix (Hui Jin) <jhuix0117@gmail.com>
- * @LastEditTime: 2019-09-07 20:23:20
- -->
+ * Copyright (c) 2019-present, Jhuix (Hui Jin) <jhuix0117@gmail.com>. All rights reserved.
+ * Use of this source code is governed by a MIT license that can be found in the LICENSE file.
+ * Description: markdown showdowns editor (MDSE)
+-->
 
 <template>
   <div class="mde-workspace-container">

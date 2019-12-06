@@ -1,10 +1,8 @@
 <!--
- * @Description: previewer for showdowns
- * @Author: Jhuix (Hui Jin) <jhuix0117@gmail.com>
- * @Date: 2019-08-26 10:52:33
- * @LastEditors: Jhuix (Hui Jin) <jhuix0117@gmail.com>
- * @LastEditTime: 2019-09-07 20:28:17
- -->
+ * Copyright (c) 2019-present, Jhuix (Hui Jin) <jhuix0117@gmail.com>. All rights reserved.
+ * Use of this source code is governed by a MIT license that can be found in the LICENSE file.
+ * Description: previewer for showdowns
+-->
 
 <script type="text/javascript">
 import showdowns from '@jhuix/showdowns';
@@ -209,6 +207,6 @@ export default {
 </script>
 
 <style lang="stylus">
-@import '../../node_modules/@jhuix/showdowns/dist/showdowns.css';
+@import '../../node_modules/@jhuix/showdowns/dist/showdowns.min.css';
 @import '../../src/assets/stylus/preview.styl';
 </style>

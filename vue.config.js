@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2019-present, Jhuix (Hui Jin) <jhuix0117@gmail.com>. All rights reserved.
+ * Use of this source code is governed by a MIT license that can be found in the LICENSE file.
+ */
+
 const isDebug = process.env.NODE_ENV === 'development';
 const isProduction = process.env.NODE_ENV === 'production';
 const isDemo = process.env.BUILD_ENV === 'demo';
@@ -7,14 +12,12 @@ console.log(`Build env: demo=${isDemo} debug=${isDebug} product=${isProduction}`
 function getExternals() {
   let externals = {};
 
-  // if (!isDebug && !isDemo) {
-  //   externals = {
-  //     vue: 'Vue',
-  //     'core-js': 'core-js',
-  //     zlib: 'zlib',
-  //     ...externals
-  //   };
-  // }
+  if (!isDebug && !isDemo) {
+    externals = {
+      vue: 'Vue',
+      ...externals
+    };
+  }
   return externals;
 }
 
@@ -90,12 +93,12 @@ module.exports = {
   },
   // 对内部的 webpack 配置（比如修改、增加Loader选项）(链式操作)
   // chainWebpack: config => {
-    // 构建若皆为 js 库，则不需要生成 html
-    // if (!(isDebug || isDemo)) {
-    //  config.plugins.delete('html');
-    //  config.plugins.delete('preload');
-    //  config.plugins.delete('prefetch');
-    // }
+  // 构建若皆为 js 库，则不需要生成 html
+  // if (!(isDebug || isDemo)) {
+  //  config.plugins.delete('html');
+  //  config.plugins.delete('preload');
+  //  config.plugins.delete('prefetch');
+  // }
   // },
   css: {
     // 是否将组件中的 CSS 提取至一个独立的 CSS 文件中,当作为一个库构建时，你也可以将其设置为 false 免得用户自己导入 CSS

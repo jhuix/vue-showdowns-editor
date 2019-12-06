@@ -1,10 +1,9 @@
 <!--
- * @Description: mde-menu element of mde-ui
- * @Author: Jhuix (Hui Jin) <jhuix0117@gmail.com>
- * @Date: 2019-08-30 13:53:46
- * @LastEditors: Jhuix (Hui Jin) <jhuix0117@gmail.com>
- * @LastEditTime: 2019-09-07 19:50:32
- -->
+ * Copyright (c) 2019-present, Jhuix (Hui Jin) <jhuix0117@gmail.com>. All rights reserved.
+ * Use of this source code is governed by a MIT license that can be found in the LICENSE file.
+ * Description: mde-menubutton element of mde-ui.
+-->
+
 <template>
   <div class="mde-ui dropdown" tabindex="-1" v-on:focusout="onBlur">
     <mde-button
