@@ -13,19 +13,19 @@ if (window.NodeList && !NodeList.prototype.forEach) {
 }
 
 export default {
-  name: 'showdowns',
+  name: 'mdse-showdowns',
   props: {
     markdown: String,
     flavor: {
       type: String,
       required: false,
       default: 'github',
-      validator: flavor => ['original', 'vanilla', 'github'].includes(flavor)
+      validator: flavor => ['ghost', 'vanilla', 'github'].includes(flavor)
     },
     plantumlImageFormat: {
       type: String,
       required: false,
-      default: 'png',
+      default: 'svg',
       validator: imgFmt => ['png', 'svg', 'jpg'].includes(imgFmt)
     },
     mermaidTheme: {
@@ -43,8 +43,8 @@ export default {
     vegaRenderer: {
       type: String,
       required: false,
-      default: 'canvas',
-      validator: renderer => ['canvas', 'svg', 'none'].includes(renderer)
+      default: 'svg',
+      validator: renderer => ['canvas', 'svg'].includes(renderer)
     },
     /**
      * Showdowns options

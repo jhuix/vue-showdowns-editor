@@ -91,7 +91,7 @@ export default {
   white-space: nowrap;
 }
 
-.mde-ui.buttons.dropdown.menu {
+.mde-ui.buttons.dropdown.menubutton {
   flex-direction: column;
   position: absolute;
   top: 40px;

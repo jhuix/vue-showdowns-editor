@@ -11,7 +11,7 @@
     @input="onMdCodeChange"
     @ready="onMdReady"
     @scroll="onMdScroll"
-    ref="mdeditor"
+    ref="mdEditor"
   ></codemirror>
 </template>
 
@@ -65,7 +65,7 @@ const getOptions = function(options) {
 };
 
 export default {
-  name: 'mdeditor',
+  name: 'mdse-editor',
   components: {
     [codemirror.name]: codemirror
   },
@@ -133,27 +133,27 @@ export default {
 
       switch (type) {
         //标题一
-        case 'h1':
+        case 'ch1':
           prefix = '#';
           break;
         //标题二
-        case 'h2':
+        case 'ch2':
           prefix = '##';
           break;
         //标题三
-        case 'h3':
+        case 'ch3':
           prefix = '###';
           break;
         //标题四
-        case 'h4':
+        case 'ch4':
           prefix = '####';
           break;
         //标题五
-        case 'h5':
+        case 'ch5':
           prefix = '#####';
           break;
         //标题六
-        case 'h6':
+        case 'ch6':
           prefix = '######';
           break;
       }
@@ -305,7 +305,7 @@ export default {
   },
   computed: {
     codemirror() {
-      return this.$refs.mdeditor.codemirror;
+      return this.$refs.mdEditor.codemirror;
     }
   },
   mounted() {

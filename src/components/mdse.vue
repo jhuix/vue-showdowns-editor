@@ -56,25 +56,25 @@
       <mde-splitpane defaultSize="50%" pane1ClassName="raw-editor" pane2ClassName="raw-previewer" split="vertical">
         <template slot="pane1">
           <div class="mde-scroll-container">
-            <mdeditor
+            <mdse-editor
               :markdown="mdDoc"
               :options="mdeOptions"
               @input="onMdChange"
               @scroll="onMdScroll"
               class="mdse-editor"
               ref="mdseEditor"
-            ></mdeditor>
+            ></mdse-editor>
           </div>
         </template>
         <template slot="pane2">
           <div class="mde-scroll-container">
-            <showdowns
+            <mdse-showdowns
               :extensions="previewExtensions"
               :markdown="mdDoc"
               :showdownOptions="mdpOptions"
               class="mdse-preview"
               ref="mdsePreviewer"
-            ></showdowns>
+            ></mdse-showdowns>
           </div>
         </template>
       </mde-splitpane>
@@ -253,7 +253,7 @@ export default {
       return this.previewer;
     },
     getPreviewHtml() {
-      return this.previewer ? this.previewer.outputHtml : '';
+      return this.previewer ? this.previewer.$el.innerHTML : '';
     },
     addRootMenu(item) {
       if (this.rootSet) this.rootSet.menuItems.push(item);

@@ -4,9 +4,9 @@
   "author": "Jhuix <jhuix0117@gmail.com>",
   "private": false,
   "description": "A markdown editor using codemirror and previewer using showdown for Vue.js",
-  "main": "dist/lib/vue-mdse.umd.js",
-  "unpkg": "dist/lib/vue-mdse.umd.min.js",
-  "css": "dist/lib/vue-mdse.css",
+  "main": "dist/lib/mdse.umd.js",
+  "unpkg": "dist/lib/mdse.umd.min.js",
+  "css": "dist/lib/mdse.css",
   "files": [
     "src",
     "dist",
@@ -33,8 +33,8 @@
     "build": "npm run build:lib && npm run demo",
     "lint": "vue-cli-service lint",
     "demo": "cross-env BUILD_ENV=demo vue-cli-service build --dest docs/demo",
-    "build:lib": "vue-cli-service build --target lib --name VueMDSE --filename vue-mdse --dest dist/lib src/index.js",
-    "build:wc": "vue-cli-service build --target wc  --name VueMDSE --filename vue-mdse --dest dist/wc src/index.js"
+    "build:lib": "vue-cli-service build --target lib --name VueMDSE --filename mdse --dest dist/lib src/index.js",
+    "build:wc": "vue-cli-service build --target wc  --name VueMDSE --filename mdse --dest dist/wc src/index.js"
   },
   "dependencies": {
     "@jhuix/showdowns": "^0.3.6",

@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019-present, Jhuix (Hui Jin) <jhuix0117@gmail.com>. All rights reserved.
  * Use of this source code is governed by a MIT license that can be found in the LICENSE file.
- * Description: showdown markdown editor
+ * Description: markdown showdowns editor
  */
 
 import VueMDSE from './index';

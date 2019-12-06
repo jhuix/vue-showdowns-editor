@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019-present, Jhuix (Hui Jin) <jhuix0117@gmail.com>. All rights reserved.
  * Use of this source code is governed by a MIT license that can be found in the LICENSE file.
- * Description: showdown markdown editor
+ * Description: markdown showdowns editor
  */
 
 import showdowns from '@jhuix/showdowns';
@@ -34,6 +34,5 @@ const install = function(Vue, config) {
 };
 
 const VueMDSE = { mdse, Showdowns, Editor, showdowns, install };
-
 export default VueMDSE;
 export { mdse, Showdowns, Editor, showdowns, install };
