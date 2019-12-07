@@ -52,9 +52,9 @@ export default {
   methods: {
     handlerToolClick(type) {
       if (this.$refs.mdse && type === 'preview') {
-        const html = zlibcodec.zEncode(this.$refs.mdse.getPreviewHtml());
+        const content = zlibcodec.zEncode(JSON.stringify(this.$refs.mdse.getPreviewHtml()));
         //this.$store.dispatch('setPreviewHtml', html);
-        sessionStorage.previewHtml = html;
+        sessionStorage.previewContent = content;
         let url = window.location.protocol === 'file:' ? './index.html' : './';
         url += '#/preview';
         window.open(url);

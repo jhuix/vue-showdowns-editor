@@ -15,15 +15,33 @@ export default {
     };
   },
   created() {
-    const html = this.$route.query.html ? this.$route.query.html : sessionStorage.previewHtml;
-    if (html) {
-      this.outputHtml = zlibcodec.zDecode(html);
+    const zcontent = this.$route.query.content ? this.$route.query.content : sessionStorage.previewContent;
+    if (zcontent) {
+      const content = JSON.parse(zlibcodec.zDecode(zcontent));
+      this.outputHtml = content.html;
+      if (content.cssLinks) {
+        content.cssLinks.map(href => {
+          const head = document.head || document.getElementsByTagName('head')[0];
+          var link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = href;
+          head.appendChild(link);
+        });
+      }
+      if (content.cssStyles) {
+        content.cssStyles.map(css => {
+          const head = document.head || document.getElementsByTagName('head')[0];
+          let style = document.createElement('style');
+          head.appendChild(style);
+          style.outerHTML = css;
+        });
+      }
     }
   },
   render(h) {
     return h('div', {
       class: {
-        "showdowns-container": true
+        'showdowns-container': true
       },
       domProps: {
         innerHTML: this.outputHtml

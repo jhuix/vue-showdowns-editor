@@ -88,7 +88,8 @@ export default {
         plantuml: {},
         vega: {}
       },
-      showdownsExtensions: {}
+      showdownsExtensions: {},
+      cssTypes: {}
     };
   },
   watch: {
@@ -174,7 +175,10 @@ export default {
     },
 
     outputHtml() {
-      return showdowns.makeHtml(this.inputMarkdown);
+      const that = this;
+      return showdowns.makeHtml(this.inputMarkdown, csstypes => {
+        that.cssTypes = csstypes;
+      });
     }
   },
   methods: {

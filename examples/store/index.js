@@ -11,16 +11,16 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    previewHtml: ''
+    previewContent: ''
   },
   mutations: {
-    setPreviewHtml(state, html) {
-      state.previewHtml = html;
+    setPreviewContent(state, content) {
+      state.previewContent = content;
     }
   },
   actions: {
-    setPreviewHtml(context, html) {
-      context.commit('setPreviewHtml', html);
+    setPreviewContent(context, content) {
+      context.commit('setPreviewContent', content);
     }
   }
 });

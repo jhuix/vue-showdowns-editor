@@ -253,7 +253,29 @@ export default {
       return this.previewer;
     },
     getPreviewHtml() {
-      return this.previewer ? this.previewer.$el.innerHTML : '';
+      let csslinks = [];
+      const cssTypes = this.previewer.cssTypes;
+      if (cssTypes.hasKatex) {
+        csslinks.push(cssTypes.css.katex);
+      }
+      if (cssTypes.hasSequence) {
+        csslinks.push(cssTypes.css.sequence);
+      }
+      if (cssTypes.hasRailroad) {
+        csslinks.push(cssTypes.css.railroad);
+      }
+      let cssstyles = [];
+      const vegaStyle = document.getElementById('vega-embed-style');
+      if (vegaStyle && vegaStyle.tagName.toLowerCase() === 'style') {
+        let styleHTML = vegaStyle.outerHTML;
+        styleHTML = styleHTML.replace(/\<br[\/]?\>/g, '');
+        cssstyles.push(styleHTML);
+      }
+      return {
+        html: this.previewer ? this.previewer.$el.innerHTML : '',
+        cssLinks: csslinks,
+        cssStyles: cssstyles
+      };
     },
     addRootMenu(item) {
       if (this.rootSet) this.rootSet.menuItems.push(item);
