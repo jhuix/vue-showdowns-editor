@@ -4,6 +4,8 @@ A markdown editor using codemirror and previewer using [@jhuix/showdowns](https:
 
 ![intro](https://raw.githubusercontent.com/jhuix/markdown-showdowns-editor/master/docs/screenshot/preview-intro.png)
 
+> If you think the markdown showdowns editor is excellent or can help you, please click on the top right corner to give me a [Star](https://github.com/jhuix/markdown-showdowns-editor)⭐️.
+
 ## Demo
 
 [MDSE demo](https://jhuix.github.io/markdown-showdowns-editor)
