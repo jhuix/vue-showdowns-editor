@@ -5,16 +5,26 @@
 
 const isDebug = process.env.NODE_ENV === 'development';
 const isProduction = process.env.NODE_ENV === 'production';
-const isDemo = process.env.BUILD_ENV === 'demo';
+const target = process.env.BUILD_ENV;
+const isDemo = target === 'demo';
+const isLib = target === 'lib';
 
-console.log(`Build env: demo=${isDemo} debug=${isDebug} product=${isProduction}`);
+console.log(`Build env: debug=${isDebug} product=${isProduction} target=${target}`);
 
 function getExternals() {
   let externals = {};
 
-  if (!isDebug && !isDemo) {
+  if (isLib) {
     externals = {
-      vue: 'Vue',
+      'core-js': 'core-js',
+      zilb: 'zlib',
+      '@jhuix/showdowns': {
+        amd: '@jhuix/showdowns',
+        commonjs: '@jhuix/showdowns',
+        commonjs2: '@jhuix/showdowns',
+        root: 'showdowns'
+      },
+      codemirror: 'codemirror',
       ...externals
     };
   }
@@ -92,20 +102,27 @@ module.exports = {
     externals: getExternals()
   },
   // 对内部的 webpack 配置（比如修改、增加Loader选项）(链式操作)
-  // chainWebpack: config => {
-  // 构建若皆为 js 库，则不需要生成 html
-  // if (!(isDebug || isDemo)) {
-  //  config.plugins.delete('html');
-  //  config.plugins.delete('preload');
-  //  config.plugins.delete('prefetch');
-  // }
-  // },
+  chainWebpack: config => {
+    if (!(isDebug || isDemo)) {
+      //构建若皆为 js 库，则不需要生成 html
+      config.plugins.delete('html');
+      //删除预加载
+      config.plugins.delete('preload');
+      config.plugins.delete('prefetch');
+      //开启压缩代码
+      //config.optimization.minimize(true)
+    }
+    // //分割代码
+    // config.optimization.splitChunks({
+    //   chunks: 'all'
+    // });
+  },
   css: {
     // 是否将组件中的 CSS 提取至一个独立的 CSS 文件中,当作为一个库构建时，你也可以将其设置为 false 免得用户自己导入 CSS
     // 默认生产环境下是 true，开发环境下是 false
     extract: true,
-    // 当为true时，css文件名可省略 module 默认为 false
-    modules: true,
+    // 当为false时，css文件名可省略 requireModuleExtension 默认为 false
+    requireModuleExtension: false,
     // 是否为 CSS 开启 source map。设置为 true 之后可能会影响构建的性能
     sourceMap: true,
     // 向 CSS 相关的 loader 传递选项(支持 css-loader postcss-loader sass-loader less-loader stylus-loader)

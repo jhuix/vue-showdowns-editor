@@ -9,6 +9,8 @@ babel.config.js
 *.map
 *.html
 *-lock.json
+.editorconfig
+.prettierrc
 
 # local env files
 .env.local

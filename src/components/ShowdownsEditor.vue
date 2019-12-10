@@ -83,16 +83,16 @@
 </template>
 
 <script type="text/javascript">
-import Editor from '@/components/Editor.vue';
-import Previewer from '@/components/Showdowns.vue';
+import debounce from 'lodash/debounce';
+import ToolbarSet from '@/scripts/toolbar.js';
 import SplitPane from '@/components/mde-ui/mde-splitpane.vue';
 import Buttons from '@/components/mde-ui/mde-buttons.vue';
 import MenuButton from '@/components/mde-ui/mde-menubutton.vue';
-import ToolbarSet from '@/scripts/toolbar.js';
-import debounce from 'lodash/debounce';
+import Editor from '@/components/Editor.vue';
+import Previewer from '@/components/Showdowns.vue';
 
 export default {
-  name: 'mdse',
+  name: 'mdse-showdowns-editor',
   props: {
     markdown: String,
     hasToolbar: {
