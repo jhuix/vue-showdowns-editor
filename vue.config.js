@@ -2,7 +2,7 @@
  * Copyright (c) 2019-present, Jhuix (Hui Jin) <jhuix0117@gmail.com>. All rights reserved.
  * Use of this source code is governed by a MIT license that can be found in the LICENSE file.
  */
-
+const path = require('path');
 const isDebug = process.env.NODE_ENV === 'development';
 const isProduction = process.env.NODE_ENV === 'production';
 const target = process.env.BUILD_ENV;
@@ -35,7 +35,7 @@ function getExternals() {
 // 官方vue.config.js 参考文档 https://cli.vuejs.org/zh/config
 module.exports = {
   // 部署生产环境和开发环境下的URL。
-  // 默认情况下，Vue CLI 3 会假设你的应用是被部署在一个域名的根路径上。
+  // 默认情况下，Vue CLI 3|4 会假设你的应用是被部署在一个域名的根路径上。
   // 例如 https://www.my-app.com/。如果应用被部署在一个子路径上，你就需要用这个选项指定这个子路径。
   // 例如，如果你的应用被部署在 https://www.my-app.com/my-app/，则设置 publicPath 为 /my-app/。
   // baseUrl 从 Vue CLI 3.3 起已弃用，请使用publicPath
@@ -57,9 +57,9 @@ module.exports = {
   pages: {
     index: {
       // page 的入口
-      entry: 'examples/main.js',
+      entry: 'examples/src/main.js',
       // 模板来源
-      template: 'public/index.html',
+      template: 'examples/public/index.html',
       // 在 dist/index.html 的输出
       filename: 'index.html',
       // 当使用 title 选项时，template 中的 title 标签需要是 <title><%= htmlWebpackPlugin.options.title %></title>
@@ -103,6 +103,9 @@ module.exports = {
   },
   // 对内部的 webpack 配置（比如修改、增加Loader选项）(链式操作)
   chainWebpack: config => {
+    if (isDemo) {
+      config.resolve.alias.set('@jhuix/vue-showdowns-editor', path.join(__dirname, 'src'));
+    }
     if (!(isDebug || isDemo)) {
       //构建若皆为 js 库，则不需要生成 html
       config.plugins.delete('html');
@@ -121,7 +124,9 @@ module.exports = {
     // 是否将组件中的 CSS 提取至一个独立的 CSS 文件中,当作为一个库构建时，你也可以将其设置为 false 免得用户自己导入 CSS
     // 默认生产环境下是 true，开发环境下是 false
     extract: true,
-    // 当为false时，css文件名可省略 requireModuleExtension 默认为 false
+    // 启用 CSS modules for all css / pre-processor files(Vue CLI 3用modules, Vue CLI 4用requireModuleExtension)
+    // Vue CLI 3: 当modules为true时, css的.module文件名可省略, 默认为 false.
+    // Vue CLI 4: 当requireModuleExtension为false时, css的.module文件名可省略, 默认为 false.
     requireModuleExtension: false,
     // 是否为 CSS 开启 source map。设置为 true 之后可能会影响构建的性能
     sourceMap: true,

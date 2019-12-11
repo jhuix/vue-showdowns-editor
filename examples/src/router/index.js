@@ -5,13 +5,13 @@
  */
 
 import Vue from 'vue';
-import Router from 'vue-router';
-import Mainview from '../mainview';
-import Preview from '../preview';
+import VueRouter from 'vue-router'
+import Mainview from '../views/mainview.vue';
+import Preview from '../views/preview.vue';
 
-Vue.use(Router);
+Vue.use(VueRouter);
 
-const router = new Router({
+const router = new VueRouter({
   routes: [
     {
       path: '/',

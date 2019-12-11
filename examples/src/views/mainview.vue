@@ -5,17 +5,17 @@
 -->
 
 <template>
-  <mdse
+  <mdse-showdowns-editor
     :hasToolbar="hasToolbar"
     :markdown="mdDoc"
     :previewExtensions="previewExtensions"
     @toolclick="handlerToolClick"
     ref="mdse"
-  ></mdse>
+  ></mdse-showdowns-editor>
 </template>
 
 <script>
-import { mdse } from '../../src';
+import { ShowdownsEditor } from '@jhuix/vue-showdowns-editor';
 import axios from 'axios';
 import zlibcodec from '../utils/zlib-codec.js';
 //例如：若需加入showdown-footnotes的showdown扩展时,
@@ -40,7 +40,7 @@ const previewMenuItem = {
 export default {
   name: 'mainview',
   components: {
-    [mdse.name]: mdse
+     [ShowdownsEditor.name]: ShowdownsEditor
   },
   data() {
     return {
@@ -84,4 +84,7 @@ export default {
   }
 };
 </script>
-<style lang="stylus"></style>
+<style lang="stylus">
+@import '../../../../markdown-showdowns-editor/dist/lib/vue-mdse.css';
+</style>
+

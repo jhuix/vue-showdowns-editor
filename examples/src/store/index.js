@@ -22,6 +22,8 @@ const store = new Vuex.Store({
     setPreviewContent(context, content) {
       context.commit('setPreviewContent', content);
     }
+  },
+  modules: {
   }
 });
 
