@@ -103,10 +103,9 @@ module.exports = {
   },
   // 对内部的 webpack 配置（比如修改、增加Loader选项）(链式操作)
   chainWebpack: config => {
-    if (isDemo) {
+    if (isDebug || isDemo) {
       config.resolve.alias.set('@jhuix/vue-showdowns-editor', path.join(__dirname, 'src'));
-    }
-    if (!(isDebug || isDemo)) {
+    } else {
       //构建若皆为 js 库，则不需要生成 html
       config.plugins.delete('html');
       //删除预加载
