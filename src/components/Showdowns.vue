@@ -5,10 +5,6 @@
 -->
 
 <script type="text/javascript">
-//The above behavior is how many browsers actually implement NodeList.prototype.forEach
-if (window.NodeList && !NodeList.prototype.forEach) {
-  NodeList.prototype.forEach = Array.prototype.forEach;
-}
 
 import showdowns from '@jhuix/showdowns';
 
