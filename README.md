@@ -1,31 +1,33 @@
-# MDSE: MarkDown-Showdowns-Editor
+# Vue-Showdowns-Editor
 
 A markdown editor using codemirror and previewer using [@jhuix/showdowns](https://github.com/jhuix/showdowns) for Vue.js.
 
-![intro](https://raw.githubusercontent.com/jhuix/markdown-showdowns-editor/master/docs/screenshot/preview-intro.png)
+The [Vue-Showdowns-Editor](https://github.com/jhuix/vue-showdowns-editor) once used a name `MDSE：MarkDown-Showdowns-Editor`.
 
-> If you think the markdown showdowns editor is excellent or can help you, please click on the top right corner to give me a [Star](https://github.com/jhuix/markdown-showdowns-editor)⭐️.
+![intro](https://raw.githubusercontent.com/jhuix/vue-showdowns-editor/master/docs/screenshot/preview-intro.png)
+
+> If you think the markdown showdowns editor is excellent or can help you, please click on the top right corner to give me a [Star](https://github.com/jhuix/vue-showdowns-editor)⭐️.
 
 ## Demo
 
-[MDSE demo](https://jhuix.github.io/markdown-showdowns-editor)
+[Showdowns-Editor demo](https://jhuix.github.io/vue-showdowns-editor)
 
 ## Markdown editor
 
-Markdown editor of [markdown-showdowns-editor](https://github.com/jhuix/markdown-showdowns-editor), edit markdown text using [vue-codemirror](https://github.com/surmon-china/vue-codemirror) to access codemirror.
+Markdown editor of [vue-showdowns-editor](https://github.com/jhuix/vue-showdowns-editor), edit markdown text using [vue-codemirror](https://github.com/surmon-china/vue-codemirror) to access codemirror.
 
 [CodeMirror](https://github.com/codemirror/CodeMirror) is a versatile text editor implemented in JavaScript for the browser. It is specialized for editing code, and comes with over 100 language modes and various addons that implement more advanced editing functionality. Every language comes with fully-featured code and syntax highlighting to help with reading and editing complex code. You can find more information (and the [manual](https://codemirror.net/doc/manual.html)) on the [codemirror project page](https://codemirror.net/).
 
 ## Markdown previewer
 
-Markdown previewer of [markdown-showdowns-editor](https://github.com/jhuix/markdown-showdowns-editor), preview markdown content with HTML using the [showdowns](https://github.com/jhuix/showdowns) (npm package refer to [@jhuix/showdowns](https://www.npmjs.com/package/@jhuix/showdowns)) to converte it.
+Markdown previewer of [vue-showdowns-editor](https://github.com/jhuix/vue-showdowns-editor), preview markdown content with HTML using the [showdowns](https://github.com/jhuix/showdowns) (npm package refer to [@jhuix/showdowns](https://www.npmjs.com/package/@jhuix/showdowns)) to converte it.
 
 [Showdowns](https://github.com/jhuix/showdowns) is a lib that make markdown to html with some extensions of [showdown.js](https://github.com/showdownjs/showdown). And [Showdown](https://github.com/showdownjs/showdown) is a Javascript Markdown to HTML converter, based on the original works by John Gruber. Showdown can be used client side (in the browser) or server side (with NodeJs). For more information, refer to the following document:
 
 - [Showdown's Markdown syntax](https://github.com/showdownjs/showdown/wiki/Showdown's-Markdown-syntax)
 - [Showdown Options](https://github.com/showdownjs/showdown/wiki/Showdown-options)
 - [Showdowns readme](https://github.com/jhuix/showdowns/blob/master/README.md)
-- [Showdowns Features](https://github.com/jhuix/showdowns/blob/master/public/showdowns-features.md)
+- [Showdowns Features Syntax](https://github.com/jhuix/showdowns/blob/master/public/showdowns-features.md)
 
 ## Supporting some markdown extension features
 
@@ -55,23 +57,23 @@ See more information, refer to the following document:
 
 [Extensions Syntax and Examples](https://github.com/jhuix/showdowns/blob/master/docs/showdowns-features.md)
 
-[Extensions Demo Preview](https://jhuix.github.io/markdown-showdowns-editor).
+[Extensions Demo Preview](https://jhuix.github.io/vue-showdowns-editor).
 
 ### LaTeX math and AsciiMath
 
-  ![math](https://raw.githubusercontent.com/jhuix/markdown-showdowns-editor/master/docs/screenshot/preview-math.png)
+  ![math](https://raw.githubusercontent.com/jhuix/vue-showdowns-editor/master/docs/screenshot/preview-math.png)
 
 ### Table of Contents
 
-  ![toc](https://raw.githubusercontent.com/jhuix/markdown-showdowns-editor/master/docs/screenshot/preview-toc.png)
+  ![toc](https://raw.githubusercontent.com/jhuix/vue-showdowns-editor/master/docs/screenshot/preview-toc.png)
 
 ### Mermaid
 
-  ![gantt](https://raw.githubusercontent.com/jhuix/markdown-showdowns-editor/master/docs/screenshot/preview-gantt.png)
+  ![gantt](https://raw.githubusercontent.com/jhuix/vue-showdowns-editor/master/docs/screenshot/preview-gantt.png)
 
 ### Plantuml
 
-  ![plantuml](https://raw.githubusercontent.com/jhuix/markdown-showdowns-editor/master/docs/screenshot/preview-plantuml.png)
+  ![plantuml](https://raw.githubusercontent.com/jhuix/vue-showdowns-editor/master/docs/screenshot/preview-plantuml.png)
 
 ## Usage In VUE
 
@@ -131,6 +133,6 @@ npm run build
 
 ## License
 
-[MIT](https://github.com/jhuix/markdown-showdowns-editor/blob/master/LICENSE)
+[MIT](https://github.com/jhuix/vue-showdowns-editor/blob/master/LICENSE)
 
 Copyright (c) 2019-present, [Jhuix](mailto:jhuix0117@gmail.com) (Hui Jin)
