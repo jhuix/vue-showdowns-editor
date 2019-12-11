@@ -40,7 +40,7 @@ const previewMenuItem = {
 export default {
   name: 'mainview',
   components: {
-     [ShowdownsEditor.name]: ShowdownsEditor
+    [ShowdownsEditor.name]: ShowdownsEditor
   },
   data() {
     return {
@@ -85,6 +85,5 @@ export default {
 };
 </script>
 <style lang="stylus">
-@import '../../../../markdown-showdowns-editor/dist/lib/vue-mdse.css';
+@import '../../../dist/lib/vue-mdse.css';
 </style>
-

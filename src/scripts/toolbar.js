@@ -3,6 +3,8 @@
  * Use of this source code is governed by a MIT license that can be found in the LICENSE file.
  */
 
+import i18n from './i18n.js';
+
 const getToolSet = function() {
   return {
     editItems: [
@@ -16,7 +18,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '撤销'
+          get info() {
+            return i18n.lang.edit.undo;
+          }
         }
       },
       {
@@ -29,11 +33,13 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '重做'
+          get info() {
+            return i18n.lang.edit.redo;
+          }
         }
       }
     ],
-    titleItems: [
+    headingItems: [
       {
         type: 'ch1',
         text: '',
@@ -44,7 +50,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '标题一'
+          get info() {
+            return i18n.lang.heading.ch1;
+          }
         }
       },
       {
@@ -57,7 +65,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '标题二'
+          get info() {
+            return i18n.lang.heading.ch2;
+          }
         }
       },
       {
@@ -70,7 +80,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '标题三'
+          get info() {
+            return i18n.lang.heading.ch3;
+          }
         }
       },
       {
@@ -83,7 +95,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '标题四'
+          get info() {
+            return i18n.lang.heading.ch4;
+          }
         }
       },
       {
@@ -96,7 +110,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '标题五'
+          get info() {
+            return i18n.lang.heading.ch5;
+          }
         }
       },
       {
@@ -109,7 +125,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '标题六'
+          get info() {
+            return i18n.lang.heading.ch6;
+          }
         }
       }
     ],
@@ -124,7 +142,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '加粗'
+          get info() {
+            return i18n.lang.font.bold;
+          }
         }
       },
       {
@@ -137,7 +157,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '斜体'
+          get info() {
+            return i18n.lang.font.italic;
+          }
         }
       },
       {
@@ -150,7 +172,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '删除线'
+          get info() {
+            return i18n.lang.font.strikethrough;
+          }
         }
       },
       {
@@ -163,7 +187,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '下划线'
+          get info() {
+            return i18n.lang.font.underline;
+          }
         }
       },
       {
@@ -176,7 +202,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '插入代码'
+          get info() {
+            return i18n.lang.font.code;
+          }
         }
       }
     ],
@@ -191,7 +219,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '居左对齐'
+          get info() {
+            return i18n.lang.align.left;
+          }
         }
       },
       {
@@ -204,7 +234,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '居中对齐'
+          get info() {
+            return i18n.lang.align.center;
+          }
         }
       },
       {
@@ -217,7 +249,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '居右对齐'
+          get info() {
+            return i18n.lang.align.right;
+          }
         }
       }
     ],
@@ -232,7 +266,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '无序列表'
+          get info() {
+            return i18n.lang.list.bullet;
+          }
         }
       },
       {
@@ -245,7 +281,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '有序列表'
+          get info() {
+            return i18n.lang.list.ordered;
+          }
         }
       },
       {
@@ -258,7 +296,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '任务列表'
+          get info() {
+            return i18n.lang.list.tasks;
+          }
         }
       }
     ],
@@ -273,7 +313,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '超链接'
+          get info() {
+            return i18n.lang.other.link;
+          }
         }
       },
       {
@@ -286,7 +328,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '图片'
+          get info() {
+            return i18n.lang.other.image;
+          }
         }
       },
       {
@@ -299,7 +343,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '代码块'
+          get info() {
+            return i18n.lang.other.codeblock;
+          }
         }
       },
       {
@@ -312,7 +358,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '分割线'
+          get info() {
+            return i18n.lang.other.splitline;
+          }
         }
       },
       {
@@ -325,7 +373,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '引用'
+          get info() {
+            return i18n.lang.other.quote;
+          }
         }
       },
       {
@@ -338,7 +388,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '表格'
+          get info() {
+            return i18n.lang.other.table;
+          }
         }
       },
       {
@@ -351,7 +403,9 @@ const getToolSet = function() {
           inverted: true,
           small: true,
           position: 'bottom right',
-          info: '章节目录'
+          get info() {
+            return i18n.lang.other.toc;
+          }
         }
       }
     ]
@@ -360,7 +414,7 @@ const getToolSet = function() {
 
 const getMenuSet = function() {
   return {
-    title: {
+    heading: {
       item: {
         type: 'heading',
         text: '',
@@ -372,48 +426,62 @@ const getMenuSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '标题菜单'
+          get info() {
+            return i18n.lang.heading.menu;
+          }
         }
       },
       menuItems: [
         {
-          type: 'h1',
-          text: '标题一',
+          type: 'ch1',
+          get text() {
+            return i18n.lang.heading.ch1;
+          },
           shortkey: 'Ctrl+1',
           menu: true,
           disabled: false
         },
         {
-          type: 'h2',
-          text: '标题二',
+          type: 'ch2',
+          get text() {
+            return i18n.lang.heading.ch2;
+          },
           shortkey: 'Ctrl+2',
           menu: true,
           disabled: false
         },
         {
-          type: 'h3',
-          text: '标题三',
+          type: 'ch3',
+          get text() {
+            return i18n.lang.heading.ch3;
+          },
           shortkey: 'Ctrl+3',
           menu: true,
           disabled: false
         },
         {
-          type: 'h4',
-          text: '标题四',
+          type: 'ch4',
+          get text() {
+            return i18n.lang.heading.ch4;
+          },
           shortkey: 'Ctrl+4',
           menu: true,
           disabled: false
         },
         {
-          type: 'h5',
-          text: '标题五',
+          type: 'ch5',
+          get text() {
+            return i18n.lang.heading.ch5;
+          },
           shortkey: 'Ctrl+5',
           menu: true,
           disabled: false
         },
         {
-          type: 'h6',
-          text: '标题六',
+          type: 'ch6',
+          get text() {
+            return i18n.lang.heading.ch6;
+          },
           shortkey: 'Ctrl+6',
           menu: true,
           disabled: false
@@ -432,41 +500,53 @@ const getMenuSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '字体'
+          get info() {
+            return i18n.lang.font.menu;
+          }
         }
       },
       menuItems: [
         {
           type: 'bold',
-          text: '加粗',
+          get text() {
+            return i18n.lang.font.bold;
+          },
           shortkey: 'Ctrl+B',
           menu: true,
           disabled: false
         },
         {
           type: 'italic',
-          text: '斜体',
+          get text() {
+            return i18n.lang.font.italic;
+          },
           shortkey: 'Ctrl+I',
           menu: true,
           disabled: false
         },
         {
           type: 'strikethrough',
-          text: '删除线',
+          get text() {
+            return i18n.lang.font.strikethrough;
+          },
           shortkey: 'Ctrl+Shift+X',
           menu: true,
           disabled: false
         },
         {
           type: 'underline',
-          text: '下划线',
+          get text() {
+            return i18n.lang.font.underline;
+          },
           shortkey: 'Ctrl+Shift+U',
           menu: true,
           disabled: false
         },
         {
           type: 'code',
-          text: '插入代码',
+          get text() {
+            return i18n.lang.font.code;
+          },
           shortkey: 'Ctrl+E',
           menu: true,
           disabled: false
@@ -485,27 +565,35 @@ const getMenuSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '对齐方式'
+          get info() {
+            return i18n.lang.align.menu;
+          }
         }
       },
       menuItems: [
         {
           type: 'align-left',
-          text: '居左对齐',
+          get text() {
+            return i18n.lang.align.left;
+          },
           shortkey: 'Ctrl+Alt+L',
           menu: true,
           disabled: false
         },
         {
           type: 'align-center',
-          text: '居中对齐',
+          get text() {
+            return i18n.lang.align.center;
+          },
           shortkey: 'Ctrl+Alt+M',
           menu: true,
           disabled: false
         },
         {
           type: 'align-right',
-          text: '居右对齐',
+          get text() {
+            return i18n.lang.align.right;
+          },
           shortkey: 'Ctrl+Alt+R',
           menu: true,
           disabled: false
@@ -524,27 +612,35 @@ const getMenuSet = function() {
           inverted: true,
           small: true,
           position: 'bottom center',
-          info: '内容列表'
+          get info() {
+            return i18n.lang.list.menu;
+          }
         }
       },
       menuItems: [
         {
           type: 'bullet',
-          text: '无序列表',
+          get text() {
+            return i18n.lang.list.bullet;
+          },
           shortkey: 'Ctrl+Alt+B',
           menu: true,
           disabled: false
         },
         {
           type: 'ordered',
-          text: '有序列表',
+          get text() {
+            return i18n.lang.list.ordered;
+          },
           shortkey: 'Ctrl+Alt+O',
           menu: true,
           disabled: false
         },
         {
           type: 'tasks',
-          text: '任务列表',
+          get text() {
+            return i18n.lang.list.tasks;
+          },
           shortkey: 'Ctrl+Alt+T',
           menu: true,
           disabled: false
@@ -567,10 +663,31 @@ const getRootSet = function() {
         inverted: true,
         small: true,
         position: 'bottom left',
-        info: '设置'
+        get info() {
+          return i18n.lang.root.setting;
+        }
       }
     },
-    menuItems: []
+    menuItems: [
+      {
+        type: 'zh-cn',
+        get text() {
+          return i18n.lang.root.zhcn;
+        },
+        shortkey: 'Ctrl+S+Z',
+        menu: true,
+        disabled: false
+      },
+      {
+        type: 'en',
+        get text() {
+          return i18n.lang.root.en;
+        },
+        shortkey: 'Ctrl+S+E',
+        menu: true,
+        disabled: false
+      }
+    ]
   };
 };
 

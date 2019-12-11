@@ -1,0 +1,49 @@
+{
+  "root":{
+    "setting": "Setting",
+    "zhcn": "Simplified Chinese",
+    "en": "English"
+  },
+  "edit": {
+    "undo": "Undo",
+    "redo": "Redo"
+  },
+  "heading": {
+    "menu": "Heading Menu",
+    "ch1": "Heading One",
+    "ch2": "Heading Two",
+    "ch3": "Heading Three",
+    "ch4": "Heading Four",
+    "ch5": "Heading Five",
+    "ch6": "Heading Six"
+  },
+  "font": {
+    "menu": "Font Menu",
+    "bold": "Bold",
+    "italic": "Italic",
+    "strikethrough": "StrikeThrough",
+    "underline": "Underline",
+    "code": "Insert Code"
+  },
+  "align": {
+    "menu": "Align Menu",
+    "left": "Align Left",
+    "center": "Align Center",
+    "right": "Align Right"
+  },
+  "list": {
+    "menu": "List Menu",
+    "bullet": "Bullet List",
+    "ordered": "Ordered List",
+    "tasks": "Tasks List"
+  },
+  "other": {
+    "link": "Link",
+    "image": "Image",
+    "codeblock": "CodeBlock",
+    "splitline": "SplitLine",
+    "quote": "Quote",
+    "table": "Table",
+    "toc": "TableOfContents"
+  }
+}

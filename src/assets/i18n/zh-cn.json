@@ -1,0 +1,49 @@
+{
+  "root":{
+    "setting": "设置",
+    "zhcn": "简体中文",
+    "en": "English"
+  },
+  "edit": {
+    "undo": "撤销",
+    "redo": "重做"
+  },
+  "heading": {
+    "menu": "标题菜单",
+    "ch1": "标题一",
+    "ch2": "标题二",
+    "ch3": "标题三",
+    "ch4": "标题四",
+    "ch5": "标题五",
+    "ch6": "标题六"
+  },
+  "font": {
+    "menu": "字体菜单",
+    "bold": "加粗",
+    "italic": "斜体",
+    "strikethrough": "删除线",
+    "underline": "下划线",
+    "code": "插入代码"
+  },
+  "align": {
+    "menu": "对齐菜单",
+    "left": "居左对齐",
+    "center": "居中对齐",
+    "right": "居右对齐"
+  },
+  "list": {
+    "menu": "列表菜单",
+    "bullet": "无序列表",
+    "ordered": "有序列表",
+    "tasks": "任务列表"
+  },
+  "other": {
+    "link": "超链接",
+    "image": "图片",
+    "codeblock": "代码块",
+    "splitline": "分割线",
+    "quote": "引用",
+    "table": "表格",
+    "toc": "章节目录"
+  }
+}

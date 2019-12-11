@@ -9,7 +9,7 @@
     <div class="mde-toolbar" v-if="hasToolbar">
       <div class="mde-toolbar-actions nav">
         <mde-menubutton
-          ref="roomenu"
+          ref="rootmenu"
           v-bind:item="rootSet.item"
           v-bind:items="rootSet.menuItems"
           v-on:menuclick="handleClick"
@@ -19,12 +19,12 @@
       <div class="mde-toolbar-actions edit" ref="edittool">
         <mde-menubutton
           ref="titlemenutool"
-          v-bind:item="menuSet.title.item"
-          v-bind:items="menuSet.title.menuItems"
+          v-bind:item="menuSet.heading.item"
+          v-bind:items="menuSet.heading.menuItems"
           v-if="showTitleMenu"
           v-on:menuclick="handleClick"
         ></mde-menubutton>
-        <mde-buttons ref="titletool" v-bind:items="toolSet.titleItems" v-else v-on:click="handleClick"></mde-buttons>
+        <mde-buttons ref="titletool" v-bind:items="toolSet.headingItems" v-else v-on:click="handleClick"></mde-buttons>
         <mde-menubutton
           ref="fontmenutool"
           v-bind:item="menuSet.font.item"
@@ -90,6 +90,7 @@ import Buttons from '@/components/mde-ui/mde-buttons.vue';
 import MenuButton from '@/components/mde-ui/mde-menubutton.vue';
 import Editor from '@/components/Editor.vue';
 import Previewer from '@/components/Showdowns.vue';
+import i18n from '@/scripts/i18n.js';
 
 export default {
   name: 'mdse-showdowns-editor',
@@ -142,7 +143,8 @@ export default {
       showTitleMenu: false,
       showFontMenu: false,
       showAlignMenu: false,
-      showListMenu: false
+      showListMenu: false,
+      activeLangItem: null
     };
   },
   created() {},
@@ -236,11 +238,7 @@ export default {
   },
   methods: {
     insertMarkdownContent(type) {
-      if (type) {
-        if (!this.editor.insertMarkdownContent(type)) {
-          this.$emit('toolclick', type);
-        }
-      }
+      return this.editor.insertMarkdownContent(type);
     },
     getLastToolOffset() {
       if (this.othertool) this.lastToolOffset = this.othertool.$el.offsetLeft + this.othertool.$el.offsetWidth;
@@ -281,7 +279,31 @@ export default {
       if (this.rootSet) this.rootSet.menuItems.push(item);
     },
     handleClick(e, item) {
-      this.insertMarkdownContent(item.type);
+      if (item.type) {
+        if (!this.insertMarkdownContent(item.type)) {
+          switch (item.type) {
+            case 'zh-cn':
+              i18n.lang = item.type;
+              item.disabled = true;
+              if (this.activeLangItem) {
+                this.activeLangItem.disabled = false;
+              }
+              this.activeLangItem = item;
+              break;
+            case 'en':
+              i18n.lang = item.type;
+              item.disabled = true;
+              if (this.activeLangItem) {
+                this.activeLangItem.disabled = false;
+              }
+              this.activeLangItem = item;
+              break;
+            default:
+              this.$emit('toolclick', item.type);
+              break;
+          }
+        }
+      }
     },
     onMdChange(doc) {
       this.mdDoc = doc;
@@ -303,6 +325,18 @@ export default {
     this.editor = this.$refs.mdseEditor;
     this.previewer = this.$refs.mdsePreviewer;
     this.rootmenu = this.$refs.rootmenu;
+    if (this.rootSet) {
+      this.rootSet.menuItems.find(
+        function(item) {
+          if (item.type === i18n.locale) {
+            item.disable = true;
+            this.activeLangItem = item;
+            return true;
+          }
+          return false;
+        }.bind(this)
+      );
+    }
     if (this.hasToolbar) {
       this.edittool = this.$refs.edittool;
       this.titletool = this.$refs.titletool;
