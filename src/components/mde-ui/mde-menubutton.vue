@@ -16,7 +16,12 @@
       v-bind:type="item.type"
       v-on:click.native="handleClick($event, item)"
     ></mde-button>
-    <mde-buttons class="dropdown menubutton" v-bind:items="items" v-on:click="handleMenuClick" v-show="isShowMenu"></mde-buttons>
+    <mde-buttons
+      class="dropdown menubutton"
+      v-bind:items="items"
+      v-on:click="handleMenuClick"
+      v-show="isShowMenu"
+    ></mde-buttons>
   </div>
 </template>
 

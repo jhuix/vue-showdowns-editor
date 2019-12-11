@@ -5,7 +5,6 @@
 -->
 
 <script type="text/javascript">
-
 import showdowns from '@jhuix/showdowns';
 
 export default {
