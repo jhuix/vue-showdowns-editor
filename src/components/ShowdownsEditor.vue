@@ -10,8 +10,8 @@
       <div class="mde-toolbar-actions nav">
         <mde-menubutton
           ref="rootmenu"
-          v-bind:item="rootSet.item"
-          v-bind:items="rootSet.menuItems"
+          v-bind:item="mainSet.item"
+          v-bind:items="mainSet.menuItems"
           v-on:menuclick="handleClick"
         ></mde-menubutton>
         <mde-buttons v-bind:items="toolSet.editItems" v-on:click="handleClick"></mde-buttons>
@@ -131,9 +131,9 @@ export default {
       rootmenu: null,
       edittool: null,
       othertool: null,
-      rootSet: ToolbarSet.getRootSet(),
-      toolSet: ToolbarSet.getToolSet(),
-      menuSet: ToolbarSet.getMenuSet(),
+      rootSet: ToolbarSet.getRootSet(i18n.lang),
+      toolSet: ToolbarSet.getToolSet(i18n.lang),
+      menuSet: ToolbarSet.getMenuSet(i18n.lang),
       screenWidth: document.documentElement.clientWidth,
       lastToolOffset: 0,
       titleToolWidth: 0,
@@ -144,13 +144,30 @@ export default {
       showFontMenu: false,
       showAlignMenu: false,
       showListMenu: false,
-      activeLangItem: null
+      locale: i18n.locale,
+      activeLangItem: null,
+      outsideMenu: null
     };
   },
   created() {},
   watch: {
     markdown(val) {
       this.mdDoc = val;
+    },
+    changeLocale(val) {
+      i18n.locale = val;
+      this.rootSet = ToolbarSet.getRootSet(i18n.lang);
+      this.toolSet = ToolbarSet.getToolSet(i18n.lang);
+      this.menuSet = ToolbarSet.getMenuSet(i18n.lang);
+      this.selectLocaleItem();
+      if (this.toolSet.editItems) {
+        if (this.toolSet.editItems.length > 0) {
+          this.toolSet.editItems[0].disabled = this.disableUndo;
+        }
+        if (this.toolSet.editItems.length > 1) {
+          this.toolSet.editItems[1].disabled = this.disableRedo;
+        }
+      }
     },
     editOptions: {
       deep: true,
@@ -220,6 +237,19 @@ export default {
     }
   },
   computed: {
+    changeLocale() {
+      return this.locale;
+    },
+    mainSet() {
+      const rootSet = this.rootSet;
+      if (typeof this.outsideMenu === 'function') {
+        const outsideMenuItems = this.outsideMenu(this.locale);
+        outsideMenuItems.map(item => {
+          rootSet.menuItems.push(item);
+        });
+      }
+      return rootSet;
+    },
     disableUndo() {
       return !this.editor || !this.editor.hasUndo();
     },
@@ -275,28 +305,18 @@ export default {
         cssStyles: cssstyles
       };
     },
-    addRootMenu(item) {
-      if (this.rootSet) this.rootSet.menuItems.push(item);
+    addOutsideMenu(outsideMenu) {
+      this.outsideMenu = outsideMenu;
     },
     handleClick(e, item) {
       if (item.type) {
         if (!this.insertMarkdownContent(item.type)) {
           switch (item.type) {
             case 'zh-cn':
-              i18n.lang = item.type;
-              item.disabled = true;
-              if (this.activeLangItem) {
-                this.activeLangItem.disabled = false;
-              }
-              this.activeLangItem = item;
+              this.locale = item.type;
               break;
             case 'en':
-              i18n.lang = item.type;
-              item.disabled = true;
-              if (this.activeLangItem) {
-                this.activeLangItem.disabled = false;
-              }
-              this.activeLangItem = item;
+              this.locale = item.type;
               break;
             default:
               this.$emit('toolclick', item.type);
@@ -319,24 +339,27 @@ export default {
           console.log('scroll current object to failed:', cm);
         }
       }
+    },
+    selectLocaleItem() {
+      if (this.rootSet) {
+        this.rootSet.menuItems.find(
+          function(item) {
+            if (item.type === this.locale) {
+              item.disable = true;
+              this.activeLangItem = item;
+              return true;
+            }
+            return false;
+          }.bind(this)
+        );
+      }
     }
   },
   mounted() {
     this.editor = this.$refs.mdseEditor;
     this.previewer = this.$refs.mdsePreviewer;
     this.rootmenu = this.$refs.rootmenu;
-    if (this.rootSet) {
-      this.rootSet.menuItems.find(
-        function(item) {
-          if (item.type === i18n.locale) {
-            item.disable = true;
-            this.activeLangItem = item;
-            return true;
-          }
-          return false;
-        }.bind(this)
-      );
-    }
+    this.selectLocaleItem();
     if (this.hasToolbar) {
       this.edittool = this.$refs.edittool;
       this.titletool = this.$refs.titletool;
@@ -382,16 +405,16 @@ export default {
 
     .mde-toolbar-actions {
       padding: 4px 5px;
-      min-height: 44px;
+      min-height: 40px;
       display: inline-flex;
       flex-direction: row;
       flex-wrap: nowrap;
 
       &.nav {
-        min-width: 190px;
+        min-width: 50px;
 
         .mde-ui.buttons {
-          margin: 0 1em 0 0;
+          margin-right: 1em;
         }
       }
     }

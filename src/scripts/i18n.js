@@ -3,36 +3,34 @@
  * Use of this source code is governed by a MIT license that can be found in the LICENSE file.
  */
 const I18N = {
-  // 定义默认语言为中文zh-cn
-  locale: 'zh-cn',
-  messages: {
-    'zh-cn': require('@/assets/i18n/zh-cn.json'),
-    en: require('@/assets/i18n/en.json')
-  }
+  'zh-cn': require('@/assets/i18n/zh-cn.json'),
+  en: require('@/assets/i18n/en.json')
 };
 
 const i18n = Object.create(
-  {},
   {
-    locale: {
+    // 定义默认语言为中文zh-cn
+    locale: 'zh-cn'
+  },
+  {
+    lang: {
       get: function() {
-        return I18N.locale;
+        if (I18N.hasOwnProperty(this.locale)) {
+          return I18N[this.locale];
+        }
+        return I18N['en'];
       },
       set: function(val) {
-        if (I18N.messages.hasOwnProperty(val)) {
-          I18N.locale = val;
+        if (I18N.hasOwnProperty(locale)) {
+          this.locale = val;
         }
       }
     },
-    lang: {
-      get: function() {
-        return I18N.messages[I18N.locale];
-      },
-      set: function(val) {
-        if (I18N.messages.hasOwnProperty(val)) {
-          I18N.locale = val;
-        }
+    getLang: function(locale) {
+      if (I18N.hasOwnProperty(locale)) {
+        return I18N[locale];
       }
+      return this.lang;
     }
   }
 );

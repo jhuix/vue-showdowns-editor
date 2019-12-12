@@ -7,6 +7,7 @@
 <template>
   <div class="mde-ui dropdown" tabindex="-1" v-on:focusout="onBlur">
     <mde-button
+      class="menubutton"
       v-bind:caret="item.caret"
       v-bind:disabled="item.disabled"
       v-bind:icon="item.icon"
@@ -16,12 +17,7 @@
       v-bind:type="item.type"
       v-on:click.native="handleClick($event, item)"
     ></mde-button>
-    <mde-buttons
-      class="dropdown menubutton"
-      v-bind:items="items"
-      v-on:click="handleMenuClick"
-      v-show="isShowMenu"
-    ></mde-buttons>
+    <mde-buttons class="dropdown" v-bind:items="items" v-on:click="handleMenuClick" v-show="isShowMenu"></mde-buttons>
   </div>
 </template>
 
@@ -62,8 +58,8 @@ export default {
       this.isShowMenu = !this.isShowMenu;
     },
     handleMenuClick(event, item) {
-      this.isShowMenu = false;
       this.$emit('menuclick', event, item);
+      this.isShowMenu = false;
     },
     onBlur() {
       this.isShowMenu = false;
@@ -77,26 +73,38 @@ export default {
   display: inline-flex;
   flex-direction: column;
   vertical-align: baseline;
-  margin: 0 0.25em 0 0;
+  margin: 0 0.28571429em 0 0;
   box-shadow: none;
-  font-size: 1rem;
+  font-size: 1em;
   outline: 0;
 }
 
-.mde-ui.dropdown>.button, .mde-ui.dropdown>.mde-ui.button {
-  box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 0 rgba(34, 36, 38, 0.15);
-}
-
-.mde-ui.dropdown .button {
+.mde-ui.dropdown .icon-button {
   position: relative;
   flex: 1 0 auto;
-  border-radius: 0.28571429rem;
+  border-radius: 0.28571429em;
   margin: 0;
   text-align: left;
   white-space: nowrap;
 }
 
-.mde-ui.buttons.dropdown.menubutton {
+.mde-ui.dropdown .menubutton.icon-button {
+  div:first-child {
+    border-top-left-radius: 0.28571429em;
+    border-bottom-left-radius: 0.28571429em;
+  }
+
+  div:last-child {
+    border-top-right-radius: 0.28571429em;
+    border-bottom-right-radius: 0.28571429em;
+  }
+
+  .content-right {
+    padding: 0.618em 0.28571429em 0.618em 0;
+  }
+}
+
+.mde-ui.buttons.dropdown {
   flex-direction: column;
   position: absolute;
   top: 40px;
@@ -110,10 +118,10 @@ export default {
   background-clip: padding-box;
   border: 1px solid #ccc;
   border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 0.28571429rem;
+  border-radius: 0.28571429em;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
 
-  .button:first-child, .button:last-child {
+  .icon-button:first-child, .icon-button:last-child, .icon-button:first-child div:first-child, .icon-button:last-child div:last-child {
     border-radius: 0;
   }
 }

@@ -48,6 +48,11 @@ export default {
       return this.disabled ? 'disabled' : '';
     }
   },
+  filters: {
+    changeText(item) {
+      return item.text;
+    }
+  },
   methods: {
     handleClick(event, item) {
       this.$emit('click', event, item);
@@ -63,9 +68,9 @@ export default {
   vertical-align: baseline;
   margin: 0 0.25em 0 0;
   box-shadow: none;
-  font-size: 1rem;
+  font-size: 1em;
 
-  .button {
+  .icon-button {
     position: relative;
   }
 }
@@ -79,25 +84,31 @@ export default {
   font-size: 0;
 }
 
-.mde-ui.buttons .button {
+.mde-ui.buttons .icon-button {
   flex: 1 0 auto;
   border-radius: 0;
   margin: 0;
 }
 
-.mde-ui.buttons>.button, .mde-ui.buttons>.mde-ui.button {
-  box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 0 rgba(34, 36, 38, 0.15);
-}
-
-.mde-ui.buttons .button:first-child {
+.mde-ui.buttons .icon-button:first-child {
   border-left: none;
   margin-left: 0;
-  border-top-left-radius: 0.28571429rem;
-  border-bottom-left-radius: 0.28571429rem;
+  border-top-left-radius: 0.28571429em;
+  border-bottom-left-radius: 0.28571429em;
+
+  div:first-child {
+    border-top-left-radius: 0.28571429em;
+    border-bottom-left-radius: 0.28571429em;
+  }
 }
 
-.mde-ui.buttons .button:last-child {
-  border-top-right-radius: 0.28571429rem;
-  border-bottom-right-radius: 0.28571429rem;
+.mde-ui.buttons .icon-button:last-child {
+  border-top-right-radius: 0.28571429em;
+  border-bottom-right-radius: 0.28571429em;
+
+  div:last-child {
+    border-top-right-radius: 0.28571429em;
+    border-bottom-right-radius: 0.28571429em;
+  }
 }
 </style>

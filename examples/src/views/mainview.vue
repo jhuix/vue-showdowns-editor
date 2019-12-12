@@ -29,13 +29,17 @@ import zlibcodec from '../utils/zlib-codec.js';
 // }
 //}
 
-const previewMenuItem = {
-  type: 'preview',
-  text: '预览',
-  shortkey: 'Ctrl+Alt+P',
-  menu: true,
-  disabled: false
-};
+function getOutsideMenu(locale) {
+  return [
+    {
+      type: 'preview',
+      text: '预览',
+      shortkey: 'Ctrl+Alt+P',
+      menu: true,
+      disabled: false
+    }
+  ];
+}
 
 export default {
   name: 'mainview',
@@ -65,7 +69,7 @@ export default {
     console.log('the app is created!', this);
 
     this.$nextTick(function() {
-      this.$refs.mdse.addRootMenu(previewMenuItem);
+      this.$refs.mdse.addOutsideMenu(getOutsideMenu);
 
       let that = this;
       var defHtml = axios.get('https://jhuix.github.io/showdowns/showdowns-features.md');
@@ -84,6 +88,4 @@ export default {
   }
 };
 </script>
-<style lang="stylus">
-@import '../../../dist/lib/vue-mdse.css';
-</style>
+<style lang="stylus"></style>
