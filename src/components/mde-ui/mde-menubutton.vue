@@ -53,13 +53,12 @@ export default {
   },
   methods: {
     handleClick(event, item) {
-      event;
-      item;
+      event.preventDefault();
       this.isShowMenu = !this.isShowMenu;
     },
     handleMenuClick(event, item) {
-      this.$emit('menuclick', event, item);
       this.isShowMenu = false;
+      this.$emit('menuclick', event, item);
     },
     onBlur() {
       this.isShowMenu = false;
@@ -86,21 +85,18 @@ export default {
   margin: 0;
   text-align: left;
   white-space: nowrap;
-}
 
-.mde-ui.dropdown .menubutton.icon-button {
-  div:first-child {
-    border-top-left-radius: 0.28571429em;
-    border-bottom-left-radius: 0.28571429em;
-  }
+  &.menubutton {
+    .content-right {
+      padding-right: 0.28571429em;
+      border-top-right-radius: 0.28571429em;
+      border-bottom-right-radius: 0.28571429em;
+    }
 
-  div:last-child {
-    border-top-right-radius: 0.28571429em;
-    border-bottom-right-radius: 0.28571429em;
-  }
-
-  .content-right {
-    padding: 0.618em 0.28571429em 0.618em 0;
+    .content-left {
+      border-top-left-radius: 0.28571429em;
+      border-bottom-left-radius: 0.28571429em;
+    }
   }
 }
 

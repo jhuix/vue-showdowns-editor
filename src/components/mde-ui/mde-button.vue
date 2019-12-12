@@ -53,9 +53,22 @@ export default {
       type: Boolean,
       default: false
     },
+    selected: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    // For example:
+    // tooltip{
+    //   show: true,
+    //   inverted: true,
+    //   small: true,
+    //   position: 'bottom left',
+    //   info: ''
+    // }
     tooltip: {
       type: Object,
-      default: null
+      required: false
     }
   },
   data() {
@@ -65,18 +78,18 @@ export default {
   },
   computed: {
     tooltipInfo() {
-      const text = this.tooltip.info ? this.tooltip.info : `${this.text}`;
-      const key = this.shortkey ? `(${this.shortkey})` : ``;
+      const text = this.tooltip && this.tooltip.info ? this.tooltip.info : this.text;
+      const key = this.shortkey ? `(${this.shortkey})` : '';
       return `${text} ${key}`;
     },
     buttonClassName() {
-      return this.disabled ? 'disabled' : '';
+      return this.disabled ? 'disabled' : this.selected ? 'selected' : '';
     },
     buttonText() {
       return this.text;
     },
     iconClassName() {
-      return this.type;
+      return this.selected ? 'tick' : this.type;
     },
     keyContent() {
       return this.shortkey ? this.shortkey : '';
@@ -144,6 +157,12 @@ export default {
   cursor: default;
   opacity: 0.45 !important;
   background-image: none !important;
+  box-shadow: none !important;
+  pointer-events: none !important;
+}
+
+.mde-ui.icon-button:selected, .mde-ui.icon-button.selected, .mde-ui.icon-button.selected:hover {
+  cursor: default;
   box-shadow: none !important;
   pointer-events: none !important;
 }
