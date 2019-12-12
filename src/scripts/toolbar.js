@@ -662,7 +662,7 @@ const getRootSet = function(lang) {
         small: true,
         position: 'bottom left',
         get info() {
-          return lang.root.setting;
+          return lang.main.setting;
         }
       }
     },
@@ -670,7 +670,7 @@ const getRootSet = function(lang) {
       {
         type: 'zh-cn',
         get text() {
-          return lang.root.zhcn;
+          return lang.main.zhcn;
         },
         shortkey: 'Ctrl+S+Z',
         menu: true,
@@ -679,7 +679,7 @@ const getRootSet = function(lang) {
       {
         type: 'en',
         get text() {
-          return lang.root.en;
+          return lang.main.en;
         },
         shortkey: 'Ctrl+S+E',
         menu: true,

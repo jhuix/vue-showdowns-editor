@@ -1,5 +1,5 @@
 {
-  "root":{
+  "main": {
     "setting": "设置",
     "zhcn": "简体中文",
     "en": "English"

@@ -96,6 +96,11 @@ export default {
   name: 'mdse-showdowns-editor',
   props: {
     markdown: String,
+    locale: {
+      type: String,
+      required: false,
+      default: 'en'
+    },
     hasToolbar: {
       type: Boolean,
       default: true
@@ -129,11 +134,13 @@ export default {
       editor: null,
       previewer: null,
       rootmenu: null,
+      maintool: null,
       edittool: null,
       othertool: null,
-      rootSet: ToolbarSet.getRootSet(i18n.lang),
-      toolSet: ToolbarSet.getToolSet(i18n.lang),
-      menuSet: ToolbarSet.getMenuSet(i18n.lang),
+      rootSet: {},
+      mainSet: {},
+      toolSet: {},
+      menuSet: {},
       screenWidth: document.documentElement.clientWidth,
       lastToolOffset: 0,
       titleToolWidth: 0,
@@ -144,13 +151,16 @@ export default {
       showFontMenu: false,
       showAlignMenu: false,
       showListMenu: false,
-      locale: i18n.locale,
+      i18nLocale: this.locale,
       activeLangItem: null,
       outsideMenu: null
     };
   },
   created() {},
   watch: {
+    locale(val) {
+      this.i18nLocale = val;
+    },
     markdown(val) {
       this.mdDoc = val;
     },
@@ -169,6 +179,7 @@ export default {
         }
       }
     },
+
     editOptions: {
       deep: true,
       handler(options) {
@@ -179,6 +190,17 @@ export default {
       deep: true,
       handler(options) {
         this.mdpOptions = Object.assign({}, this.mdpOptions, options);
+      }
+    },
+    changeRootSet: {
+      deep: true,
+      handler(rootset) {
+        let mainSet = Object.assign({}, rootset);
+        if (typeof this.outsideMenu === 'function') {
+          const outsideMenuItems = this.outsideMenu(this.locale);
+          mainSet.menuItems = mainSet.menuItems.concat(outsideMenuItems);
+        }
+        this.mainSet = mainSet;
       }
     },
     disableUndo(n) {
@@ -238,17 +260,10 @@ export default {
   },
   computed: {
     changeLocale() {
-      return this.locale;
+      return this.i18nLocale;
     },
-    mainSet() {
-      const rootSet = this.rootSet;
-      if (typeof this.outsideMenu === 'function') {
-        const outsideMenuItems = this.outsideMenu(this.locale);
-        outsideMenuItems.map(item => {
-          rootSet.menuItems.push(item);
-        });
-      }
-      return rootSet;
+    changeRootSet() {
+      return this.rootSet;
     },
     disableUndo() {
       return !this.editor || !this.editor.hasUndo();
@@ -307,16 +322,22 @@ export default {
     },
     addOutsideMenu(outsideMenu) {
       this.outsideMenu = outsideMenu;
+      let mainSet = Object.assign({}, this.rootSet);
+      if (typeof this.outsideMenu === 'function') {
+        const outsideMenuItems = this.outsideMenu(this.locale);
+        mainSet.menuItems = mainSet.menuItems.concat(outsideMenuItems);
+      }
+      this.mainSet = mainSet;
     },
     handleClick(e, item) {
       if (item.type) {
         if (!this.insertMarkdownContent(item.type)) {
           switch (item.type) {
             case 'zh-cn':
-              this.locale = item.type;
+              this.i18nLocale = item.type;
               break;
             case 'en':
-              this.locale = item.type;
+              this.i18nLocale = item.type;
               break;
             default:
               this.$emit('toolclick', item.type);
@@ -345,7 +366,7 @@ export default {
         this.rootSet.menuItems.find(
           function(item) {
             if (item.type === this.locale) {
-              item.disable = true;
+              item.disabled = true;
               this.activeLangItem = item;
               return true;
             }
@@ -358,27 +379,38 @@ export default {
   mounted() {
     this.editor = this.$refs.mdseEditor;
     this.previewer = this.$refs.mdsePreviewer;
-    this.rootmenu = this.$refs.rootmenu;
+    i18n.locale = this.i18nLocale;
+    this.rootSet = ToolbarSet.getRootSet(i18n.lang);
+    this.toolSet = ToolbarSet.getToolSet(i18n.lang);
+    this.menuSet = ToolbarSet.getMenuSet(i18n.lang);
     this.selectLocaleItem();
-    if (this.hasToolbar) {
-      this.edittool = this.$refs.edittool;
-      this.titletool = this.$refs.titletool;
-      if (this.titletool) this.titleToolWidth = this.titletool.$el.clientWidth;
-      this.fonttool = this.$refs.fonttool;
-      if (this.fonttool) this.fontToolWidth = this.fonttool.$el.clientWidth;
-      this.aligntool = this.$refs.aligntool;
-      if (this.aligntool) this.alignToolWidth = this.aligntool.$el.clientWidth;
-      this.listtool = this.$refs.listtool;
-      if (this.listtool) this.listToolWidth = this.listtool.$el.clientWidth;
-      this.othertool = this.$refs.othertool;
-      this.getLastToolOffset();
-
-      let that = this;
-      window.addEventListener('resize', function() {
-        that.screenWidth = document.documentElement.clientWidth;
-        that.getLastToolOffset();
-      });
+    let mainSet = Object.assign({}, this.rootSet);
+    if (typeof this.outsideMenu === 'function') {
+      const outsideMenuItems = this.outsideMenu(this.locale);
+      mainSet.menuItems = mainSet.menuItems.concat(outsideMenuItems);
     }
+    this.mainSet = mainSet;
+    this.$nextTick(() => {
+      if (this.hasToolbar) {
+        this.edittool = this.$refs.edittool;
+        this.titletool = this.$refs.titletool;
+        if (this.titletool) this.titleToolWidth = this.titletool.$el.clientWidth;
+        this.fonttool = this.$refs.fonttool;
+        if (this.fonttool) this.fontToolWidth = this.fonttool.$el.clientWidth;
+        this.aligntool = this.$refs.aligntool;
+        if (this.aligntool) this.alignToolWidth = this.aligntool.$el.clientWidth;
+        this.listtool = this.$refs.listtool;
+        if (this.listtool) this.listToolWidth = this.listtool.$el.clientWidth;
+        this.othertool = this.$refs.othertool;
+        this.getLastToolOffset();
+
+        let that = this;
+        window.addEventListener('resize', function() {
+          that.screenWidth = document.documentElement.clientWidth;
+          that.getLastToolOffset();
+        });
+      }
+    });
   }
 };
 </script>
@@ -405,13 +437,19 @@ export default {
 
     .mde-toolbar-actions {
       padding: 4px 5px;
-      min-height: 40px;
+      min-height: 34px;
       display: inline-flex;
       flex-direction: row;
       flex-wrap: nowrap;
 
       &.nav {
-        min-width: 50px;
+        min-width: 40px;
+        padding-left: 0;
+
+        .mde-ui.dropdown .icon-button {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+        }
 
         .mde-ui.buttons {
           margin-right: 1em;
