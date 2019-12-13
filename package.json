@@ -93,5 +93,8 @@
     "type": "git",
     "url": "https://github.com/jhuix/vue-showdowns-editor"
   },
-  "homepage": "https://github.com/jhuix/vue-showdowns-editor#readme"
+  "homepage": "https://github.com/jhuix/vue-showdowns-editor#readme",
+  "publishConfig": {
+    "access": "public"
+  }
 }
