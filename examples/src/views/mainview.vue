@@ -8,8 +8,10 @@
   <mdse-showdowns-editor
     :hasToolbar="hasToolbar"
     :markdown="mdDoc"
+    :locale="locale"
     :previewExtensions="previewExtensions"
     @toolClick="handlerToolClick"
+    @localeChanged="handlerLocaleChanged"
     ref="mdse"
   ></mdse-showdowns-editor>
 </template>
@@ -49,6 +51,7 @@ export default {
   data() {
     return {
       mdDoc: '',
+      locale: 'en',
       hasToolbar: true,
       previewExtensions: null
     };
@@ -63,10 +66,19 @@ export default {
         url += '#/preview';
         window.open(url);
       }
+    },
+    handlerLocaleChanged(i18n) {
+      this.locale = i18n.locale;
+      localStorage['vue-mdse:locale'] = this.locale;
     }
   },
   created() {
     console.log('the app is created!', this);
+
+    if (localStorage.hasOwnProperty('vue-mdse:locale')) {
+      this.locale = localStorage['vue-mdse:locale'];
+      console.log(`the app locale is ${this.locale}!`);
+    }
 
     this.$nextTick(function() {
       this.$refs.mdse.addOutsideMenu(getOutsideMenu);

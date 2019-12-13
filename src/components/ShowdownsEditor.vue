@@ -220,10 +220,14 @@ export default {
       }
     },
     disableUndo(n) {
-      if (this.toolSet.editItems && this.toolSet.editItems.length > 0) this.toolSet.editItems[0].disabled = n;
+      if (this.toolSet.editItems && this.toolSet.editItems.length > 0) {
+        this.toolSet.editItems[0].disabled = n;
+      }
     },
     disableRedo(n) {
-      if (this.toolSet.editItems && this.toolSet.editItems.length > 1) this.toolSet.editItems[1].disabled = n;
+      if (this.toolSet.editItems && this.toolSet.editItems.length > 1) {
+        this.toolSet.editItems[1].disabled = n;
+      }
     },
     showMenuChange() {
       this.$nextTick(() => {
