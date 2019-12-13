@@ -3,6 +3,7 @@ node_modules/
 examples/
 packages/
 src/
+docs/
 public/
 vue.config.js
 babel.config.js
@@ -11,6 +12,8 @@ babel.config.js
 *-lock.json
 .editorconfig
 .prettierrc
+.gitignore
+.npmignore
 
 # local env files
 .env.local
