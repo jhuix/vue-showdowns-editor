@@ -1,6 +1,7 @@
 {
   "main": {
-    "menu": "Main Menu"
+    "menu": "Main Menu",
+    "preview": "Preview Html"
   },
   "help": {
     "menu": "Help Menu",

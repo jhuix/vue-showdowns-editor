@@ -1,6 +1,7 @@
 {
   "main": {
-    "menu": "主菜单"
+    "menu": "主菜单",
+    "preview": "预览为HTML"
   },
   "help": {
     "menu": "帮助菜单",
