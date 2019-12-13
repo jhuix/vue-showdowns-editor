@@ -81,10 +81,11 @@ const i18n = {
       if (typeof locale === 'undefined' || !locale) {
         locale = this.locale;
       }
-      const lang = this.getLang(locale);
-      key = key.substring(i18n_prefix.length);
-      const msg = I18nPath.getPathValue(lang, key);
-      return msg ? msg : '';
+      const keys = key.substring(i18n_prefix.length).split('?');
+      if (keys) {
+        const msg = I18nPath.getPathValue(this.getLang(locale), keys[0]);
+        return msg ? msg : keys.length > 1 ? keys.slice(1).join('?') : '';
+      }
     }
     return key;
   }

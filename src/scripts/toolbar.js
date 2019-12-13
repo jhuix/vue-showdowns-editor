@@ -574,6 +574,9 @@ const getMenuSet = function() {
           disabled: false
         },
         {
+          type: 'separator'
+        },
+        {
           type: 'en',
           text: 'English',
           menu: true,

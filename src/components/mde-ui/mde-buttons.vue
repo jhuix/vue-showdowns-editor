@@ -69,10 +69,6 @@ export default {
   margin: 0 0.25em 0 0;
   box-shadow: none;
   font-size: 1em;
-
-  .icon-button {
-    position: relative;
-  }
 }
 
 .mde-ui.buttons:after {
@@ -84,7 +80,7 @@ export default {
   font-size: 0;
 }
 
-.mde-ui.buttons .icon-button {
+.mde-ui.buttons .icon-button:not(.separator) {
   flex: 1 0 auto;
   border-radius: 0;
   margin: 0;

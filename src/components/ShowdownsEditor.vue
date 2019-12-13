@@ -198,6 +198,7 @@ export default {
           this.toolSet.editItems[1].disabled = this.disableRedo;
         }
       }
+      this.$emit('localeChanged', i18n);
     },
 
     editOptions: {
@@ -338,6 +339,9 @@ export default {
         cssStyles: cssstyles
       };
     },
+    getI18N() {
+      return i18n;
+    },
     addOutsideMenu(outsideMenu) {
       this.outsideMenu = outsideMenu;
       this.resetMainMenu();
@@ -355,7 +359,7 @@ export default {
             break;
           default:
             if (!this.insertMarkdownContent(type)) {
-              this.$emit('toolclick', type);
+              this.$emit('toolClick', type);
             }
             break;
         }
@@ -392,7 +396,7 @@ export default {
     resetMainMenu() {
       let mainSet = JSON.parse(JSON.stringify(this.rootSet));
       if (typeof this.outsideMenu === 'function') {
-        const outsideMenuItems = this.outsideMenu();
+        const outsideMenuItems = this.outsideMenu(this.i18nLocale);
         mainSet.menuItems = mainSet.menuItems.concat(outsideMenuItems);
       }
       this.mainSet = mainSet;
@@ -434,7 +438,7 @@ export default {
   position: relative;
   flex: 1;
   outline: none;
-  min-width: 885px;
+  min-width: 50em;
   width: 100%;
   height: 100%;
   display: flex;
@@ -493,7 +497,7 @@ export default {
     flex: 1;
 
     .raw-editor {
-      min-width: 442px;
+      min-width: 25em;
     }
 
     .mde-scroll-container {

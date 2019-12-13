@@ -75,48 +75,50 @@ export default {
   },
   data() {
     return {
-      localeI18N: i18n,
       activeTooltip: true
     };
   },
   computed: {
     tooltipInfo() {
       const text = this.tooltip && this.tooltip.info ? this.tooltip.info : this.text;
-      return `${this.localeI18N.getMessage(text, this.localeI18N.locale)} (${this.keyContent})`;
+      return `${i18n.getMessage(text, i18n.locale)} (${this.keyContent})`;
     },
     tooltipPositon() {
-      if (this.tooltip && this.tooltip.position) return this.tooltip.position;
-      return '';
+      return this.tooltip && this.tooltip.position ? this.tooltip.position : '';
     },
     buttonClassName() {
+      if (this.isSeparator) return 'separator';
       return this.disabled ? 'disabled' : this.selected ? 'selected' : '';
     },
     buttonText() {
-      return this.localeI18N ? this.localeI18N.getMessage(this.text, this.localeI18N.locale) : this.text;
+      return this.isSeparator ? '' : i18n.getMessage(this.text, i18n.locale);
     },
     iconClassName() {
       return this.selected ? 'tick' : this.type;
     },
     keyContent() {
-      return this.shortkey ? this.localeI18N.getMessage(this.shortkey, this.localeI18N.locale) : '';
+      return this.shortkey ? i18n.getMessage(this.shortkey, i18n.locale) : '';
     },
     showTooltip() {
-      return !!this.tooltip && this.tooltip.show && this.activeTooltip;
+      return !this.isSeparator && !!this.tooltip && this.tooltip.show && this.activeTooltip;
     },
     hasTooltip() {
-      return !!this.tooltip;
+      return !this.isSeparator && !!this.tooltip;
     },
     hasIcon() {
-      return this.icon;
+      return !this.isSeparator && this.icon;
     },
     hasMenu() {
-      return this.menu;
+      return !this.isSeparator && this.menu;
     },
     hasCaret() {
-      return this.caret;
+      return !this.isSeparator && this.caret;
     },
     hasContent() {
       return this.hasMenu || this.hasCaret || !!this.buttonText;
+    },
+    isSeparator() {
+      return this.type === 'separator';
     }
   },
   methods: {
@@ -140,6 +142,8 @@ export default {
 .mde-ui.icon-button {
   cursor: pointer;
   display: inline-flex;
+  position: relative;
+  flex: 1 0 auto;
   min-height: 1em;
   outline: none;
   border: none;
@@ -154,7 +158,6 @@ export default {
   font-style: normal;
   text-align: center;
   text-decoration: none;
-  border-radius: 0.28571429em;
   user-select: none;
   transition: opacity 0.1s ease, background-color 0.1s ease, color 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
   will-change: '';
@@ -181,6 +184,19 @@ export default {
     width: 100%;
     padding: 0.618em 0.618em 0.618em 0;
   }
+}
+
+.mde-ui.icon-button.separator {
+  cursor: default;
+  opacity: 0.2 !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  pointer-events: none !important;
+  border: 2px solid rgba(255, 255, 255, 0);
+  min-height: 5px;
+  min-width: 5px;
+  background-color: #464646;
+  background-clip: padding-box;
 }
 
 .mde-ui.icon-button:disabled, .mde-ui.icon-button.disabled, .mde-ui.icon-button.disabled:hover {

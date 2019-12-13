@@ -9,7 +9,7 @@
     :hasToolbar="hasToolbar"
     :markdown="mdDoc"
     :previewExtensions="previewExtensions"
-    @toolclick="handlerToolClick"
+    @toolClick="handlerToolClick"
     ref="mdse"
   ></mdse-showdowns-editor>
 </template>
@@ -33,7 +33,7 @@ function getOutsideMenu(locale) {
   return [
     {
       type: 'preview',
-      text: '预览',
+      text: 'i18n://lang.main.preview?预览',
       shortkey: 'Ctrl+Alt+P',
       menu: true,
       disabled: false

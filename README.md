@@ -8,9 +8,9 @@ The [Vue-Showdowns-Editor](https://github.com/jhuix/vue-showdowns-editor) once u
 
 > If you think the markdown showdowns editor is excellent or can help you, please click on the top right corner to give me a [Star](https://github.com/jhuix/vue-showdowns-editor)⭐️.
 
-## Demo
+## Live Demo Editor —— `showdowns-editor`
 
-[Showdowns-Editor demo](https://jhuix.github.io/vue-showdowns-editor)
+Check a live demo editor here https://jhuix.github.io/vue-showdowns-editor
 
 ## Markdown editor
 
@@ -90,11 +90,11 @@ Vue.use(VueMDSE);
 
 ```
 <script>
-  import { mdse, Showdowns, Editor } from '../src';
+  import { ShowdownsEditor, Showdowns, Editor } from '../src';
 
   export default {
     components: {
-      [mdse.name]: mdse,
+      [ShowdownsEditor.name]: ShowdownsEditor,
       [Showdowns.name]: Showdowns,
       [Editor.name]: Editor,
     }
@@ -105,9 +105,9 @@ Vue.use(VueMDSE);
 Or
 
 ```
-import { mdse, Showdowns, Editor } from '../src';
+import { ShowdownsEditor, Showdowns, Editor } from '../src';
 
-Vue.component(mdse.name, mdse);
+Vue.component(ShowdownsEditor.name, ShowdownsEditor);
 Vue.component(Showdowns.name, Showdowns);
 Vue.component(Editor.name, Editor);
 ```

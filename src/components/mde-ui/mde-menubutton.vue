@@ -97,15 +97,13 @@ export default {
   outline: 0;
 }
 
-.mde-ui.dropdown .icon-button {
-  position: relative;
-  flex: 1 0 auto;
-  border-radius: 0.28571429em;
-  margin: 0;
+.mde-ui.dropdown .icon-button:not(.separator) {
   text-align: left;
   white-space: nowrap;
 
   &.menubutton {
+    border-radius: 0.28571429em;
+
     .content-right {
       padding-right: 0.28571429em;
       border-top-right-radius: 0.28571429em;
@@ -125,7 +123,7 @@ export default {
   top: 40px;
   z-index: 999;
   float: left;
-  min-width: 180px;
+  min-width: 12em;
   margin: 0;
   padding: 5px 0;
   text-align: left;
