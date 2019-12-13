@@ -6,11 +6,12 @@
   "author": "Jhuix <jhuix0117@gmail.com>",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "npm run build:lib && npm run build:demo",
+    "build": "npm run lint && npm run build:lib && npm run build:demo",
     "lint": "vue-cli-service lint",
     "build:lib": "cross-env BUILD_ENV=lib vue-cli-service build --target lib --name VueMDSE --filename vue-mdse --dest dist/lib src/index.js",
     "build:wc": "vue-cli-service build --target wc --name showdowns-editor --dest dist/wc src/index.common.js",
-    "build:demo": "cross-env BUILD_ENV=demo vue-cli-service build --dest docs/demo"
+    "build:demo": "cross-env BUILD_ENV=demo vue-cli-service build --dest docs/demo",
+    "prepublishOnly": "npm run lint && npm run build:lib"
   },
   "main": "dist/lib/vue-mdse.common.js",
   "unpkg": "dist/lib/vue-mdse.umd.min.js",
