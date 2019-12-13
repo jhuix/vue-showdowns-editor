@@ -7,49 +7,68 @@
 <template>
   <div class="mde-workspace-container">
     <div class="mde-toolbar" v-if="hasToolbar">
-      <div class="mde-toolbar-actions nav">
-        <mde-menubutton
-          ref="rootmenu"
-          v-bind:item="mainSet.item"
-          v-bind:items="mainSet.menuItems"
-          v-on:menuclick="handleClick"
-        ></mde-menubutton>
-        <mde-buttons v-bind:items="toolSet.editItems" v-on:click="handleClick"></mde-buttons>
+      <div class="mde-toolbar-left">
+        <div class="mde-toolbar-actions nav">
+          <mde-menubutton
+            ref="mainmenu"
+            class="mainmenu"
+            v-bind:item="mainSet.item"
+            v-bind:items="mainSet.menuItems"
+            v-on:menuclick="handleClick"
+          ></mde-menubutton>
+          <mde-buttons v-bind:items="toolSet.editItems" v-on:click="handleClick"></mde-buttons>
+        </div>
+        <div class="mde-toolbar-actions edit" ref="edittool">
+          <mde-menubutton
+            ref="titlemenutool"
+            v-bind:item="menuSet.heading.item"
+            v-bind:items="menuSet.heading.menuItems"
+            v-if="showTitleMenu"
+            v-on:menuclick="handleClick"
+          ></mde-menubutton>
+          <mde-buttons
+            ref="titletool"
+            v-bind:items="toolSet.headingItems"
+            v-else
+            v-on:click="handleClick"
+          ></mde-buttons>
+          <mde-menubutton
+            ref="fontmenutool"
+            v-bind:item="menuSet.font.item"
+            v-bind:items="menuSet.font.menuItems"
+            v-if="showFontMenu"
+            v-on:menuclick="handleClick"
+          ></mde-menubutton>
+          <mde-buttons ref="fonttool" v-bind:items="toolSet.fontItems" v-else v-on:click="handleClick"></mde-buttons>
+          <mde-menubutton
+            ref="alignmenutool"
+            v-bind:item="menuSet.align.item"
+            v-bind:items="menuSet.align.menuItems"
+            v-if="showAlignMenu"
+            v-on:menuclick="handleClick"
+          ></mde-menubutton>
+          <mde-buttons ref="aligntool" v-bind:items="toolSet.alignItems" v-else v-on:click="handleClick"></mde-buttons>
+          <mde-menubutton
+            ref="listmenutool"
+            v-bind:item="menuSet.list.item"
+            v-bind:items="menuSet.list.menuItems"
+            v-if="showListMenu"
+            v-on:menuclick="handleClick"
+          ></mde-menubutton>
+          <mde-buttons ref="listtool" v-bind:items="toolSet.listItems" v-else v-on:click="handleClick"></mde-buttons>
+          <mde-buttons ref="othertool" v-bind:items="toolSet.otherItems" v-on:click="handleClick"></mde-buttons>
+        </div>
       </div>
-      <div class="mde-toolbar-actions edit" ref="edittool">
-        <mde-menubutton
-          ref="titlemenutool"
-          v-bind:item="menuSet.heading.item"
-          v-bind:items="menuSet.heading.menuItems"
-          v-if="showTitleMenu"
-          v-on:menuclick="handleClick"
-        ></mde-menubutton>
-        <mde-buttons ref="titletool" v-bind:items="toolSet.headingItems" v-else v-on:click="handleClick"></mde-buttons>
-        <mde-menubutton
-          ref="fontmenutool"
-          v-bind:item="menuSet.font.item"
-          v-bind:items="menuSet.font.menuItems"
-          v-if="showFontMenu"
-          v-on:menuclick="handleClick"
-        ></mde-menubutton>
-        <mde-buttons ref="fonttool" v-bind:items="toolSet.fontItems" v-else v-on:click="handleClick"></mde-buttons>
-        <mde-menubutton
-          ref="alignmenutool"
-          v-bind:item="menuSet.align.item"
-          v-bind:items="menuSet.align.menuItems"
-          v-if="showAlignMenu"
-          v-on:menuclick="handleClick"
-        ></mde-menubutton>
-        <mde-buttons ref="aligntool" v-bind:items="toolSet.alignItems" v-else v-on:click="handleClick"></mde-buttons>
-        <mde-menubutton
-          ref="listmenutool"
-          v-bind:item="menuSet.list.item"
-          v-bind:items="menuSet.list.menuItems"
-          v-if="showListMenu"
-          v-on:menuclick="handleClick"
-        ></mde-menubutton>
-        <mde-buttons ref="listtool" v-bind:items="toolSet.listItems" v-else v-on:click="handleClick"></mde-buttons>
-        <mde-buttons ref="othertool" v-bind:items="toolSet.otherItems" v-on:click="handleClick"></mde-buttons>
+      <div class="mde-toolbar-right" v-if="hasRightTool">
+        <div class="mde-toolbar-actions help">
+          <mde-menubutton
+            ref="helpmenutool"
+            v-bind:item="menuSet.help.item"
+            v-bind:items="menuSet.help.menuItems"
+            v-if="showHelpMenu"
+            v-on:menuclick="handleClick"
+          ></mde-menubutton>
+        </div>
       </div>
     </div>
     <div class="mde-editor-container">
@@ -105,6 +124,10 @@ export default {
       type: Boolean,
       default: true
     },
+    hasRightTool: {
+      type: Boolean,
+      default: true
+    },
     editOptions: {
       type: Object,
       default: () => ({})
@@ -133,14 +156,13 @@ export default {
       mdpOptions: this.previewOptions,
       editor: null,
       previewer: null,
-      rootmenu: null,
       maintool: null,
       edittool: null,
       othertool: null,
-      rootSet: {},
+      rootSet: ToolbarSet.getRootSet(),
+      toolSet: ToolbarSet.getToolSet(),
+      menuSet: ToolbarSet.getMenuSet(),
       mainSet: {},
-      toolSet: {},
-      menuSet: {},
       screenWidth: document.documentElement.clientWidth,
       lastToolOffset: 0,
       titleToolWidth: 0,
@@ -166,10 +188,8 @@ export default {
     },
     changeLocale(val) {
       i18n.locale = val;
-      this.rootSet = ToolbarSet.getRootSet(i18n.lang);
-      this.toolSet = ToolbarSet.getToolSet(i18n.lang);
-      this.menuSet = ToolbarSet.getMenuSet(i18n.lang);
       this.selectLocaleItem();
+      this.resetMainMenu();
       if (this.toolSet.editItems) {
         if (this.toolSet.editItems.length > 0) {
           this.toolSet.editItems[0].disabled = this.disableUndo;
@@ -194,13 +214,8 @@ export default {
     },
     changeRootSet: {
       deep: true,
-      handler(rootset) {
-        let mainSet = Object.assign({}, rootset);
-        if (typeof this.outsideMenu === 'function') {
-          const outsideMenuItems = this.outsideMenu(this.locale);
-          mainSet.menuItems = mainSet.menuItems.concat(outsideMenuItems);
-        }
-        this.mainSet = mainSet;
+      handler() {
+        this.resetMainMenu();
       }
     },
     disableUndo(n) {
@@ -279,6 +294,9 @@ export default {
     },
     toolLeft() {
       return this.othertool ? this.othertool.getOffsetLeft() : 0;
+    },
+    showHelpMenu() {
+      return this.hasToolbar && this.hasRightTool && this.menuSet && this.menuSet.help && this.menuSet.help.menuItems;
     }
   },
   methods: {
@@ -322,27 +340,24 @@ export default {
     },
     addOutsideMenu(outsideMenu) {
       this.outsideMenu = outsideMenu;
-      let mainSet = Object.assign({}, this.rootSet);
-      if (typeof this.outsideMenu === 'function') {
-        const outsideMenuItems = this.outsideMenu(this.locale);
-        mainSet.menuItems = mainSet.menuItems.concat(outsideMenuItems);
-      }
-      this.mainSet = mainSet;
+      this.resetMainMenu();
     },
     handleClick(e, item) {
       if (item.type) {
-        if (!this.insertMarkdownContent(item.type)) {
-          switch (item.type) {
-            case 'zh-cn':
-              this.i18nLocale = item.type;
-              break;
-            case 'en':
-              this.i18nLocale = item.type;
-              break;
-            default:
-              this.$emit('toolclick', item.type);
-              break;
-          }
+        const type = item.type;
+        console.log('the click object type is ', type);
+        switch (type) {
+          case 'zh-cn':
+            this.i18nLocale = type;
+            break;
+          case 'en':
+            this.i18nLocale = type;
+            break;
+          default:
+            if (!this.insertMarkdownContent(type)) {
+              this.$emit('toolclick', type);
+            }
+            break;
         }
       }
     },
@@ -362,34 +377,33 @@ export default {
       }
     },
     selectLocaleItem() {
-      if (this.rootSet) {
-        this.rootSet.menuItems.find(
+      if (this.menuSet && this.menuSet.help && this.menuSet.help.menuItems) {
+        this.menuSet.help.menuItems.map(
           function(item) {
-            if (item.type === this.locale) {
+            if (item.type === this.i18nLocale) {
               item.disabled = true;
-              this.activeLangItem = item;
-              return true;
+            } else {
+              item.disabled = false;
             }
-            return false;
           }.bind(this)
         );
       }
+    },
+    resetMainMenu() {
+      let mainSet = JSON.parse(JSON.stringify(this.rootSet));
+      if (typeof this.outsideMenu === 'function') {
+        const outsideMenuItems = this.outsideMenu();
+        mainSet.menuItems = mainSet.menuItems.concat(outsideMenuItems);
+      }
+      this.mainSet = mainSet;
     }
   },
   mounted() {
     this.editor = this.$refs.mdseEditor;
     this.previewer = this.$refs.mdsePreviewer;
     i18n.locale = this.i18nLocale;
-    this.rootSet = ToolbarSet.getRootSet(i18n.lang);
-    this.toolSet = ToolbarSet.getToolSet(i18n.lang);
-    this.menuSet = ToolbarSet.getMenuSet(i18n.lang);
     this.selectLocaleItem();
-    let mainSet = Object.assign({}, this.rootSet);
-    if (typeof this.outsideMenu === 'function') {
-      const outsideMenuItems = this.outsideMenu(this.locale);
-      mainSet.menuItems = mainSet.menuItems.concat(outsideMenuItems);
-    }
-    this.mainSet = mainSet;
+    this.resetMainMenu();
     this.$nextTick(() => {
       if (this.hasToolbar) {
         this.edittool = this.$refs.edittool;
@@ -433,7 +447,12 @@ export default {
     display: inline-flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    justify-content: space-between;
     z-index: 201;
+
+    .mde-toolbar-left, .mde-toolbat-right {
+      display: inherit;
+    }
 
     .mde-toolbar-actions {
       padding: 4px 5px;
@@ -446,9 +465,20 @@ export default {
         min-width: 40px;
         padding-left: 0;
 
-        .mde-ui.dropdown .icon-button {
-          border-top-left-radius: 0;
-          border-bottom-left-radius: 0;
+        .mde-ui.dropdown {
+          &.mainmenu {
+            background: url('../assets/img/logo.png') no-repeat;
+            background-size: contain;
+
+            .icon-button {
+              background-color: unset;
+            }
+          }
+
+          .icon-button {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+          }
         }
 
         .mde-ui.buttons {

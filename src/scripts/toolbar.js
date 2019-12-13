@@ -3,7 +3,7 @@
  * Use of this source code is governed by a MIT license that can be found in the LICENSE file.
  */
 
-const getToolSet = function(lang) {
+const getToolSet = function() {
   return {
     editItems: [
       {
@@ -16,9 +16,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.edit.undo;
-          }
+          info: 'i18n://lang.edit.undo'
         }
       },
       {
@@ -31,9 +29,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.edit.redo;
-          }
+          info: 'i18n://lang.edit.redo'
         }
       }
     ],
@@ -48,9 +44,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.heading.ch1;
-          }
+          info: 'i18n://lang.heading.ch1'
         }
       },
       {
@@ -63,9 +57,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.heading.ch2;
-          }
+          info: 'i18n://lang.heading.ch2'
         }
       },
       {
@@ -78,9 +70,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.heading.ch3;
-          }
+          info: 'i18n://lang.heading.ch3'
         }
       },
       {
@@ -93,9 +83,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.heading.ch4;
-          }
+          info: 'i18n://lang.heading.ch4'
         }
       },
       {
@@ -108,9 +96,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.heading.ch5;
-          }
+          info: 'i18n://lang.heading.ch5'
         }
       },
       {
@@ -123,9 +109,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.heading.ch6;
-          }
+          info: 'i18n://lang.heading.ch6'
         }
       }
     ],
@@ -140,9 +124,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.font.bold;
-          }
+          info: 'i18n://lang.font.bold'
         }
       },
       {
@@ -155,9 +137,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.font.italic;
-          }
+          info: 'i18n://lang.font.italic'
         }
       },
       {
@@ -170,9 +150,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.font.strikethrough;
-          }
+          info: 'i18n://lang.font.strikethrough'
         }
       },
       {
@@ -185,9 +163,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.font.underline;
-          }
+          info: 'i18n://lang.font.underline'
         }
       },
       {
@@ -200,9 +176,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.font.code;
-          }
+          info: 'i18n://lang.font.code'
         }
       }
     ],
@@ -217,9 +191,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.align.left;
-          }
+          info: 'i18n://lang.align.left'
         }
       },
       {
@@ -232,9 +204,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.align.center;
-          }
+          info: 'i18n://lang.align.center'
         }
       },
       {
@@ -247,9 +217,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.align.right;
-          }
+          info: 'i18n://lang.align.right'
         }
       }
     ],
@@ -264,9 +232,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.list.bullet;
-          }
+          info: 'i18n://lang.list.bullet'
         }
       },
       {
@@ -279,9 +245,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.list.ordered;
-          }
+          info: 'i18n://lang.list.ordered'
         }
       },
       {
@@ -294,9 +258,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.list.tasks;
-          }
+          info: 'i18n://lang.list.tasks'
         }
       }
     ],
@@ -311,9 +273,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.other.link;
-          }
+          info: 'i18n://lang.other.link'
         }
       },
       {
@@ -326,9 +286,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.other.image;
-          }
+          info: 'i18n://lang.other.image'
         }
       },
       {
@@ -341,9 +299,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.other.codeblock;
-          }
+          info: 'i18n://lang.other.codeblock'
         }
       },
       {
@@ -356,9 +312,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.other.splitline;
-          }
+          info: 'i18n://lang.other.splitline'
         }
       },
       {
@@ -371,9 +325,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.other.quote;
-          }
+          info: 'i18n://lang.other.quote'
         }
       },
       {
@@ -386,9 +338,7 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.other.table;
-          }
+          info: 'i18n://lang.other.table'
         }
       },
       {
@@ -401,16 +351,14 @@ const getToolSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom right',
-          get info() {
-            return lang.other.toc;
-          }
+          info: 'i18n://lang.other.toc'
         }
       }
     ]
   };
 };
 
-const getMenuSet = function(lang) {
+const getMenuSet = function() {
   return {
     heading: {
       item: {
@@ -424,62 +372,48 @@ const getMenuSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.heading.menu;
-          }
+          info: 'i18n://lang.heading.menu'
         }
       },
       menuItems: [
         {
           type: 'ch1',
-          get text() {
-            return lang.heading.ch1;
-          },
+          text: 'i18n://lang.heading.ch1',
           shortkey: 'Ctrl+1',
           menu: true,
           disabled: false
         },
         {
           type: 'ch2',
-          get text() {
-            return lang.heading.ch2;
-          },
+          text: 'i18n://lang.heading.ch2',
           shortkey: 'Ctrl+2',
           menu: true,
           disabled: false
         },
         {
           type: 'ch3',
-          get text() {
-            return lang.heading.ch3;
-          },
+          text: 'i18n://lang.heading.ch3',
           shortkey: 'Ctrl+3',
           menu: true,
           disabled: false
         },
         {
           type: 'ch4',
-          get text() {
-            return lang.heading.ch4;
-          },
+          text: 'i18n://lang.heading.ch4',
           shortkey: 'Ctrl+4',
           menu: true,
           disabled: false
         },
         {
           type: 'ch5',
-          get text() {
-            return lang.heading.ch5;
-          },
+          text: 'i18n://lang.heading.ch5',
           shortkey: 'Ctrl+5',
           menu: true,
           disabled: false
         },
         {
           type: 'ch6',
-          get text() {
-            return lang.heading.ch6;
-          },
+          text: 'i18n://lang.heading.ch6',
           shortkey: 'Ctrl+6',
           menu: true,
           disabled: false
@@ -498,53 +432,41 @@ const getMenuSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.font.menu;
-          }
+          info: 'i18n://lang.font.menu'
         }
       },
       menuItems: [
         {
           type: 'bold',
-          get text() {
-            return lang.font.bold;
-          },
+          text: 'i18n://lang.font.bold',
           shortkey: 'Ctrl+B',
           menu: true,
           disabled: false
         },
         {
           type: 'italic',
-          get text() {
-            return lang.font.italic;
-          },
+          text: 'i18n://lang.font.italic',
           shortkey: 'Ctrl+I',
           menu: true,
           disabled: false
         },
         {
           type: 'strikethrough',
-          get text() {
-            return lang.font.strikethrough;
-          },
+          text: 'i18n://lang.font.strikethrough',
           shortkey: 'Ctrl+Shift+X',
           menu: true,
           disabled: false
         },
         {
           type: 'underline',
-          get text() {
-            return lang.font.underline;
-          },
+          text: 'i18n://lang.font.underline',
           shortkey: 'Ctrl+Shift+U',
           menu: true,
           disabled: false
         },
         {
           type: 'code',
-          get text() {
-            return lang.font.code;
-          },
+          text: 'i18n://lang.font.code',
           shortkey: 'Ctrl+E',
           menu: true,
           disabled: false
@@ -563,35 +485,27 @@ const getMenuSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.align.menu;
-          }
+          info: 'i18n://lang.align.menu'
         }
       },
       menuItems: [
         {
           type: 'align-left',
-          get text() {
-            return lang.align.left;
-          },
+          text: 'i18n://lang.align.left',
           shortkey: 'Ctrl+Alt+L',
           menu: true,
           disabled: false
         },
         {
           type: 'align-center',
-          get text() {
-            return lang.align.center;
-          },
+          text: 'i18n://lang.align.center',
           shortkey: 'Ctrl+Alt+M',
           menu: true,
           disabled: false
         },
         {
           type: 'align-right',
-          get text() {
-            return lang.align.right;
-          },
+          text: 'i18n://lang.align.right',
           shortkey: 'Ctrl+Alt+R',
           menu: true,
           disabled: false
@@ -610,36 +524,58 @@ const getMenuSet = function(lang) {
           inverted: true,
           small: true,
           position: 'bottom center',
-          get info() {
-            return lang.list.menu;
-          }
+          info: 'i18n://lang.list.menu'
         }
       },
       menuItems: [
         {
           type: 'bullet',
-          get text() {
-            return lang.list.bullet;
-          },
+          text: 'i18n://lang.list.bullet',
           shortkey: 'Ctrl+Alt+B',
           menu: true,
           disabled: false
         },
         {
           type: 'ordered',
-          get text() {
-            return lang.list.ordered;
-          },
+          text: 'i18n://lang.list.ordered',
           shortkey: 'Ctrl+Alt+O',
           menu: true,
           disabled: false
         },
         {
           type: 'tasks',
-          get text() {
-            return lang.list.tasks;
-          },
+          text: 'i18n://lang.list.tasks',
           shortkey: 'Ctrl+Alt+T',
+          menu: true,
+          disabled: false
+        }
+      ]
+    },
+    help: {
+      item: {
+        type: 'tools',
+        text: '',
+        shortkey: 'Ctrl+Shift+S',
+        caret: true,
+        disabled: false,
+        tooltip: {
+          show: true,
+          inverted: true,
+          small: true,
+          position: 'bottom left',
+          info: 'i18n://lang.help.menu'
+        }
+      },
+      menuItems: [
+        {
+          type: 'zh-cn',
+          text: '简体中文',
+          menu: true,
+          disabled: false
+        },
+        {
+          type: 'en',
+          text: 'English',
           menu: true,
           disabled: false
         }
@@ -648,10 +584,10 @@ const getMenuSet = function(lang) {
   };
 };
 
-const getRootSet = function(lang) {
+const getRootSet = function() {
   return {
     item: {
-      type: 'tools',
+      type: 'main',
       text: '',
       shortkey: 'Ctrl+Shift+S',
       caret: true,
@@ -661,31 +597,10 @@ const getRootSet = function(lang) {
         inverted: true,
         small: true,
         position: 'bottom left',
-        get info() {
-          return lang.main.setting;
-        }
+        info: 'i18n://lang.main.menu'
       }
     },
-    menuItems: [
-      {
-        type: 'zh-cn',
-        get text() {
-          return lang.main.zhcn;
-        },
-        shortkey: 'Ctrl+S+Z',
-        menu: true,
-        disabled: false
-      },
-      {
-        type: 'en',
-        get text() {
-          return lang.main.en;
-        },
-        shortkey: 'Ctrl+S+E',
-        menu: true,
-        disabled: false
-      }
-    ]
+    menuItems: []
   };
 };
 

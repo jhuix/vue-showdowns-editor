@@ -80,7 +80,7 @@ export default {
     return {
       mdDoc: this.markdown,
       codeOptions: getOptions(this.options),
-      changeDelay: 500
+      changeDelay: 250
     };
   },
   watch: {
@@ -95,10 +95,12 @@ export default {
     }
   },
   created() {
-    let that = this;
-    that.onMdCodeChange = debounce(function(newCode) {
-      that.$emit('input', newCode);
-    }, that.changeDelay);
+    this.onMdCodeChange = debounce(
+      function(newCode) {
+        this.$emit('input', newCode);
+      }.bind(this),
+      this.changeDelay
+    );
   },
   methods: {
     hasUndo: function() {
@@ -114,7 +116,6 @@ export default {
       return result;
     },
     insertMarkdownContent(type) {
-      console.log('the click object type is ', type);
       let result = true;
       let replaceText = null;
       let textMatch = null;
@@ -316,7 +317,6 @@ export default {
 </script>
 
 <style lang="stylus">
-// theme css
 @import ('../../node_modules/codemirror/theme/lesser-dark.css');
 @import ('../../node_modules/codemirror/theme/mdn-like.css');
 @import ('../../node_modules/codemirror/theme/neat.css');

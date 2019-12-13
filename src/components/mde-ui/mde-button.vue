@@ -13,14 +13,14 @@
   >
     <span
       v-bind:data-inverted="tooltip.inverted"
-      v-bind:data-position="tooltip.position"
+      v-bind:data-position="tooltipPositon"
       v-bind:data-tooltip="tooltipInfo"
       v-bind:data-tooltip-small="tooltip.small"
       v-if="hasTooltip"
       v-show="showTooltip"
     ></span>
-    <div class="content-left">
-      <i class="icon" v-bind:class="iconClassName" v-if="hasIcon"></i>
+    <div class="content-left" v-if="hasIcon">
+      <i class="icon" v-bind:class="iconClassName"></i>
     </div>
     <div class="content-right" v-if="hasContent">
       {{ `${buttonText}` }}
@@ -31,6 +31,8 @@
 </template>
 
 <script type="text/javascript">
+import i18n from '@/scripts/i18n.js';
+
 export default {
   name: 'mde-button',
   props: {
@@ -73,26 +75,30 @@ export default {
   },
   data() {
     return {
+      localeI18N: i18n,
       activeTooltip: true
     };
   },
   computed: {
     tooltipInfo() {
       const text = this.tooltip && this.tooltip.info ? this.tooltip.info : this.text;
-      const key = this.shortkey ? `(${this.shortkey})` : '';
-      return `${text} ${key}`;
+      return `${this.localeI18N.getMessage(text, this.localeI18N.locale)} (${this.keyContent})`;
+    },
+    tooltipPositon() {
+      if (this.tooltip && this.tooltip.position) return this.tooltip.position;
+      return '';
     },
     buttonClassName() {
       return this.disabled ? 'disabled' : this.selected ? 'selected' : '';
     },
     buttonText() {
-      return this.text;
+      return this.localeI18N ? this.localeI18N.getMessage(this.text, this.localeI18N.locale) : this.text;
     },
     iconClassName() {
       return this.selected ? 'tick' : this.type;
     },
     keyContent() {
-      return this.shortkey ? this.shortkey : '';
+      return this.shortkey ? this.localeI18N.getMessage(this.shortkey, this.localeI18N.locale) : '';
     },
     showTooltip() {
       return !!this.tooltip && this.tooltip.show && this.activeTooltip;
@@ -132,7 +138,27 @@ export default {
 @import ('../../assets/css/iconfont.css');
 
 .mde-ui.icon-button {
+  cursor: pointer;
+  display: inline-flex;
+  min-height: 1em;
+  outline: none;
+  border: none;
+  vertical-align: baseline;
+  background: #e0e1e2 none;
+  color: rgba(0, 0, 0, 0.6);
+  text-transform: none;
+  text-shadow: none;
   font-size: 1em;
+  font-weight: 400;
+  line-height: 1em;
+  font-style: normal;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 0.28571429em;
+  user-select: none;
+  transition: opacity 0.1s ease, background-color 0.1s ease, color 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
+  will-change: '';
+  -webkit-tap-highlight-color: transparent;
 
   span[data-tooltip] {
     position: absolute;
@@ -144,10 +170,14 @@ export default {
   }
 
   .content-left {
+    display: inherit;
     padding: 0.618em;
   }
 
   .content-right {
+    display: inherit;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
     padding: 0.618em 0.618em 0.618em 0;
   }
@@ -165,29 +195,6 @@ export default {
   cursor: default;
   box-shadow: none !important;
   pointer-events: none !important;
-}
-
-.mde-ui.icon-button {
-  cursor: pointer;
-  display: inline-flex;
-  min-height: 1em;
-  outline: none;
-  border: none;
-  vertical-align: baseline;
-  background: #e0e1e2 none;
-  color: rgba(0, 0, 0, 0.6);
-  text-transform: none;
-  text-shadow: none;
-  font-weight: 400;
-  line-height: 1em;
-  font-style: normal;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 0.28571429em;
-  user-select: none;
-  transition: opacity 0.1s ease, background-color 0.1s ease, color 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
-  will-change: '';
-  -webkit-tap-highlight-color: transparent;
 }
 
 .mde-ui.icon-button, .mde-ui.icon-button:hover {
@@ -230,7 +237,6 @@ export default {
 }
 
 .content-right > .shortkey {
-  float: right;
   padding-left: 16px;
 }
 

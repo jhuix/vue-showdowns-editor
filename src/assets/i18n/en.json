@@ -1,8 +1,10 @@
 {
   "main": {
-    "setting": "Setting",
-    "zhcn": "Simplified Chinese",
-    "en": "English"
+    "menu": "Main Menu"
+  },
+  "help": {
+    "menu": "Help Menu",
+    "setting": "Setting"
   },
   "edit": {
     "undo": "Undo",

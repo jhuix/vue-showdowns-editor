@@ -17,7 +17,13 @@
       v-bind:type="item.type"
       v-on:click.native="handleClick($event, item)"
     ></mde-button>
-    <mde-buttons class="dropdown" v-bind:items="items" v-on:click="handleMenuClick" v-show="isShowMenu"></mde-buttons>
+    <mde-buttons
+      class="dropdown"
+      v-bind:items="items"
+      v-on:click="handleMenuClick"
+      v-if="isShowMenu"
+      ref="dropMenu"
+    ></mde-buttons>
   </div>
 </template>
 
@@ -54,7 +60,20 @@ export default {
   methods: {
     handleClick(event, item) {
       event.preventDefault();
+      const rect = event.currentTarget.getBoundingClientRect();
+      const scrollWidth = document.documentElement.scrollWidth;
       this.isShowMenu = !this.isShowMenu;
+      this.$nextTick(() => {
+        if (this.$refs.dropMenu) {
+          const el = this.$refs.dropMenu.$el;
+          const elrc = el.getBoundingClientRect();
+          el.style.top = Math.ceil(rect.bottom) + 'px';
+          if (elrc.right > document.documentElement.clientWidth) {
+            const right = Math.max(document.documentElement.clientWidth, scrollWidth) - rect.right;
+            el.style.right = right + 'px';
+          }
+        }
+      });
     },
     handleMenuClick(event, item) {
       this.isShowMenu = false;
@@ -107,6 +126,7 @@ export default {
   z-index: 999;
   float: left;
   min-width: 180px;
+  margin: 0;
   padding: 5px 0;
   text-align: left;
   outline: 0;
