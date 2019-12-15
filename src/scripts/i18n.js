@@ -51,7 +51,11 @@ const I18nPath = {
 
 const I18N = {
   'zh-cn': require('@/assets/i18n/zh-cn.json'),
-  en: require('@/assets/i18n/en.json')
+  'zh-cht': require('@/assets/i18n/zh-cht.json'),
+  en: require('@/assets/i18n/en.json'),
+  ko: require('@/assets/i18n/ko.json'),
+  ja: require('@/assets/i18n/ja.json'),
+  ru: require('@/assets/i18n/ru.json')
 };
 
 const i18n_prefix = 'i18n://lang.';

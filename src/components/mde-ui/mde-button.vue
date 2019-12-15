@@ -75,13 +75,26 @@ export default {
   },
   data() {
     return {
+      locale: i18n.locale,
       activeTooltip: true
     };
+  },
+  watch: {
+    'changedI8N.locale': {
+      deep: true,
+      handler(val) {
+        this.locale = val;
+      }
+    }
   },
   computed: {
     tooltipInfo() {
       const text = this.tooltip && this.tooltip.info ? this.tooltip.info : this.text;
-      return `${i18n.getMessage(text, i18n.locale)} (${this.keyContent})`;
+      const msg = this.locale ? i18n.getMessage(text, this.locale) : text;
+      return `${msg} (${this.keyContent})`;
+    },
+    changedI8N() {
+      return i18n;
     },
     tooltipPositon() {
       return this.tooltip && this.tooltip.position ? this.tooltip.position : '';

@@ -1,0 +1,52 @@
+{
+  "main": {
+    "menu": "主菜單",
+    "preview": "預覽為HTML"
+  },
+  "help": {
+    "menu": "幫助選單",
+    "setting": "設定"
+  },
+  "edit": {
+    "undo": "撤銷",
+    "redo": "重做"
+  },
+  "heading": {
+    "menu": "標題選單",
+    "ch1": "標題一",
+    "ch2": "標題二",
+    "ch3": "標題三",
+    "ch4": "標題四",
+    "ch5": "標題五",
+    "ch6": "標題六"
+  },
+  "font": {
+    "menu": "字體選單",
+    "bold": "加粗字體",
+    "italic": "斜體字體",
+    "strikethrough": "删除線",
+    "underline": "底線",
+    "code": "插入代碼"
+  },
+  "align": {
+    "menu": "對齊選單",
+    "left": "居左對齊",
+    "center": "居中對齊",
+    "right": "居右對齊"
+  },
+  "list": {
+    "menu": "清單選單",
+    "bullet": "無序清單",
+    "ordered": "有序清單",
+    "tasks": "任務清單"
+  },
+  "other": {
+    "link": "超連結",
+    "image": "圖片",
+    "codeblock": "程式碼塊",
+    "splitline": "分割線",
+    "quote": "引用",
+    "table": "表格",
+    "toc": "章節目錄"
+  }
+}

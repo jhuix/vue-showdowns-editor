@@ -22,8 +22,8 @@
   },
   "font": {
     "menu": "字体菜单",
-    "bold": "加粗",
-    "italic": "斜体",
+    "bold": "加粗字体",
+    "italic": "斜体字体",
     "strikethrough": "删除线",
     "underline": "下划线",
     "code": "插入代码"

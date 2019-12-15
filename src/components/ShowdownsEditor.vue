@@ -111,6 +111,8 @@ import Editor from '@/components/Editor.vue';
 import Previewer from '@/components/Showdowns.vue';
 import i18n from '@/scripts/i18n.js';
 
+const prefix_lang_type = 'locale:';
+
 export default {
   name: 'mdse-showdowns-editor',
   props: {
@@ -354,18 +356,15 @@ export default {
       if (item.type) {
         const type = item.type;
         console.log('the click object type is ', type);
-        switch (type) {
-          case 'zh-cn':
-            this.i18nLocale = type;
-            break;
-          case 'en':
-            this.i18nLocale = type;
-            break;
-          default:
-            if (!this.insertMarkdownContent(type)) {
-              this.$emit('toolClick', type);
-            }
-            break;
+        if (type.startsWith(prefix_lang_type)) {
+          const locale = type.substr(prefix_lang_type.length);
+          if (locale) {
+            this.i18nLocale = locale;
+          }
+        } else if (type !== 'separator') {
+          if (!this.insertMarkdownContent(type)) {
+            this.$emit('toolClick', type);
+          }
         }
       }
     },
@@ -388,7 +387,7 @@ export default {
       if (this.menuSet && this.menuSet.help && this.menuSet.help.menuItems) {
         this.menuSet.help.menuItems.map(
           function(item) {
-            if (item.type === this.i18nLocale) {
+            if (item.type === prefix_lang_type + this.i18nLocale) {
               item.disabled = true;
             } else {
               item.disabled = false;

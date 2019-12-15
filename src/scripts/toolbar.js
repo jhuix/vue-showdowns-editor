@@ -568,7 +568,7 @@ const getMenuSet = function() {
       },
       menuItems: [
         {
-          type: 'zh-cn',
+          type: 'locale:zh-cn',
           text: '简体中文',
           menu: true,
           disabled: false
@@ -577,8 +577,32 @@ const getMenuSet = function() {
           type: 'separator'
         },
         {
-          type: 'en',
+          type: 'locale:zh-cht',
+          text: '繁体中文',
+          menu: true,
+          disabled: false
+        },
+        {
+          type: 'locale:en',
           text: 'English',
+          menu: true,
+          disabled: false
+        },
+        {
+          type: 'locale:ja',
+          text: '日本語',
+          menu: true,
+          disabled: false
+        },
+        {
+          type: 'locale:ko',
+          text: '한글',
+          menu: true,
+          disabled: false
+        },
+        {
+          type: 'locale:ru',
+          text: 'русский язык',
           menu: true,
           disabled: false
         }

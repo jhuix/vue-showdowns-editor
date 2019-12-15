@@ -1,0 +1,52 @@
+{
+  "main": {
+    "menu": "메인 메뉴",
+    "preview": "HTML 보기"
+  },
+  "help": {
+    "menu": "도움말 메뉴",
+    "setting": "설치"
+  },
+  "edit": {
+    "undo": "취소",
+    "redo": "다시 하다"
+  },
+  "heading": {
+    "menu": "제목 메뉴",
+    "ch1": "제목 1",
+    "ch2": "제목 2",
+    "ch3": "제목 3",
+    "ch4": "제목 4",
+    "ch5": "제목 5",
+    "ch6": "제목 6"
+  },
+  "font": {
+    "menu": "글꼴 메뉴",
+    "bold": "조체자",
+    "italic": "사체 글꼴",
+    "strikethrough": "선 삭제",
+    "underline": "밑줄",
+    "code": "코드 삽입"
+  },
+  "align": {
+    "menu": "정렬 메뉴",
+    "left": "왼쪽 정렬",
+    "center": "가운데 정렬",
+    "right": "오른쪽 정렬"
+  },
+  "list": {
+    "menu": "목록 메뉴",
+    "bullet": "무질서 목록",
+    "ordered": "순서 목록",
+    "tasks": "작업 목록"
+  },
+  "other": {
+    "link": "하이퍼링크",
+    "image": "그림",
+    "codeblock": "코드 블록",
+    "splitline": "분할선",
+    "quote": "인용",
+    "table": "테이블",
+    "toc": "디렉토리"
+  }
+}
