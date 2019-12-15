@@ -5,7 +5,7 @@
  */
 
 import Vue from 'vue';
-import VueRouter from 'vue-router'
+import VueRouter from 'vue-router';
 import Mainview from '../views/mainview.vue';
 import Preview from '../views/preview.vue';
 

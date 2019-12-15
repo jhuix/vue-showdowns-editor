@@ -23,8 +23,7 @@ const store = new Vuex.Store({
       context.commit('setPreviewContent', content);
     }
   },
-  modules: {
-  }
+  modules: {}
 });
 
 export default store;

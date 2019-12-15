@@ -100,4 +100,6 @@ export default {
   }
 };
 </script>
-<style lang="stylus"></style>
+<style lang="stylus">
+@import '../../node_modules/@jhuix/vue-showdowns-editor/dist/lib/vue-mdse.css';
+</style>
