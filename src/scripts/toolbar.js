@@ -553,7 +553,7 @@ const getMenuSet = function() {
     },
     help: {
       item: {
-        type: 'tools',
+        type: 'help',
         text: '',
         shortkey: 'Ctrl+Shift+S',
         caret: true,
@@ -562,7 +562,7 @@ const getMenuSet = function() {
           show: true,
           inverted: true,
           small: true,
-          position: 'bottom left',
+          position: 'bottom right',
           info: 'i18n://lang.help.menu'
         }
       },
