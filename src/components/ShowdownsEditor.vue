@@ -120,7 +120,7 @@ export default {
     locale: {
       type: String,
       required: false,
-      default: 'en'
+      default: 'zh-cn'
     },
     hasToolbar: {
       type: Boolean,
@@ -180,7 +180,9 @@ export default {
       outsideMenu: null
     };
   },
-  created() {},
+  created() {
+    i18n.locale = this.i18nLocale;
+  },
   watch: {
     locale(val) {
       this.i18nLocale = val;
@@ -408,7 +410,6 @@ export default {
   mounted() {
     this.editor = this.$refs.mdseEditor;
     this.previewer = this.$refs.mdsePreviewer;
-    i18n.locale = this.i18nLocale;
     this.selectLocaleItem();
     this.resetMainMenu();
     this.$nextTick(() => {

@@ -134,21 +134,23 @@ module.exports = {
       css: {
         // 这里的选项会传递给 css-loader
         //localIdentName: '[name]'
-      },
-      postcss: {
-        // 这里的选项会传递给 postcss-loader
+        importLoaders: 1
       },
       sass: {
         // 这里的选项会传递给 sass-loader
+        importLoaders: 1
       },
       scss: {
         // 这里的选项会传递给 sass-loader
+        importLoaders: 1
       },
       less: {
         // 这里的选项会传递给 less-loader
+        importLoaders: 1
       },
       stylus: {
         // 这里的选项会传递给 stylus-loader
+        importLoaders: 1
       }
     }
   },

@@ -75,26 +75,14 @@ export default {
   },
   data() {
     return {
-      locale: i18n.locale,
+      i18n: i18n,
       activeTooltip: true
     };
-  },
-  watch: {
-    'changedI8N.locale': {
-      deep: true,
-      handler(val) {
-        this.locale = val;
-      }
-    }
   },
   computed: {
     tooltipInfo() {
       const text = this.tooltip && this.tooltip.info ? this.tooltip.info : this.text;
-      const msg = this.locale ? i18n.getMessage(text, this.locale) : text;
-      return `${msg} (${this.keyContent})`;
-    },
-    changedI8N() {
-      return i18n;
+      return `${this.i18n.getMessage(text, this.i18n.locale)} (${this.keyContent})`;
     },
     tooltipPositon() {
       return this.tooltip && this.tooltip.position ? this.tooltip.position : '';
@@ -104,13 +92,13 @@ export default {
       return this.disabled ? 'disabled' : this.selected ? 'selected' : '';
     },
     buttonText() {
-      return this.isSeparator ? '' : i18n.getMessage(this.text, i18n.locale);
+      return this.isSeparator ? '' : this.i18n.getMessage(this.text, this.i18n.locale);
     },
     iconClassName() {
       return this.selected ? 'tick' : this.type;
     },
     keyContent() {
-      return this.shortkey ? i18n.getMessage(this.shortkey, i18n.locale) : '';
+      return this.shortkey ? this.i18n.getMessage(this.shortkey, this.i18n.locale) : '';
     },
     showTooltip() {
       return !this.isSeparator && !!this.tooltip && this.tooltip.show && this.activeTooltip;

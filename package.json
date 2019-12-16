@@ -48,32 +48,10 @@
     "vue-template-compiler": "^2.6.10",
     "vuex": "^3.1.2"
   },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "@vue/prettier"
-    ],
-    "rules": {
-      "no-console": "off",
-      "no-useless-escape": 0
-    },
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
   "browserslist": [
     "> 0.2%",
     "last 2 versions",
-    "not ie <= 9",
+    "IE > 9",
     "iOS >= 8",
     "Firefox >= 20",
     "Android > 4.4"
