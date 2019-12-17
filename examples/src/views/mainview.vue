@@ -73,16 +73,15 @@ export default {
     }
   },
   created() {
-    console.log('the app is created!', this);
+    console.log('the app is created!');
 
-    if (localStorage.hasOwnProperty('vue-mdse:locale')) {
-      this.locale = localStorage['vue-mdse:locale'];
-      console.log(`the app locale is ${this.locale}!`);
+    if (localStorage && localStorage.hasOwnProperty('vue-mdse:locale')) {
+       this.locale = localStorage['vue-mdse:locale'];
+       console.log(`the app locale is ${this.locale}!`);
     }
 
     this.$nextTick(function() {
       this.$refs.mdse.addOutsideMenu(getOutsideMenu);
-
       let that = this;
       var defHtml = axios.get('https://jhuix.github.io/showdowns/showdowns-features.md');
       defHtml

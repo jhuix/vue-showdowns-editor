@@ -176,7 +176,6 @@ export default {
       showAlignMenu: false,
       showListMenu: false,
       i18nLocale: this.locale,
-      activeLangItem: null,
       outsideMenu: null
     };
   },
