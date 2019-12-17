@@ -101,5 +101,7 @@ export default {
 };
 </script>
 <style lang="stylus">
-@import '../../node_modules/@jhuix/vue-showdowns-editor/dist/lib/vue-mdse.css';
+.mde-workspace-container {
+  overflow: hidden;
+}
 </style>
