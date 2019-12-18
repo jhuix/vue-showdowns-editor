@@ -297,6 +297,11 @@ export default {
     getMarkdown() {
       return this.mdDoc;
     },
+    setOption(key, val) {
+      if (this.codemirror) {
+        this.codemirror.setOption(key, val);
+      }
+    },
     onMdReady(cm) {
       this.$emit('ready', cm);
     },
@@ -317,14 +322,6 @@ export default {
 </script>
 
 <style lang="stylus">
-@import ('../../node_modules/codemirror/theme/lesser-dark.css');
-@import ('../../node_modules/codemirror/theme/mdn-like.css');
-@import ('../../node_modules/codemirror/theme/neat.css');
-@import ('../../node_modules/codemirror/theme/rubyblue.css');
-@import ('../../node_modules/codemirror/theme/seti.css');
-@import ('../../node_modules/codemirror/theme/darcula.css');
-@import ('../../node_modules/codemirror/theme/idea.css');
-@import ('../../node_modules/codemirror/theme/the-matrix.css');
 @import '../../node_modules/codemirror/addon/fold/foldgutter.css';
 @import '../../node_modules/codemirror/lib/codemirror.css';
 @import '../../src/assets/stylus/edit.styl';
