@@ -46,14 +46,12 @@ module.exports = {
 function addStyleResource(rule) {
   rule
     .use('style-resource-loader')
-    .loader('style-resources-loader')
+    .loader('@jhuix/style-resources-loader')
     .options({
+      test: /mainview/,
       patterns: [],
       injector: function(source, resources) {
-        if (source.trim().indexOf('.mde-workspace-container') != -1) {
-          source = `@import '../../node_modules/@jhuix/vue-showdowns-editor/dist/lib/vue-mdse.css';\n${source.trim()}`;
-        }
-        return source;
+        return `@import '../../node_modules/@jhuix/vue-showdowns-editor/dist/lib/vue-mdse.css';\n${source.trim()}`;
       }
     });
 }
