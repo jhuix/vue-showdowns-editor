@@ -349,6 +349,14 @@ export default {
     getI18N() {
       return i18n;
     },
+    setEditorOption(key, val) {
+      if (this.editor) {
+        this.editor.setOption(key, val);
+      }
+    },
+    setEditorTheme(theme) {
+      this.setEditorOption('theme', theme);
+    },
     addOutsideMenu(outsideMenu) {
       this.outsideMenu = outsideMenu;
       this.resetMainMenu();
@@ -477,7 +485,7 @@ export default {
             background: url('../assets/img/logo.png') no-repeat;
             background-size: contain;
 
-            .icon-button {
+            .icon-button.menubutton {
               background-color: unset;
             }
           }

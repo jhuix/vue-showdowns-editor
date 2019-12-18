@@ -81,11 +81,11 @@ const i18n = {
     return this.lang;
   },
   getMessage: function(key, locale) {
-    if (key && key.substring(0, i18n_prefix.length) === i18n_prefix) {
+    if (key && key.startsWith(i18n_prefix)) {
       if (typeof locale === 'undefined' || !locale) {
         locale = this.locale;
       }
-      const keys = key.substring(i18n_prefix.length).split('?');
+      const keys = key.substr(i18n_prefix.length).split('?');
       if (keys) {
         const msg = I18nPath.getPathValue(this.getLang(locale), keys[0]);
         return msg ? msg : keys.length > 1 ? keys.slice(1).join('?') : '';
