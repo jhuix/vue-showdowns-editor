@@ -76,8 +76,8 @@ export default {
     console.log('the app is created!');
 
     if (localStorage && localStorage.hasOwnProperty('vue-mdse:locale')) {
-       this.locale = localStorage['vue-mdse:locale'];
-       console.log(`the app locale is ${this.locale}!`);
+      this.locale = localStorage['vue-mdse:locale'];
+      console.log(`the app locale is ${this.locale}!`);
     }
 
     this.$nextTick(function() {
