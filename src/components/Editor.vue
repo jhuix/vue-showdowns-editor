@@ -36,6 +36,9 @@ import 'codemirror/addon/fold/markdown-fold.js';
 import 'codemirror/addon/fold/comment-fold.js';
 import 'codemirror/addon/selection/active-line.js';
 
+const _CodeMirror = require('codemirror');
+const CodeMirror = window.CodeMirror || _CodeMirror;
+
 const getOptions = function(options) {
   return {
     mode: 'text/x-markdown',
@@ -58,6 +61,102 @@ const getOptions = function(options) {
       Tab: function(cm) {
         var spaces = Array(cm.getOption('tabSize')).join(' ');
         cm.replaceSelection(spaces);
+      },
+      // heading 1
+      'Ctrl-1': function(cm) {
+        CodeMirror.signal(cm, 'shortkey', cm, 'ch1');
+      },
+      // heading 2
+      'Ctrl-2': function(cm) {
+        CodeMirror.signal(cm, 'shortkey', cm, 'ch2');
+      },
+      // heading 3
+      'Ctrl-3': function(cm) {
+        CodeMirror.signal(cm, 'shortkey', cm, 'ch3');
+      },
+      // heading 4
+      'Ctrl-4': function(cm) {
+        CodeMirror.signal(cm, 'shortkey', cm, 'ch5');
+      },
+      // heading 5
+      'Ctrl-5': function(cm) {
+        CodeMirror.signal(cm, 'shortkey', cm, 'ch5');
+      },
+      // heading 6
+      'Ctrl-6': function(cm) {
+        CodeMirror.signal(cm, 'shortkey', cm, 'ch6');
+      },
+      // Bold font
+      'Ctrl-B': function(cm) {
+        CodeMirror.signal(cm, 'shortkey', cm, 'bold');
+      },
+      // Italic font
+      'Ctrl-I': function(cm) {
+        CodeMirror.signal(cm, 'shortkey', cm, 'italic');
+      },
+      // code
+      'Ctrl-E': function(cm) {
+        CodeMirror.signal(cm, 'shortkey', cm, 'code');
+      },
+      // link
+      'Ctrl-L': function(cm) {
+        CodeMirror.signal(cm, 'shortkey', cm, 'link');
+      },
+      // splitline
+      'Ctrl--': function(cm) {
+        CodeMirror.signal(cm, 'shortkey', cm, 'splitline');
+      },
+      // quote
+      'Ctrl-Q': function(cm) {
+        CodeMirror.signal(cm, 'shortkey', cm, 'quote');
+      },
+      // toc
+      'Ctrl-M': function(cm) {
+        CodeMirror.signal(cm, 'shortkey', cm, 'toc');
+      },
+      // table
+      'Ctrl-Alt-T': function(cm) {
+        CodeMirror.signal(cm, 'shortkey', cm, 'table');
+      },
+      // align-left
+      'Ctrl-Alt-L': function(cm) {
+        CodeMirror.signal(cm, 'shortkey', cm, 'align-left');
+      },
+      // align-center
+      'Ctrl-Alt-M': function(cm) {
+        CodeMirror.signal(cm, 'shortkey', cm, 'align-center');
+      },
+      // align-right
+      'Ctrl-Alt-R': function(cm) {
+        CodeMirror.signal(cm, 'shortkey', cm, 'align-right');
+      },
+      // bullet
+      'Ctrl-Alt-B': function(cm) {
+        CodeMirror.signal(cm, 'shortkey', cm, 'bullet');
+      },
+      // ordered
+      'Ctrl-Alt-O': function(cm) {
+        CodeMirror.signal(cm, 'shortkey', cm, 'ordered');
+      },
+      // tasks
+      'Ctrl-Alt-K': function(cm) {
+        CodeMirror.signal(cm, 'shortkey', cm, 'tasks');
+      },
+      // image
+      'Ctrl-Alt-I': function(cm) {
+        CodeMirror.signal(cm, 'shortkey', cm, 'image');
+      },
+      // strikethrough
+      'Ctrl-Alt-S': function(cm) {
+        CodeMirror.signal(cm, 'shortkey', cm, 'strikethrough');
+      },
+      // underline
+      'Ctrl-Alt-U': function(cm) {
+        CodeMirror.signal(cm, 'shortkey', cm, 'underline');
+      },
+      // codeblock
+      'Ctrl-Alt-E': function(cm) {
+        CodeMirror.signal(cm, 'shortkey', cm, 'codeblock');
       }
     },
     ...options
@@ -307,16 +406,26 @@ export default {
     },
     onMdScroll(cm) {
       this.$emit('scroll', cm);
+    },
+    onShortKey(cm, type) {
+      this.insertMarkdownContent(type);
+    },
+    destroy() {
+      // cleanup shortkey event
+      this.codemirror.off('shortkey', this.onShortKey);
     }
   },
   computed: {
     codemirror() {
-      return this.$refs.mdEditor.codemirror;
+      return this.$refs.mdEditor.cminstance;
     }
   },
   mounted() {
-    //console.log('this is current codemirror object', this.codemirror);
     // you can use this.codemirror to do something...
+    this.codemirror.on('shortkey', this.onShortKey);
+  },
+  beforeDestroy() {
+    this.destroy();
   }
 };
 </script>

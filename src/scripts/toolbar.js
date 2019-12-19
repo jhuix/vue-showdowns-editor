@@ -143,7 +143,7 @@ const getToolSet = function() {
       {
         type: 'strikethrough',
         text: '',
-        shortkey: 'Ctrl+Shift+X',
+        shortkey: 'Ctrl+Alt+S',
         disabled: false,
         tooltip: {
           show: true,
@@ -156,7 +156,7 @@ const getToolSet = function() {
       {
         type: 'underline',
         text: '',
-        shortkey: 'Ctrl+Shift+U',
+        shortkey: 'Ctrl+Alt+U',
         disabled: false,
         tooltip: {
           show: true,
@@ -251,7 +251,7 @@ const getToolSet = function() {
       {
         type: 'tasks',
         text: '',
-        shortkey: 'Ctrl+Alt+T',
+        shortkey: 'Ctrl+Alt+K',
         disabled: false,
         tooltip: {
           show: true,
@@ -292,7 +292,7 @@ const getToolSet = function() {
       {
         type: 'codeblock',
         text: '',
-        shortkey: 'Ctrl+Shift+E',
+        shortkey: 'Ctrl+Alt+E',
         disabled: false,
         tooltip: {
           show: true,
@@ -305,7 +305,7 @@ const getToolSet = function() {
       {
         type: 'splitline',
         text: '',
-        shortkey: 'Ctrl+H',
+        shortkey: 'Ctrl+-',
         disabled: false,
         tooltip: {
           show: true,
@@ -331,7 +331,7 @@ const getToolSet = function() {
       {
         type: 'table',
         text: '',
-        shortkey: 'Ctrl+T',
+        shortkey: 'Ctrl+Alt+T',
         disabled: false,
         tooltip: {
           show: true,
@@ -364,7 +364,6 @@ const getMenuSet = function() {
       item: {
         type: 'heading',
         text: '',
-        shortkey: 'Atl+H',
         caret: true,
         disabled: false,
         tooltip: {
@@ -424,7 +423,6 @@ const getMenuSet = function() {
       item: {
         type: 'font',
         text: '',
-        shortkey: 'Atl+F',
         caret: true,
         disabled: false,
         tooltip: {
@@ -453,14 +451,14 @@ const getMenuSet = function() {
         {
           type: 'strikethrough',
           text: 'i18n://lang.font.strikethrough',
-          shortkey: 'Ctrl+Shift+X',
+          shortkey: 'Ctrl+Alt+S',
           menu: true,
           disabled: false
         },
         {
           type: 'underline',
           text: 'i18n://lang.font.underline',
-          shortkey: 'Ctrl+Shift+U',
+          shortkey: 'Ctrl+Alt+U',
           menu: true,
           disabled: false
         },
@@ -477,7 +475,6 @@ const getMenuSet = function() {
       item: {
         type: 'align-justify',
         text: '',
-        shortkey: 'Atl+A',
         caret: true,
         disabled: false,
         tooltip: {
@@ -516,7 +513,6 @@ const getMenuSet = function() {
       item: {
         type: 'list',
         text: '',
-        shortkey: 'Atl+L',
         caret: true,
         disabled: false,
         tooltip: {
@@ -545,7 +541,7 @@ const getMenuSet = function() {
         {
           type: 'tasks',
           text: 'i18n://lang.list.tasks',
-          shortkey: 'Ctrl+Alt+T',
+          shortkey: 'Ctrl+Alt+K',
           menu: true,
           disabled: false
         }
@@ -555,7 +551,6 @@ const getMenuSet = function() {
       item: {
         type: 'help',
         text: '',
-        shortkey: 'Ctrl+Shift+S',
         caret: true,
         disabled: false,
         tooltip: {
