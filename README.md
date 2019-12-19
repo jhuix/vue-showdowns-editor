@@ -57,25 +57,51 @@ See more information, refer to the following document:
 
 [Extensions Syntax and Examples](https://github.com/jhuix/showdowns/blob/master/docs/showdowns-features.md)
 
-[Extensions Demo Preview](https://jhuix.github.io/vue-showdowns-editor).
-
-### LaTeX math and AsciiMath
-
-  ![math](https://raw.githubusercontent.com/jhuix/vue-showdowns-editor/master/docs/screenshot/preview-math.png)
+[Extensions Demo Preview](https://jhuix.github.io/vue-showdowns-editor)
 
 ### Table of Contents
 
   ![toc](https://raw.githubusercontent.com/jhuix/vue-showdowns-editor/master/docs/screenshot/preview-toc.png)
 
+### LaTeX math and AsciiMath
+
+  ![math](https://raw.githubusercontent.com/jhuix/vue-showdowns-editor/master/docs/screenshot/preview-math.png)
+
 ### Mermaid
 
-  ![gantt](https://raw.githubusercontent.com/jhuix/vue-showdowns-editor/master/docs/screenshot/preview-gantt.png)
+  ![gantt](https://raw.githubusercontent.com/jhuix/vue-showdowns-editor/master/docs/screenshot/preview-mermaid-example.png)
 
 ### Plantuml
 
   ![plantuml](https://raw.githubusercontent.com/jhuix/vue-showdowns-editor/master/docs/screenshot/preview-plantuml.png)
 
+### Flowchart
+
+  ![plantuml](https://raw.githubusercontent.com/jhuix/vue-showdowns-editor/master/docs/screenshot/preview-flowchart.png)
+
+### Network Sequence
+
+  ![plantuml](https://raw.githubusercontent.com/jhuix/vue-showdowns-editor/master/docs/screenshot/preview-sequence.png) 
+
+### Graphviz's dot
+
+  ![plantuml](https://raw.githubusercontent.com/jhuix/vue-showdowns-editor/master/docs/screenshot/preview-dot.png) 
+
+### Railroad diagrams
+
+  ![plantuml](https://raw.githubusercontent.com/jhuix/vue-showdowns-editor/master/docs/screenshot/preview-railroad.png) 
+
+### WaveDrom
+
+  ![plantuml](https://raw.githubusercontent.com/jhuix/vue-showdowns-editor/master/docs/screenshot/preview-wavedrom.png) 
+
+### Vega and Vega-Lite
+
+  ![plantuml](https://raw.githubusercontent.com/jhuix/vue-showdowns-editor/master/docs/screenshot/preview-vega.png) 
+
 ## Usage In VUE
+
+  See [`mainview.vue`](https://raw.githubusercontent.com/jhuix/vue-showdowns-editor/master/examples/src/views/mainview.vue) source file of examples.
 
 - Import all components
 
@@ -102,7 +128,7 @@ Vue.use(VueMDSE);
 </script>
 ```
 
-Or
+OR
 
 ```
 import { ShowdownsEditor, Showdowns, Editor } from '../src';
@@ -110,6 +136,63 @@ import { ShowdownsEditor, Showdowns, Editor } from '../src';
 Vue.component(ShowdownsEditor.name, ShowdownsEditor);
 Vue.component(Showdowns.name, Showdowns);
 Vue.component(Editor.name, Editor);
+```
+
+- Set CodeMirror Theme (mdn-like's theme) and add outside menu
+
+```
+<template>
+  <mdse-showdowns-editor
+    @toolClick="handlerToolClick"
+    ref="mdse"
+  ></mdse-showdowns-editor>
+</template>
+
+<script>
+import { ShowdownsEditor } from '@jhuix/vue-showdowns-editor';
+
+function getOutsideMenu(locale) {
+  return [
+    {
+      type: 'theme:mdn-like',
+      text: 'mdn-like',
+      menu: true,
+      disabled: false
+    }
+}
+
+export default {
+  name: 'mainview',
+  components: {
+    [ShowdownsEditor.name]: ShowdownsEditor
+  },
+  methods: {
+    handlerToolClick(type) {
+      if (type.startsWith('theme:')) {
+        // click menu which type is theme:mdn-like 
+        type = type.substr(6);
+        if (editor_themes.indexOf(type) != -1) {
+          // Set CodeMirror Theme
+          this.$refs.mdse.setEditorTheme(type);
+        }
+      }
+    },
+  },
+  created() {
+    this.$nextTick(function() {
+      // add outside menu
+      this.$refs.mdse.addOutsideMenu(getOutsideMenu);
+      // Set CodeMirror Theme
+      this.$refs.mdse.setEditorTheme('mdn-like');
+    }
+  }
+}
+</script>
+
+// import mdn-like theme css style
+<style lang="stylus">
+@import ('~@/../node_modules/codemirror/theme/mdn-like.css');
+</style>
 ```
 
 ## Development
