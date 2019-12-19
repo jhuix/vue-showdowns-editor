@@ -40,8 +40,8 @@ body {
   line-height: 1.6;
   min-height: 100%;
   position: relative;
-  font-family: Helvetica Neue, NotoSansHans-Regular, AvenirNext-Regular, arial, Hiragino Sans GB, Microsoft Yahei, WenQuanYi Micro Hei, Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
+  font-family: Helvetica Neue, monospace, NotoSansHans-Regular, AvenirNext-Regular, Hiragino Sans GB, Microsoft Yahei, WenQuanYi Micro Hei, Arial, Helvetica, sans-serif;
+  font-smoothing: antialiased;
   height: 100%;
 }
 

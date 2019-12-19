@@ -75,7 +75,7 @@ function getOutsideMenu(locale) {
       disabled: false
     },
     {
-      type: 'seti',
+      type: 'theme:seti',
       text: 'seti',
       menu: true,
       disabled: false
@@ -199,14 +199,14 @@ export default {
 };
 </script>
 <style lang="stylus">
-@import ('../../../node_modules/codemirror/theme/lesser-dark.css');
-@import ('../../../node_modules/codemirror/theme/mdn-like.css');
-@import ('../../../node_modules/codemirror/theme/neat.css');
-@import ('../../../node_modules/codemirror/theme/rubyblue.css');
-@import ('../../../node_modules/codemirror/theme/seti.css');
-@import ('../../../node_modules/codemirror/theme/darcula.css');
-@import ('../../../node_modules/codemirror/theme/idea.css');
-@import ('../../../node_modules/codemirror/theme/the-matrix.css');
-@import ('../../../node_modules/codemirror/theme/the-matrix.css');
-@import ('../../../node_modules/codemirror/theme/solarized.css');
+@import ('~@/../node_modules/codemirror/theme/lesser-dark.css');
+@import ('~@/../node_modules/codemirror/theme/mdn-like.css');
+@import ('~@/../node_modules/codemirror/theme/neat.css');
+@import ('~@/../node_modules/codemirror/theme/rubyblue.css');
+@import ('~@/../node_modules/codemirror/theme/seti.css');
+@import ('~@/../node_modules/codemirror/theme/darcula.css');
+@import ('~@/../node_modules/codemirror/theme/idea.css');
+@import ('~@/../node_modules/codemirror/theme/the-matrix.css');
+@import ('~@/../node_modules/codemirror/theme/the-matrix.css');
+@import ('~@/../node_modules/codemirror/theme/solarized.css');
 </style>
