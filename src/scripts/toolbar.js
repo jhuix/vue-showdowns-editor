@@ -597,7 +597,7 @@ const getMenuSet = function() {
         },
         {
           type: 'locale:ru',
-          text: 'русский язык',
+          text: 'Pусский',
           menu: true,
           disabled: false
         }

@@ -25,8 +25,8 @@ export default {
 html {
   box-sizing: border-box;
   text-size-adjust: 100%;
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 15px;
+  line-height: 1.5;
   height: 100%;
 }
 
@@ -35,19 +35,20 @@ html {
 }
 
 body {
-  background: #fff;
-  font-size: 16px;
-  line-height: 1.6;
+  background: #fbfbfb;
+  color: #24292e;
+  font-size: 15px;
+  line-height: 1.5;
   min-height: 100%;
   position: relative;
-  font-family: Helvetica Neue, NotoSansHans-Regular, AvenirNext-Regular, Hiragino Sans GB, Microsoft Yahei, WenQuanYi Micro Hei, Arial, Helvetica, sans-serif;
-  font-smoothing: antialiased;
+  font-family: Menlo, "Ubuntu Mono", Consolas, "Courier New", "Microsoft Yahei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   height: 100%;
 }
 
 #app {
-  color: rgba(0, 0, 0, 0.87);
   height: 100%;
-  font-size: 16px;
+  font-size: 15px;
 }
 </style>

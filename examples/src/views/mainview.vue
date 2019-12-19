@@ -174,7 +174,6 @@ export default {
       if (localStorage.hasOwnProperty('vue-mdse:theme')) {
         this.theme = localStorage['vue-mdse:theme'];
       }
-      this.theme = localStorage['vue-mdse:theme'];
     }
     console.log(`the app locale is ${this.locale} and theme is ${this.theme}!`);
 

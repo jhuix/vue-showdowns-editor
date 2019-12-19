@@ -6,7 +6,7 @@ The [Vue-Showdowns-Editor](https://github.com/jhuix/vue-showdowns-editor) once u
 
 ![intro](https://raw.githubusercontent.com/jhuix/vue-showdowns-editor/master/docs/screenshot/preview-intro.png)
 
-> If you think the markdown showdowns editor is excellent or can help you, please click on the top right corner to give me a [Star](https://github.com/jhuix/vue-showdowns-editor)⭐️.
+> If you think the markdown showdowns editor can help you or also hope to encourage the author, please click on the top right corner to give me a [Star](https://github.com/jhuix/vue-showdowns-editor)⭐️. Thanks for your star.
 
 ## Live Demo Editor —— `showdowns-editor`
 
