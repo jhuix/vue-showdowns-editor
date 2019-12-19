@@ -611,7 +611,6 @@ const getRootSet = function() {
     item: {
       type: 'main',
       text: '',
-      shortkey: 'Ctrl+Shift+S',
       caret: true,
       disabled: false,
       tooltip: {

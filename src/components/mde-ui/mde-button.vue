@@ -82,7 +82,8 @@ export default {
   computed: {
     tooltipInfo() {
       const text = this.tooltip && this.tooltip.info ? this.tooltip.info : this.text;
-      return `${this.i18n.getMessage(text, this.i18n.locale)} (${this.keyContent})`;
+      const keyContent = this.keyContent ? ` (${this.keyContent})` : '';
+      return `${this.i18n.getMessage(text, this.i18n.locale)}${keyContent}`;
     },
     tooltipPositon() {
       return this.tooltip && this.tooltip.position ? this.tooltip.position : '';
