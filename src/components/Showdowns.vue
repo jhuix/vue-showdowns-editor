@@ -84,7 +84,8 @@ export default {
         vega: {}
       },
       showdownsExtensions: {},
-      cssTypes: {}
+      cssTypes: {},
+      outputHtml: ''
     };
   },
   watch: {
@@ -162,18 +163,21 @@ export default {
           }
         }
       }
+    },
+    inputMarkdown(val) {
+      const that = this;
+      showdowns
+        .makeHtml(this.inputMarkdown, csstypes => {
+          that.cssTypes = csstypes;
+        })
+        .then(html => {
+          that.outputHtml = html;
+        });
     }
   },
   computed: {
     inputMarkdown() {
       return this.markdown === null ? this.$slots.default[0].text : this.markdown;
-    },
-
-    outputHtml() {
-      const that = this;
-      return showdowns.makeHtml(this.inputMarkdown, csstypes => {
-        that.cssTypes = csstypes;
-      });
     }
   },
   methods: {
