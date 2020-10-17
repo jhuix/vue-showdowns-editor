@@ -20,7 +20,7 @@ export default {
       const content = JSON.parse(zlibcodec.zDecode(zcontent));
       this.outputHtml = content.html;
       if (content.cssLinks) {
-        content.cssLinks.map(href => {
+        content.cssLinks.map((href) => {
           const head = document.head || document.getElementsByTagName('head')[0];
           var link = document.createElement('link');
           link.rel = 'stylesheet';
@@ -29,7 +29,7 @@ export default {
         });
       }
       if (content.cssStyles) {
-        content.cssStyles.map(css => {
+        content.cssStyles.map((css) => {
           const head = document.head || document.getElementsByTagName('head')[0];
           let style = document.createElement('style');
           head.appendChild(style);

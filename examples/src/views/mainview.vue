@@ -10,8 +10,8 @@
     :markdown="mdDoc"
     :locale="locale"
     :previewExtensions="previewExtensions"
-    @toolClick="handlerToolClick"
-    @localeChanged="handlerLocaleChanged"
+    @tool-click="handlerToolClick"
+    @locale-changed="handlerLocaleChanged"
     ref="mdse"
   ></mdse-showdowns-editor>
 </template>
@@ -177,20 +177,20 @@ export default {
     }
     console.log(`the app locale is ${this.locale} and theme is ${this.theme}!`);
 
-    this.$nextTick(function() {
+    this.$nextTick(function () {
       this.$refs.mdse.addOutsideMenu(getOutsideMenu);
       this.$refs.mdse.setEditorTheme(this.theme);
       let that = this;
       var defHtml = axios.get('https://jhuix.github.io/showdowns/showdowns-features.md');
       defHtml
-        .then(function(res) {
+        .then(function (res) {
           that.mdDoc = res.data;
           return axios.get("https://jhuix.github.io/showdowns/Showdown's-Markdown-syntax.md");
         })
-        .then(function(res) {
+        .then(function (res) {
           that.mdDoc = that.mdDoc + '\n\n' + res.data;
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     });

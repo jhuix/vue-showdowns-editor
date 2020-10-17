@@ -34,9 +34,9 @@ module.exports = {
       }
     }
   },
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     const types = ['vue-modules', 'vue', 'normal-modules', 'normal'];
-    types.forEach(type => addStyleResource(config.module.rule('stylus').oneOf(type)));
+    types.forEach((type) => addStyleResource(config.module.rule('stylus').oneOf(type)));
   },
 
   // 是否为 Babel 或 TypeScript 使用 thread-loader
@@ -50,7 +50,7 @@ function addStyleResource(rule) {
     .options({
       test: /mainview/,
       patterns: [],
-      injector: function(source, resources) {
+      injector: function (source, resources) {
         return `@import '../../node_modules/@jhuix/vue-showdowns-editor/dist/lib/vue-mdse.css';\n${source.trim()}`;
       }
     });
