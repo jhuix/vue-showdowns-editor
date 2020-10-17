@@ -9,20 +9,95 @@ Showdowns Markdown Syntax, refer to the document -- [Showdown's Markdown Syntax]
 
 - **In browser environment, it is implemented to dynamically load js lib files related to more showdown diagrams extension for using [showdowns >= 0.3.0 version](https://github.com/jhuix/showdowns).**
 
-- **In codeblock of markdown, expanded syntax language attribute from "\```codename" to "\```codename {json}" or "\```codename [json]".**
+- **In codeblock of markdown, expanded syntax language attribute from "\```language" to "\```language {json}" or "\```language [json]".**
 
     - **The common "align" field value of json is "left" or "center" or "right" in syntax language attribute, and it is empty means "left" align.**
 
-    - **The common "codeblock" field value of json is "true" or "false" in syntax language attribute, and it is empty means "false". It is "true" means the codeblock is forced to display as  normal code block, otherwise the codeblock is tried to parse as corresponding diagrams.**
+    - **The common "codeblock" field value of json is "true" or "false" in syntax language attribute, and it is empty means "false". It is "true" means the codeblock is forced to display as normal code block, otherwise the codeblock is tried to parse as corresponding diagrams.**
 
     - For example, see following [Network Sequence](#network-sequence) example.
 
 ## Table
 
+- The following features are extended based on the showdown's table:
+
+  - Cell spans over columns
+  - Cell spans over rows (optional)
+  - Omitted table header (optional)
+
+- Showdown's table
+
+cell style syntax has "-{2,}",":-{2,}",":-{2,}:","-{2,}:", means default (align left), align left, align center, and align right style
+
+    | Return Code | Style | Value | DESC      |
+    | ----------- | :-----: | :----- | ---------: |
+    | OK          | int   | 1     | Succeeded |
+    | ERROR       | int   | 0     | Failed '\|'    |
+
 | Return Code | Style | Value | DESC      |
-| ----------- | ----- | ----- | --------- |
+| ----------- | :-----: | :----- | ---------: |
 | OK          | int   | 1     | Succeeded |
 | ERROR       | int   | 0     | Failed    |
+
+- Colspan table
+
+"||" indicates cells being merged left.
+
+    | Return Code | Style | Value | DESC      |
+    | ====== | :-----: | ===== | ===== |
+    | **OK**          | int   | 1     | [Succeeded](https://www.baidu.com) |
+    | ERROR       | int   | 0     ||
+    | ERROR       || 0     ||
+
+| Return Code | Style | Value | DESC      |
+| ====== | :-----: | ===== | ===== |
+| **OK**          | int   | 1     | [Succeeded](https://www.baidu.com) |
+| ERROR       | int   | 0     ||
+| ERROR       || 0     ||
+
+- Rowspan table (optional: tablesRowspan)
+
+"^^" indicates cells being merged above.
+
+    | Return Code | Style | Value | DESC      |
+    | ====== | :-----: | ===== | ===== |
+    | ^^         || 1     | [Succeeded](https://www.baidu.com) |
+    | ^^       || 0     ||
+    | ERROR       | int   | 0     ||
+    | ERROR       || 0     ||
+    | ^^       || 0     ||
+
+| Return Code | Style | Value | DESC      |
+| ====== | :-----: | ===== | ===== |
+| ^^         || 1     | [Succeeded](https://www.baidu.com) |
+| ^^       || 0     ||
+| ERROR       | int   | 0     ||
+| ERROR       || 0     ||
+| ^^       || 0     ||
+
+- Headerless table (optional: tablesHeaderless)
+
+Table header can be eliminated.
+
+    |--|--|--|--|--|--|--|--|
+    |♜|  |♝|♛|♚|♝|♞|♜|
+    |  |♟|♟|♟|  |♟|♟|♟|
+    |♟|  |♞|  |  |  |  |  |
+    |  |♗|  |  |♟|  |  |  |
+    |  |  |  |  |♙|  |  |  |
+    |  |  |  |  |  |♘|  |  |
+    |♙|♙|♙|♙|  |♙|♙|♙|
+    |♖|♘|♗|♕|♔|  |  |♖|
+
+|--|--|--|--|--|--|--|--|
+|♜|  |♝|♛|♚|♝|♞|♜|
+|  |♟|♟|♟|  |♟|♟|♟|
+|♟|  |♞|  |  |  |  |  |
+|  |♗|  |  |♟|  |  |  |
+|  |  |  |  |♙|  |  |  |
+|  |  |  |  |  |♘|  |  |
+|♙|♙|♙|♙|  |♙|♙|♙|
+|♖|♘|♗|♕|♔|  |  |♖|
 
 ## Markdown extension features
 
@@ -36,22 +111,104 @@ It's implemented sub-TOC in showdown-toc.js.
 
     [TOC]
 
-#### sub-TOC example
+#### sub-TOC examples
 
 [TOC]
 
 ##### sub-TOC examples1
 
+###### sub examples1
+
 ##### sub-TOC examples2
+
+###### sub examples2
 
 ### Footnotes
 
 It's implemented in showdown-footnotes.js, use for reference the [showdown-footnotes](https://github.com/Kriegslustig/showdown-footnotes).
 
-For example:
+#### Markdown Syntax
+
+    [^1]: The explanation.
+
+#### Footnotes examples
 
 [^1]: The explanation.
 
+### Container
+
+It's implemented in showdown-container.js, allows you to create block level containers.
+By default, The CSS effect with class name tip|info|warning|error|success|alert-tip|alert-info|alert-warning|alert-error|alert-success is implemented. And you can also customize the class name.
+
+#### Markdown Syntax
+
+    ::: <classname | parentclass-childclass> <title content>
+    *Some text*
+    :::
+
+Which will be rendered as:
+
+    <div class="showdown-container [container classname | parentclass parentclass-childclass]">
+      <p class="container-title">title content</p>
+      <p>
+        <em>Some text</em>
+      </p>
+    </div>
+
+#### Container examples
+
+::: tip
+*A simple tip text!*
+:::
+
+::: tip Tip!
+*A simple tip text!*
+:::
+
+::: info Info!
+*A simple info text!*
+:::
+
+::: warning Warning!
+*A simple warning text!*
+:::
+
+::: error Error!
+*A simple error text!*
+:::
+
+::: success Success!
+*A simple success text!*
+:::
+
+::: alert-tip
+*A simple tip alert text!*
+:::
+
+::: alert-tip Alert Tip!
+*A simple tip alert text!*
+:::
+
+::: alert-info Alert Info!
+*A simple info alert text!*
+:::
+
+::: alert-warning Alert Warning!
+*A simple warning alert text!*
+:::
+
+::: alert-error Alert Error!
+*A simple error alert text!*
+:::
+
+::: alert-success Alert Success!
+*A simple success alert text!*
+:::
+
+::: alert-success-tip Alert Success Tip!
+<style>.alert-success-tip:after {content: '\00a0';width: 0;height: 0;display: block;border-style: solid;border-width: 15px;border-color: #f3961c transparent transparent transparent;position: absolute;z-index: -1;bottom: -30px;left: 50px;}</style>
+*A simple success alert text!*
+:::
 
 ### LaTeX math and AsciiMath
 
@@ -61,29 +218,80 @@ It's supported by [showdown-katex](https://github.com/obedm503/showdown-katex.gi
 
 - AsciiMath syntax:
 
-        ```asciimath {"align": "left | center | right", "codeblock": true | false}
-        <code content>
-        ```
+  * Block multiple math
+
+      Multiple math are separated by an empty line.
+
+            ```asciimath {"align": "left | center | right", "codeblock": true | false}
+            <code content>
+
+            <code content>
+            ```
+
+  * Inline math
+
+      * `\\(...\\)` is delimiters of inline latex math
+      * `\\[...\\]` is delimiters of inline block latex math
+      * `$$...$$` is delimiters of inline block latex math
 
 - LaTex syntax:
 
-        ```latex {"align": "left | center | right", "codeblock": true | false}
-        <code content>
-        ```
+  * Block multiple math
 
-#### Math examples
+      Multiple math are separated by an empty line.
+
+            ```latex {"align": "left | center | right", "codeblock": true | false}
+            <code content>
+
+            <code content>
+            ```
+
+  * Inline math
+
+      * `@@...@@` is delimiters of inline ascii math
+      * `\\~...\\~` is delimiters of inline block ascii math
+
+#### LaTex examples
 
 ```latex
 x=\frac{ -b\pm\sqrt{ b^2-4ac } } {2a}
-```
 
-```asciimath {"align":"center"}
-x = (-b +- sqrt(b^2-4ac)) / (2a)
+x=\frac{ -b\pm\sqrt{ b^2-4ac } } {2a}
+
+
+
+x=\frac{ -b\pm\sqrt{ b^2-4ac } } {2a}
 ```
 
 ```latex {"align":"right"}
 x=\frac{ -b\pm\sqrt{ b^2-4ac } } {2a}
 ```
+
+where:
+   
+* \\(\sqrt{ b^2-4ac }\\) is inline latex math
+* \\[\sqrt{ b^2-4ac }\\] is inline latex block math
+* $$\sqrt{ b^2-4ac }$$ is inline latex block math
+
+#### AsciiMath examples
+
+Internal heat energy:
+
+```asciimath {"align":"center"}
+delta Q = rho \ c \u
+
+delta Q = rho \ c \u
+      
+delta Q = rho \ c \u
+
+
+
+delta Q = rho \ c \u
+```
+
+where:
+
+- @@delta Q@@ is the internal heat energy per unit volume \\~(J * m^-3)\\~
 
 ### Mermaid
 
@@ -247,38 +455,6 @@ io=>inputoutput: catch something
 st->op1->cond
 cond(yes)->io->e
 cond(no)->sub1(right)->op1
-```
-
-### Network Sequence
-
-It's implemented in showdown-sequence.js, render diagrams of sequence using [js-sequence-diagrams](https://github.com/bramp/js-sequence-diagrams).
-
-#### Markdown Syntax
-
-The \<theme name> of json's "theme" field value is "hand" or "simple" in syntax language attribute;
-
-    ```sequence {"theme": "<theme name>", "align": "<align>"}
-    <code content>
-    ```
-
-#### Network Sequence example
-
-- Sequence example with hand theme:
-
-```sequence {"theme":"hand", "align":"center"}
-Alice->Bob: Hello Bob, how are you?
-Note right of Bob: Bob thinks
-Bob-->Alice: I am good thanks!
-```
-
-<br>
-
-- Sequence example with simple theme:
-
-```sequence {"theme":"simple", "align":"right"}
-Alice->Bob: Hello Bob, how are you?
-Note right of Bob: Bob thinks
-Bob-->Alice: I am good thanks!
 ```
 
 ### Graphviz's dot
@@ -546,4 +722,36 @@ OR
     }
   }
 }
+```
+
+### Network Sequence
+
+It's implemented in showdown-sequence.js, render diagrams of sequence using [js-sequence-diagrams](https://github.com/bramp/js-sequence-diagrams).
+
+#### Markdown Syntax
+
+The \<theme name> of json's "theme" field value is "hand" or "simple" in syntax language attribute;
+
+    ```sequence {"theme": "<theme name>", "align": "<align>"}
+    <code content>
+    ```
+
+#### Network Sequence example
+
+- Sequence example with hand theme:
+
+```sequence {"theme":"hand", "align":"center"}
+Alice->Bob: Hello Bob, how are you?
+Note right of Bob: Bob thinks
+Bob-->Alice: I am good thanks!
+```
+
+<br>
+
+- Sequence example with simple theme:
+
+```sequence {"theme":"simple", "align":"right"}
+Alice->Bob: Hello Bob, how are you?
+Note right of Bob: Bob thinks
+Bob-->Alice: I am good thanks!
 ```
