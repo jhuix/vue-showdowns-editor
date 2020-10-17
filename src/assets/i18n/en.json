@@ -48,5 +48,15 @@
     "quote": "Quote",
     "table": "Table",
     "toc": "TableOfContents"
+  },
+  "content": {
+    "default": "please enter text",
+    "link": {
+      "text": "text",
+      "url": "text hyperlink"
+    },
+    "image": {
+      "url": "image hyperlink"
+    }
   }
 }

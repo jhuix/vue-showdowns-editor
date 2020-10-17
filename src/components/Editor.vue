@@ -16,6 +16,7 @@
 </template>
 
 <script type="text/javascript">
+import i18n from '@/scripts/i18n.js';
 import debounce from 'lodash/debounce';
 import { codemirror } from 'vue-codemirror';
 import 'codemirror/mode/gfm/gfm.js';
@@ -39,7 +40,7 @@ import 'codemirror/addon/selection/active-line.js';
 const _CodeMirror = require('codemirror');
 const CodeMirror = window.CodeMirror || _CodeMirror;
 
-const getOptions = function(options) {
+const getOptions = function (options) {
   return {
     mode: 'text/x-markdown',
     theme: 'default',
@@ -58,104 +59,104 @@ const getOptions = function(options) {
     styleActiveLine: true, // 当前行背景高亮
     extraKeys: {
       Enter: 'newlineAndIndentContinueMarkdownList',
-      Tab: function(cm) {
+      Tab: function (cm) {
         var spaces = Array(cm.getOption('tabSize')).join(' ');
         cm.replaceSelection(spaces);
       },
       // heading 1
-      'Ctrl-1': function(cm) {
+      'Ctrl-1': function (cm) {
         CodeMirror.signal(cm, 'shortkey', cm, 'ch1');
       },
       // heading 2
-      'Ctrl-2': function(cm) {
+      'Ctrl-2': function (cm) {
         CodeMirror.signal(cm, 'shortkey', cm, 'ch2');
       },
       // heading 3
-      'Ctrl-3': function(cm) {
+      'Ctrl-3': function (cm) {
         CodeMirror.signal(cm, 'shortkey', cm, 'ch3');
       },
       // heading 4
-      'Ctrl-4': function(cm) {
+      'Ctrl-4': function (cm) {
         CodeMirror.signal(cm, 'shortkey', cm, 'ch5');
       },
       // heading 5
-      'Ctrl-5': function(cm) {
+      'Ctrl-5': function (cm) {
         CodeMirror.signal(cm, 'shortkey', cm, 'ch5');
       },
       // heading 6
-      'Ctrl-6': function(cm) {
+      'Ctrl-6': function (cm) {
         CodeMirror.signal(cm, 'shortkey', cm, 'ch6');
       },
       // Bold font
-      'Ctrl-B': function(cm) {
+      'Ctrl-B': function (cm) {
         CodeMirror.signal(cm, 'shortkey', cm, 'bold');
       },
       // Italic font
-      'Ctrl-I': function(cm) {
+      'Ctrl-I': function (cm) {
         CodeMirror.signal(cm, 'shortkey', cm, 'italic');
       },
       // code
-      'Ctrl-E': function(cm) {
+      'Ctrl-E': function (cm) {
         CodeMirror.signal(cm, 'shortkey', cm, 'code');
       },
       // link
-      'Ctrl-L': function(cm) {
+      'Ctrl-L': function (cm) {
         CodeMirror.signal(cm, 'shortkey', cm, 'link');
       },
       // splitline
-      'Ctrl--': function(cm) {
+      'Ctrl--': function (cm) {
         CodeMirror.signal(cm, 'shortkey', cm, 'splitline');
       },
       // quote
-      'Ctrl-Q': function(cm) {
+      'Ctrl-Q': function (cm) {
         CodeMirror.signal(cm, 'shortkey', cm, 'quote');
       },
       // toc
-      'Ctrl-M': function(cm) {
+      'Ctrl-M': function (cm) {
         CodeMirror.signal(cm, 'shortkey', cm, 'toc');
       },
       // table
-      'Ctrl-Alt-T': function(cm) {
+      'Ctrl-Alt-T': function (cm) {
         CodeMirror.signal(cm, 'shortkey', cm, 'table');
       },
       // align-left
-      'Ctrl-Alt-L': function(cm) {
+      'Ctrl-Alt-L': function (cm) {
         CodeMirror.signal(cm, 'shortkey', cm, 'align-left');
       },
       // align-center
-      'Ctrl-Alt-M': function(cm) {
+      'Ctrl-Alt-M': function (cm) {
         CodeMirror.signal(cm, 'shortkey', cm, 'align-center');
       },
       // align-right
-      'Ctrl-Alt-R': function(cm) {
+      'Ctrl-Alt-R': function (cm) {
         CodeMirror.signal(cm, 'shortkey', cm, 'align-right');
       },
       // bullet
-      'Ctrl-Alt-B': function(cm) {
+      'Ctrl-Alt-B': function (cm) {
         CodeMirror.signal(cm, 'shortkey', cm, 'bullet');
       },
       // ordered
-      'Ctrl-Alt-O': function(cm) {
+      'Ctrl-Alt-O': function (cm) {
         CodeMirror.signal(cm, 'shortkey', cm, 'ordered');
       },
       // tasks
-      'Ctrl-Alt-K': function(cm) {
+      'Ctrl-Alt-K': function (cm) {
         CodeMirror.signal(cm, 'shortkey', cm, 'tasks');
       },
       // image
-      'Ctrl-Alt-I': function(cm) {
+      'Ctrl-Alt-I': function (cm) {
         CodeMirror.signal(cm, 'shortkey', cm, 'image');
       },
       // strikethrough
-      'Ctrl-Alt-S': function(cm) {
+      'Ctrl-Alt-S': function (cm) {
         CodeMirror.signal(cm, 'shortkey', cm, 'strikethrough');
       },
       // underline
-      'Ctrl-Alt-U': function(cm) {
+      'Ctrl-Alt-U': function (cm) {
         CodeMirror.signal(cm, 'shortkey', cm, 'underline');
       },
       // codeblock
-      'Ctrl-Alt-E': function(cm) {
+      'Ctrl-Alt-E': function (cm) {
         CodeMirror.signal(cm, 'shortkey', cm, 'codeblock');
       }
     },
@@ -195,20 +196,20 @@ export default {
   },
   created() {
     this.onMdCodeChange = debounce(
-      function(newCode) {
+      function (newCode) {
         this.$emit('input', newCode);
       }.bind(this),
       this.changeDelay
     );
   },
   methods: {
-    hasUndo: function() {
+    hasUndo: function () {
       let result = false;
       let his = this.codemirror.getDoc().historySize();
       if (his['undo'] && his['undo'] > 0) result = true;
       return result;
     },
-    hasRedo: function() {
+    hasRedo: function () {
       let result = false;
       let his = this.codemirror.getDoc().historySize();
       if (his['redo'] && his['redo'] > 0) result = true;
@@ -228,8 +229,8 @@ export default {
       let lastPos = { line: currentPos.line, ch: lineText.length };
       const lineRangeText = doc.getRange(firstPos, currentPos);
       let defaultLineText = lineRangeText;
-      if (!defaultSelectText && !lineText) defaultSelectText = '请输入文本';
-      if (!defaultLineText && !lineText) defaultLineText = '请输入文本';
+      if (!defaultSelectText && !lineText) defaultSelectText = i18n.getMessage('i18n://lang.content.default');
+      if (!defaultLineText && !lineText) defaultLineText = i18n.getMessage('i18n://lang.content.default');
 
       switch (type) {
         //标题一
@@ -357,11 +358,17 @@ export default {
           break;
         //链接
         case 'link':
-          this.codemirror.replaceSelection(`${selectText}[文本](文本链接地址)`);
+          this.codemirror.replaceSelection(
+            `${selectText}[${i18n.getMessage('i18n://lang.content.link.text')}](http://${i18n.getMessage(
+              'i18n://lang.content.link.url'
+            )})`
+          );
           break;
         //图片
         case 'image':
-          this.codemirror.replaceSelection(`![](图片链接地址)${selectText}`);
+          this.codemirror.replaceSelection(
+            `![](http://${i18n.getMessage('i18n://lang.content.image.url')})${selectText}`
+          );
           break;
         //代码块
         case 'codeblock':

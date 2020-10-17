@@ -14,7 +14,7 @@ const showdowns = window && window.showdowns ? window.showdowns : _showdowns;
 const components = [ShowdownsEditor, Showdowns, Editor];
 
 // 定义 install 方法
-const install = function(Vue, config) {
+const install = function (Vue, config) {
   if (config) {
     if (config.editOptions) {
       ShowdownsEditor.props.editOptions.default = () => config.editOptions;
@@ -29,7 +29,7 @@ const install = function(Vue, config) {
   }
 
   // 遍历并注册全局组件
-  components.map(componet => {
+  components.map((componet) => {
     Vue.component(componet.name, componet);
   });
 };

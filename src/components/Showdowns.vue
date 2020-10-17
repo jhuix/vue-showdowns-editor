@@ -15,31 +15,31 @@ export default {
       type: String,
       required: false,
       default: 'github',
-      validator: flavor => ['ghost', 'vanilla', 'github'].includes(flavor)
+      validator: (flavor) => ['ghost', 'vanilla', 'github'].includes(flavor)
     },
     plantumlImageFormat: {
       type: String,
       required: false,
       default: 'svg',
-      validator: imgFmt => ['png', 'svg', 'jpg'].includes(imgFmt)
+      validator: (imgFmt) => ['png', 'svg', 'jpg'].includes(imgFmt)
     },
     mermaidTheme: {
       type: String,
       required: false,
       default: 'default',
-      validator: theme => ['default', 'forest', 'dark', 'neutral'].includes(theme)
+      validator: (theme) => ['default', 'forest', 'dark', 'neutral'].includes(theme)
     },
     vegaTheme: {
       type: String,
       required: false,
       default: 'vox',
-      validator: theme => ['excel', 'ggplot2', 'quartz', 'vox', 'dark'].includes(theme)
+      validator: (theme) => ['excel', 'ggplot2', 'quartz', 'vox', 'dark'].includes(theme)
     },
     vegaRenderer: {
       type: String,
       required: false,
       default: 'svg',
-      validator: renderer => ['canvas', 'svg'].includes(renderer)
+      validator: (renderer) => ['canvas', 'svg'].includes(renderer)
     },
     /**
      * Showdowns options
@@ -167,10 +167,10 @@ export default {
     inputMarkdown(val) {
       const that = this;
       showdowns
-        .makeHtml(this.inputMarkdown, csstypes => {
+        .makeHtml(this.inputMarkdown, (csstypes) => {
           that.cssTypes = csstypes;
         })
-        .then(html => {
+        .then((html) => {
           that.outputHtml = html;
         });
     }

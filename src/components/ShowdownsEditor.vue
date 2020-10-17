@@ -201,7 +201,7 @@ export default {
           this.toolSet.editItems[1].disabled = this.disableRedo;
         }
       }
-      this.$emit('localeChanged', i18n);
+      this.$emit('locale-changed', i18n);
     },
 
     editOptions: {
@@ -239,7 +239,7 @@ export default {
       });
     },
     lastOffsetChange() {
-      debounce(function(that) {
+      debounce(function (that) {
         if (!that.controlChangeMenu) {
           const srceenWidth = that.screenWidth;
           const lastToolOffset = that.lastToolOffset;
@@ -372,7 +372,7 @@ export default {
           }
         } else if (type !== 'separator') {
           if (!this.insertMarkdownContent(type)) {
-            this.$emit('toolClick', type);
+            this.$emit('tool-click', type);
           }
         }
       }
@@ -395,7 +395,7 @@ export default {
     selectLocaleItem() {
       if (this.menuSet && this.menuSet.help && this.menuSet.help.menuItems) {
         this.menuSet.help.menuItems.map(
-          function(item) {
+          function (item) {
             if (item.type === prefix_lang_type + this.i18nLocale) {
               item.disabled = true;
             } else {
@@ -434,7 +434,7 @@ export default {
         this.getLastToolOffset();
 
         let that = this;
-        window.addEventListener('resize', function() {
+        window.addEventListener('resize', function () {
           that.screenWidth = document.documentElement.clientWidth;
           that.getLastToolOffset();
         });

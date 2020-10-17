@@ -9,7 +9,7 @@ const I18nPath = {
   /**
    * External parse that check for a cache hit first
    */
-  parsePath: function(path) {
+  parsePath: function (path) {
     let hit = this._cache[path];
     if (!hit) {
       hit = path.split('.');
@@ -23,7 +23,7 @@ const I18nPath = {
   /**
    * Get path value from path string
    */
-  getPathValue: function(obj, path) {
+  getPathValue: function (obj, path) {
     if (typeof obj !== 'object' || !obj) {
       return null;
     }
@@ -74,13 +74,13 @@ const i18n = {
       this.locale = val;
     }
   },
-  getLang: function(locale) {
+  getLang: function (locale) {
     if (I18N.hasOwnProperty(locale)) {
       return I18N[locale];
     }
     return this.lang;
   },
-  getMessage: function(key, locale) {
+  getMessage: function (key, locale) {
     if (key && key.startsWith(i18n_prefix)) {
       if (typeof locale === 'undefined' || !locale) {
         locale = this.locale;
@@ -88,7 +88,13 @@ const i18n = {
       const keys = key.substr(i18n_prefix.length).split('?');
       if (keys) {
         const msg = I18nPath.getPathValue(this.getLang(locale), keys[0]);
-        return msg ? msg : keys.length > 1 ? keys.slice(1).join('?') : '';
+        return msg
+          ? msg
+          : keys.length > 1
+          ? keys.slice(1).join('?')
+          : locale !== 'en'
+          ? I18nPath.getPathValue(this.getLang('en'), keys[0])
+          : '';
       }
     }
     return key;

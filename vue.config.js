@@ -102,7 +102,7 @@ module.exports = {
     externals: getExternals()
   },
   // 对内部的 webpack 配置（比如修改、增加Loader选项）(链式操作)
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     if (isDebug || isDemo) {
       config.resolve.alias.set('@jhuix/vue-showdowns-editor', path.join(__dirname, 'src'));
     } else {
@@ -134,23 +134,18 @@ module.exports = {
       css: {
         // 这里的选项会传递给 css-loader
         //localIdentName: '[name]'
-        importLoaders: 1
       },
       sass: {
         // 这里的选项会传递给 sass-loader
-        importLoaders: 1
       },
       scss: {
         // 这里的选项会传递给 sass-loader
-        importLoaders: 1
       },
       less: {
         // 这里的选项会传递给 less-loader
-        importLoaders: 1
       },
       stylus: {
         // 这里的选项会传递给 stylus-loader
-        importLoaders: 1
       }
     }
   },

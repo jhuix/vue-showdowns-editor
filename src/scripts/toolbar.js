@@ -3,7 +3,7 @@
  * Use of this source code is governed by a MIT license that can be found in the LICENSE file.
  */
 
-const getToolSet = function() {
+const getToolSet = function () {
   return {
     editItems: [
       {
@@ -358,7 +358,7 @@ const getToolSet = function() {
   };
 };
 
-const getMenuSet = function() {
+const getMenuSet = function () {
   return {
     heading: {
       item: {
@@ -606,7 +606,7 @@ const getMenuSet = function() {
   };
 };
 
-const getRootSet = function() {
+const getRootSet = function () {
   return {
     item: {
       type: 'main',
