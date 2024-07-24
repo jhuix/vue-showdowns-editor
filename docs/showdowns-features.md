@@ -249,7 +249,7 @@ It's supported by [showdown-katex](https://github.com/obedm503/showdown-katex.gi
   * Inline math
 
       * `@@...@@` is delimiters of inline ascii math
-      * `\\~...\\~` is delimiters of inline block ascii math
+      * `~...~` is delimiters of inline block ascii math
 
 #### LaTex examples
 
@@ -291,7 +291,7 @@ delta Q = rho \ c \u
 
 where:
 
-- @@delta Q@@ is the internal heat energy per unit volume \\~(J * m^-3)\\~
+- @@delta Q@@ is the internal heat energy per unit volume ~(J * m^-3)~
 
 ### Mermaid
 
