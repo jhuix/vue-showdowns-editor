@@ -23,12 +23,12 @@
     "README.md"
   ],
   "dependencies": {
-    "@jhuix/showdowns": "^0.5.5",
+    "@jhuix/showdowns": "^0.5.7",
     "vue-codemirror": "^4.0.6"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.7",
-    "@vue/cli-plugin-eslint": "^4.5.7",
+    "@vue/cli-plugin-eslint": "^5.0.8",
     "@vue/cli-plugin-vuex": "^4.5.7",
     "@vue/cli-service": "^4.5.7",
     "@vue/eslint-config-prettier": "^6.0.0",
