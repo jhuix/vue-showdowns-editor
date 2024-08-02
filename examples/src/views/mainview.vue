@@ -180,15 +180,17 @@ export default {
     this.$nextTick(function () {
       this.$refs.mdse.addOutsideMenu(getOutsideMenu);
       this.$refs.mdse.setEditorTheme(this.theme);
+      let context = '';
       let that = this;
       var defHtml = axios.get('https://jhuix.github.io/showdowns/showdowns-features.md');
       defHtml
         .then(function (res) {
-          that.mdDoc = res.data;
+          context = res.data;
           return axios.get("https://jhuix.github.io/showdowns/Showdown's-Markdown-syntax.md");
         })
         .then(function (res) {
-          that.mdDoc = that.mdDoc + '\n\n' + res.data;
+          context += '\n\n' + res.data;
+          that.mdDoc = context;
         })
         .catch(function (error) {
           console.log(error);

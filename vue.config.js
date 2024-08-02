@@ -97,6 +97,7 @@ module.exports = {
   // 该方法的第一个参数会收到已经解析好的配置。在函数内，你可以直接修改配置，或者返回一个将会被合并的对象。
   configureWebpack: {
     devtool: 'source-map',
+    performance: { hints: false },
     // 排除外部库以及不需要打包的 node_modules 第三方包（如使用CDN或引用本地JS库）
     // 作为一个合格成熟的 lib，应该学会让用你的人去安装第三方包
     externals: getExternals()
@@ -175,7 +176,7 @@ module.exports = {
     //}
   },
   // 是否为 Babel 或 TypeScript 使用 thread-loader
-  parallel: require('os').cpus().length > 1
+  parallel: false // require('os').cpus().length > 1
   // 向 PWA 插件传递选项
   //pwa: {},
   // 可以用来传递任何第三方插件选项

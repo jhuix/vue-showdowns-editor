@@ -85,6 +85,7 @@ export default {
       },
       showdownsExtensions: {},
       cssTypes: {},
+      scripts: [],
       outputHtml: ''
     };
   },
@@ -170,8 +171,31 @@ export default {
         .makeHtml(this.inputMarkdown, (csstypes) => {
           that.cssTypes = csstypes;
         })
-        .then((html) => {
-          that.outputHtml = html;
+        .then((res) => {
+          if (typeof res === 'object') {
+            that.scripts = res.scripts;
+            that.outputHtml = res.html;
+          } else {
+            that.scripts = [];
+            that.outputHtml = res;
+          }
+          that.$nextTick(() => {
+            const scripts = that.scripts;
+            if (scripts && scripts.length > 0) {
+              window.dispatchEvent(
+                new CustomEvent('showdowns', {
+                  detail: {
+                    scripts: scripts
+                  }
+                })
+              );
+            }
+          });
+        })
+        .catch((err) => {
+          that.scripts = [];
+          that.outputHtml = '';
+          console.log(err);
         });
     }
   },

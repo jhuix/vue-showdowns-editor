@@ -343,7 +343,8 @@ export default {
       return {
         html: this.previewer ? this.previewer.$el.innerHTML : '',
         cssLinks: csslinks,
-        cssStyles: cssstyles
+        cssStyles: cssstyles,
+        scripts: this.previewer.scripts
       };
     },
     getI18N() {
@@ -437,6 +438,40 @@ export default {
         window.addEventListener('resize', function () {
           that.screenWidth = document.documentElement.clientWidth;
           that.getLastToolOffset();
+        });
+
+        window.addEventListener('showdowns', (event) => {
+          // 所有资源加载完成
+          console.log('all markdown resources fully loaded');
+          const scripts = event.detail.scripts;
+          if (scripts && scripts.length > 0) {
+            for (var i = 0; i < scripts.length; ++i) {
+              const script = scripts[i];
+              const id = script.id;
+              const code = script.code;
+              let element = that.previewer.$el;
+              if (!element) {
+                element = document.getElementById(id);
+              } else {
+                element.id = 'showdowns-preview';
+              }
+              if (element) {
+                const eid = element.id;
+                const scriptID = `script-${id}`;
+                let script = document.querySelector(`#${eid} > #${scriptID}`);
+                if (script) {
+                  document.body.removeChild(script);
+                } else {
+                  script = document.createElement('script');
+                  script.id = scriptID;
+                }
+                script.type = 'text/javascript';
+                script.text = code;
+                element.appendChild(script);
+                console.log(`load preview script ${script.id} ` + script.type);
+              }
+            }
+          }
         });
       }
     });
