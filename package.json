@@ -23,7 +23,7 @@
     "README.md"
   ],
   "dependencies": {
-    "@jhuix/showdowns": "^0.6.3",
+    "@jhuix/showdowns": "^0.6.4",
     "vue-codemirror": "^4.0.6"
   },
   "devDependencies": {
