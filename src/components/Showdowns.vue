@@ -180,16 +180,7 @@ export default {
             that.outputHtml = res;
           }
           that.$nextTick(() => {
-            const scripts = that.scripts;
-            if (scripts && scripts.length > 0) {
-              window.dispatchEvent(
-                new CustomEvent('showdowns', {
-                  detail: {
-                    scripts: scripts
-                  }
-                })
-              );
-            }
+            showdowns.completedHtml(that.scripts, '.showdowns');
           });
         })
         .catch((err) => {
