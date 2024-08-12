@@ -53,6 +53,11 @@ Markdown previewer of [vue-showdowns-editor](https://github.com/jhuix/vue-showdo
 
 - [Vega and Vega-Lite](https://github.com/jhuix/showdowns/blob/master/docs/showdowns-features.md#vega-and-vega-lite)
 
+- [Echarts](https://github.com/jhuix/showdowns/blob/master/docs/showdowns-features.md#echarts)
+
+- [ABCJS](https://github.com/jhuix/showdowns/blob/master/docs/showdowns-features.md#abc)
+
+
 See more information, refer to the following document:
 
 [Extensions Syntax and Examples](https://github.com/jhuix/showdowns/blob/master/docs/showdowns-features.md)
